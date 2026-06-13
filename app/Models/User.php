@@ -7,6 +7,7 @@ use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -29,4 +30,40 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function competitions()
+    {
+        return $this->hasMany(Competition::class, 'created_by_user_id');
+    }
+
+    public function dog()
+    {
+        return $this->hasMany(Dog::class, 'created_by_user_id');
+    }
+
+    public function handler()
+    {
+        return $this->hasMany(Handler::class, 'created_by_user_id');
+    }
+
+    public function pair()
+    {
+        return $this->hasMany(Pair::class, 'created_by_user_id');
+    }
+
+    public function photo()
+    {
+        return $this->hasMany(Photo::class, 'uploaded_by_user_id');
+    }
+
+    public function result()
+    {
+        return $this->hasMany(Result::class, 'recorded_by_user_id');
+    }
+
+    public function track()
+    {
+        return $this->hasMany(Track::class, 'created_by_user_id');
+    }
+
 }

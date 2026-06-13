@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('sponsors', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('organizer_id')->constrained('organizers')->onDelete('cascade');
             $table->string('name');
             $table->string('description')->nullable();
             $table->string('email', 150)->nullable();
