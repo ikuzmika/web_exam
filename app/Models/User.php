@@ -66,4 +66,14 @@ class User extends Authenticatable
         return $this->hasMany(Track::class, 'created_by_user_id');
     }
 
+
+    public function isAdmin() {
+        return $this->role === 'admin';
+    }
+    public function isOrganizer() {
+        return $this->role === 'organizer';
+    }
+    public function isRegularUser() {
+        return $this->role === 'user';
+    }
 }
