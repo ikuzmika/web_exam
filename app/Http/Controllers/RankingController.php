@@ -2,63 +2,84 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Competition;
+use App\Models\DifficultyLevel;
+use App\Models\Result;
+use App\Models\SizeCategory;
 use Illuminate\Http\Request;
 
 class RankingController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+
+    public function rank(Request $request)
     {
-        //
+        $query = Result::query()
+            ->with([
+                'pair.handler',
+                'pair.dog.sizeCategory',
+                'track.competition',
+                'track.difficultyLevel',
+            ])
+            ->select('pair_id')
+            ->selectRaw('SUM(points) as total_points')
+            ->selectRaw('COUNT(*) as result_count')
+            ->groupBy('pair_id')
+            ->orderByDesc('total_points');
+
+        // Filtrs pēc gada
+        if ($request->filled('year')) {
+            $query->whereHas('track.competition', function ($q) use ($request) {
+                $q->whereYear('date_from', $request->year);
+            });
+        }
+
+        // Filtrs pēc sacensībām
+        if ($request->filled('competition_id')) {
+            $query->whereHas('track', function ($q) use ($request) {
+                $q->where('competition_id', $request->competition_id);
+            });
+        }
+
+        // Filtrs pēc suņa izmēra kategorijas
+        if ($request->filled('size_category_id')) {
+            $query->whereHas('pair.dog', function ($q) use ($request) {
+                $q->where('size_category_id', $request->size_category_id);
+            });
+        }
+
+        // Filtrs pēc trases grūtības līmeņa
+        if ($request->filled('difficulty_level_id')) {
+            $query->whereHas('track', function ($q) use ($request) {
+                $q->where('difficulty_level_id', $request->difficulty_level_id);
+            });
+        }
+
+        $rankings = $query->paginate(10)->withQueryString();
+
+        $competitions = Competition::orderByDesc('date_from')->get();
+        $sizeCategories = SizeCategory::orderBy('name')->get();
+        $difficultyLevels = DifficultyLevel::orderBy('name')->get();
+
+        $years = Competition::selectRaw('YEAR(date_from) as year')
+            ->distinct()
+            ->orderByDesc('year')
+            ->pluck('year');
+
+        return view('rankings.index', compact(
+            'rankings',
+            'competitions',
+            'sizeCategories',
+            'difficultyLevels',
+            'years'
+        ));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Atsevišķa metode filtrēšanai.
+     * Faktiski tā izmanto to pašu rank() loģiku.
      */
-    public function create()
+    public function filter(Request $request)
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return $this->rank($request);
     }
 }
