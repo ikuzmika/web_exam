@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('sponsors', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('created_by_user_id')->constrained('users')->onDelete('cascade');
             $table->string('name');
             $table->string('description')->nullable();
             $table->string('email', 150)->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

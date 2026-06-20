@@ -2,26 +2,26 @@
 
 namespace App\Policies;
 
-use App\Models\Competition;
+use App\Models\Result;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
-class CompetitionPolicy
+class ResultPolicy
 {
     /**
      * Determine whether the user can view any models.
      */
     public function viewAny(User $user): bool
     {
-        return true;
+        return false;
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Competition $competition): bool
+    public function view(User $user, Result $result): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -29,37 +29,37 @@ class CompetitionPolicy
      */
     public function create(User $user): bool
     {
-        return $user->isOrganizer();
+        return false;
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Competition $competition): bool
+    public function update(User $user, Result $result): bool
     {
-        return (($user->isOrganizer()) && ($user->id === $competition->created_by_user_id));
+        return false;
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Competition $competition): bool
+    public function delete(User $user, Result $result): bool
     {
-        return (($user->isOrganizer()) && ($user->id === $competition->created_by_user_id));
+        return false;
     }
 
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Competition $competition): bool
+    public function restore(User $user, Result $result): bool
     {
-        return $user->isOrganizer();
+        return false;
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Competition $competition): bool
+    public function forceDelete(User $user, Result $result): bool
     {
         return false;
     }

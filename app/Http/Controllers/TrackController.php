@@ -44,7 +44,7 @@ class TrackController extends Controller
      */
     public function store(Request $request, Track $track)
     {
-        if ($request->user()->cannnot('store', $track)) {
+        if ($request->user()->cannnot('create', $track)) {
             abort(403, 'Unauthorized action.');
         }
 
@@ -57,7 +57,8 @@ class TrackController extends Controller
         $validated['created_by_user_id'] = Auth::id();
 
         Track::create($validated);
-        return redirect()->route('track.index')->with('success', 'Track created.');
+        return redirect()->route('track.index')
+            ->with('success', 'Track created.');
     }
 
     /**
@@ -77,7 +78,7 @@ class TrackController extends Controller
     {
         $track = Track::findOrFail($id);
 
-        if ($request->user()->cannnot('edit', $track)) {
+        if ($request->user()->cannnot('update', $track)) {
             abort(403, 'Unauthorized action.');
         }
 
@@ -106,7 +107,8 @@ class TrackController extends Controller
         $validated['created_by_user_id'] = Auth::id();
 
         $track->update($validated);
-        return redirect()->route('track.show', $track->id)->with('success', 'Track updated.');
+        return redirect()->route('track.show', $track->id)
+            ->with('success', 'Track updated.');
     }
 
     /**
@@ -119,6 +121,41 @@ class TrackController extends Controller
         }
 
         $track->delete();
-        return redirect()->route('track.index')->with('success', 'Track deleted.');
+        return redirect()->route('track.index')
+            ->with('success', 'Track deleted.');
+    }
+
+    public function trashed(Request $request)
+    {
+        if ($request->user()->cannnot('viewTrashed', Track::class)) {
+            abort(403, 'Unauthorized action.');
+        }
+        $tracks = Track::onlyTrashed()->get();
+        return view('track.trashed', compact('tracks'));
+    }
+
+    public function restore(Request $request, string $id)
+    {
+        $track = Track::onlyTrashed()->findOrFail($id);
+
+        if ($request->user()->cannnot('restore', Track::class)) {
+            abort(403, 'Unauthorized action.');
+        }
+        $track->restore();
+        return redirect()->route('track.trashed')
+            ->with('success', 'Track restored.');
+    }
+
+    public function forceDelete(Request $request, string $id)
+    {
+        $track = Track::onlyTrashed()->findOrFail($id);
+
+        if ($request->user()->cannnot('forceDelete', Track::class)) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $track->forceDelete();
+        return redirect()->route('track.trashed')
+            ->with('success', 'Track permanently deleted.');
     }
 }

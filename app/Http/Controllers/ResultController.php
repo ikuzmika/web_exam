@@ -46,7 +46,7 @@ class ResultController extends Controller
      */
     public function store(Request $request, Result $result)
     {
-        if ($request->user()->cannot('store', $result)) {
+        if ($request->user()->cannot('create', $result)) {
             abort(403, 'Unauthorized action.');
         }
 
@@ -61,7 +61,8 @@ class ResultController extends Controller
 
         Result::create($validated);
 
-        return redirect()->route('result.index')->with('success', 'Result created.');
+        return redirect()->route('result.index')
+            ->with('success', 'Result created.');
     }
 
     /**
@@ -81,7 +82,7 @@ class ResultController extends Controller
     {
         $result = Result::findOrFail($id);
 
-        if ($request->user()->cannot('edit', $result)) {
+        if ($request->user()->cannot('update', $result)) {
             abort(403, 'Unauthorized action.');
         }
 
@@ -111,7 +112,8 @@ class ResultController extends Controller
 
         $validated['recorded_by_user_id'] = Auth::id();
         $result->update($validated);
-        return redirect()->route('result.show', $result->id)->with('success', 'Result updated.');
+        return redirect()->route('result.show', $result->id)
+            ->with('success', 'Result updated.');
     }
 
     /**
@@ -124,6 +126,42 @@ class ResultController extends Controller
         }
 
         $result->delete();
-        return redirect()->route('result.index')->with('success', 'Result deleted.');
+        return redirect()->route('result.index')
+            ->with('success', 'Result deleted.');
+    }
+
+    public function trashed(Request $request)
+    {
+        if ($request->user()->cannot('viewTrashed', Result::class)) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $results = Result::onlyTrashed()->get();
+        return view('results.trashed', compact('results'));
+    }
+
+    public function restore(Request $request, string $id)
+    {
+        $result = Result::onlyTrashed()->findOrFail($id);
+
+        if ($request->user()->cannot('restore', Result::class)) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $result->restore();
+        return redirect()->route('result.trashed')
+            ->with('success', 'Result restored.');
+    }
+
+    public function forceDelete(Request $request, string $id)
+    {
+        $result = Result::onlyTrashed()->findOrFail($id);
+
+        if ($request->user()->cannot('forceDelete', Result::class)) {
+            abort(403, 'Unauthorized action.');
+        }
+        $result->forceDelete();
+        return redirect()->route('result.trashed')
+            ->with('success', 'Result permanently deleted.');
     }
 }

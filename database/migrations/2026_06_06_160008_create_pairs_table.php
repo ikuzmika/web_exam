@@ -18,6 +18,7 @@ return new class extends Migration
             $table->date('active_from')->nullable();
             $table->date('active_until')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

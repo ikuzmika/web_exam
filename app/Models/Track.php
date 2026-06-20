@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Track extends Model
 {
+    use SoftDeletes;
+
     protected $fillable = [
         'competition_id',
         'difficulty_level_id',

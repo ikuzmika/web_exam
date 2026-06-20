@@ -13,12 +13,14 @@ return new class extends Migration
     {
         Schema::create('organizers', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('created_by_user_id')->constrained('users')->onDelete('cascade');
             $table->string('name', 60)->unique();
             $table->string('contact_person', 150)->nullable();
             $table->string('email', 100)->unique()->nullable();
             $table->string('contact_number', 20)->nullable();
             $table->string('venue');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

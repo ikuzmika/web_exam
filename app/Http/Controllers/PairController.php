@@ -42,7 +42,7 @@ class PairController extends Controller
      */
     public function store(Request $request, Pair $pair)
     {
-        if ($request->user()->cannot('store', $pair)) {
+        if ($request->user()->cannot('create', $pair)) {
             abort(403, 'Unauthorized action.');
         }
 
@@ -55,7 +55,8 @@ class PairController extends Controller
         $validated['created_by_user_id'] = Auth::id();
 
         Pair::create($validated);
-        return redirect()->route('pair.index')->with('success', 'Pair created.');
+        return redirect()->route('pair.index')
+            ->with('success', 'Pair created.');
     }
 
     /**
@@ -74,7 +75,7 @@ class PairController extends Controller
     {
         $pair = Pair::findOrFail($id);
 
-        if ($request->user()->cannot('edit', $pair)) {
+        if ($request->user()->cannot('update', $pair)) {
             abort(403, 'Unauthorized action.');
         }
 
@@ -102,7 +103,8 @@ class PairController extends Controller
         $validated['created_by_user_id'] = Auth::id();
 
         $pair->update($validated);
-        return redirect()->route('pair.show', $pair->id)->with('success', 'Pair updated.');
+        return redirect()->route('pair.show', $pair->id)
+            ->with('success', 'Pair updated.');
     }
 
     /**
@@ -115,6 +117,42 @@ class PairController extends Controller
         }
 
         $pair->delete();
-        return redirect()->route('pair.index')->with('success', 'Pair has been deleted.');
+        return redirect()->route('pair.index')
+            ->with('success', 'Pair deleted.');
+    }
+
+    public function trashed(Request $request)
+    {
+        if ($request->user()->cannot('viewTrashed', Pair::class)) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $pairs = Pair::onlyTrashed()->get();
+        return view('pairs.trashed', compact('pairs'));
+    }
+
+    public function restore(Request $request, string $id)
+    {
+        $pair = Pair::onlyTrashed()->findOrFail($id);
+
+        if ($request->user()->cannot('restore', $pair)) {
+            abort(403, 'Unauthorized action.');
+        }
+        $pair->restore();
+        return redirect()->route('pair.trashed')
+            ->with('success', 'Pair restored.');
+    }
+
+    public function forceDelete(Request $request, string $id)
+    {
+        $pair = Pair::onlyTrashed()->findOrFail($id);
+
+        if ($request->user()->cannot('forceDelete', $pair)) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $pair->forceDelete();
+        return redirect()->route('pair.trashed')
+            ->with('success', 'Pair permanently deleted.');
     }
 }

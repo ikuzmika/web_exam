@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('title', 200)->nullable();
             $table->string('file_path');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

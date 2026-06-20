@@ -22,7 +22,7 @@ class AdminController extends Controller
     {
         $this->checkAdmin();
 
-        $users = User::orderBy('name')->paginate(10);
+        $users = User::orderBy('name');
 
         return view('admin.users.index', compact('users'));
     }

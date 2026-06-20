@@ -44,7 +44,7 @@ class PhotoController extends Controller
      */
     public function store(Request $request, Photo $photo)
     {
-        if ($request->user()->cannot('store', Photo::class)) {
+        if ($request->user()->cannot('create', Photo::class)) {
             abort(403, 'Unauthorized action.');
         }
 
@@ -80,7 +80,7 @@ class PhotoController extends Controller
     {
         $photo = Photo::findOrFail($id);
 
-        if ($request->user()->cannot('edit', $photo)) {
+        if ($request->user()->cannot('update', $photo)) {
             abort(403, 'Unauthorized action.');
         }
 
@@ -125,6 +125,42 @@ class PhotoController extends Controller
 
         $photo->delete();
         return redirect()->route('photo.index')
-            ->with('success', 'Photo deleted successfully.');
+            ->with('success', 'Photo deleted.');
+    }
+
+    public function trashed(Request $request)
+    {
+        if ($request->user()->cannot('viewTrashed', Photo::class)) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $photos = Photo::onlyTrashed()->get();
+        return view('photos.trashed', compact('photos'));
+    }
+
+    public function restore(Request $request, string $id)
+    {
+        $photo = Photo::onlyTrashed()->findOrFail($id);
+
+        if ($request->user()->cannot('restore', $photo)) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $photo->restore();
+        return redirect()->route('photo.trashed')
+            ->with('success', 'Photo restored.');
+    }
+
+    public function forceDelete(Request $request, string $id)
+    {
+        $photo = Photo::onlyTrashed()->findOrFail($id);
+
+        if ($request->user()->cannot('forceDelete', $photo)) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $photo->forceDelete();
+        return redirect()->route('photo.trashed')
+            ->with('success', 'Photo permanently deleted.');
     }
 }

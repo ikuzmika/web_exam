@@ -16,8 +16,9 @@ return new class extends Migration
             $table->foreignId('organizer_id')->constrained('organizers')->onDelete('cascade');
             $table->foreignId('sponsor_id')->constrained('sponsors')->onDelete('cascade');
             $table->string('contribution_type', 100)->nullable();
-            $table->string('contribution_amount', 100)->nullable();
+            $table->decimal('contribution_amount', 10)->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->unique(['organizer_id', 'sponsor_id']);
         });

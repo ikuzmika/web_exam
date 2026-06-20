@@ -44,7 +44,7 @@ class CompetitionController extends Controller
      */
     public function store(Request $request, Competition $competition)
     {
-        if ($request->user()->cannot('store', $competition)) {
+        if ($request->user()->cannot('create', $competition)) {
             abort(403, 'Unauthorized action.');
         }
 
@@ -59,7 +59,8 @@ class CompetitionController extends Controller
 
         Competition::create($validated);
 
-        return redirect()->route('competition.index')->with('success', 'Competition created.');
+        return redirect()->route('competition.index')
+            ->with('success', 'Competition created.');
     }
 
     /**
@@ -79,7 +80,7 @@ class CompetitionController extends Controller
     {
         $competition = Competition::findOrFail($id);
 
-        if ($request->user()->cannot('edit', $competition)) {
+        if ($request->user()->cannot('update', $competition)) {
             abort(403, 'Unauthorized action.');
         }
 
@@ -109,7 +110,8 @@ class CompetitionController extends Controller
         $validated['created_by_user_id'] = Auth::id();
 
         $competition->update($validated);
-        return redirect()->route('competition.show', $competition->id)->with('success', 'Competition updated.');
+        return redirect()->route('competition.show', $competition->id)
+            ->with('success', 'Competition updated.');
 
     }
 
@@ -123,6 +125,43 @@ class CompetitionController extends Controller
         }
 
         $competition->delete();
-        return redirect()->route('competition.index')->with('success', 'Competition deleted.');
+        return redirect()->route('competition.index')
+            ->with('success', 'Competition deleted.');
+    }
+
+    public function trashed(Request $request)
+    {
+        if ($request->user()->cannot('viewTrashed', Competition::class)) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $competitions = Competition::onlyTrashed()->get();
+        return view('competitions.trashed', compact('competitions'));
+    }
+
+    public function restore(Request $request, string $id)
+    {
+        $competition = Competition::onlyTrashed()->findOrFail($id);
+
+        if ($request->user()->cannot('restore', $competition)) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $competition->restore();
+        return redirect()->route('competition.trashed')
+            ->with('success', 'Competition restored.');
+    }
+
+    public function forceDelete(Request $request, string $id)
+    {
+        $competition = Competition::onlyTrashed()->findOrFail($id);
+
+        if ($request->user()->cannot('forceDelete', $competition)) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $competition->forceDelete();
+        return redirect()->route('competition.trashed')
+            ->with('success', 'Competition permanently deleted.');
     }
 }

@@ -40,7 +40,7 @@ class HandlerController extends Controller
      */
     public function store(Request $request, Handler $handler)
     {
-        if ($request->user()->cannot('store', $handler)) {
+        if ($request->user()->cannot('create', $handler)) {
             abort(403, 'Unauthorized action.');
         }
 
@@ -55,7 +55,8 @@ class HandlerController extends Controller
 
         Handler::create($validated);
 
-        return redirect()->route('handler.index')->with('success', 'Handler created.');
+        return redirect()->route('handler.index')
+            ->with('success', 'Handler created.');
     }
 
     /**
@@ -103,7 +104,8 @@ class HandlerController extends Controller
         $validated['cerated_by_user_id'] = Auth::id();
 
         $handler->update($validated);
-        return redirect()->route('handler.show', $handler->id)->with('success', 'Handler updated.');
+        return redirect()->route('handler.show', $handler->id)
+            ->with('success', 'Handler updated.');
     }
 
     /**
@@ -116,6 +118,44 @@ class HandlerController extends Controller
         }
 
         $handler->delete();
-        return redirect()->route('handler.index')->with('success', 'Handler deleted.');
+        return redirect()->route('handler.index')
+            ->with('success', 'Handler deleted.');
+    }
+
+    public function trashed(Request $request)
+    {
+        if ($request->user()->cannot('viewTrashed', Handler::class)) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $handlers = Handler::onlyTrashed()->get();
+
+        return view('handlers.trashed', compact('handlers'));
+    }
+
+    public function restore(Request $request, string $id)
+    {
+        $handler = Handler::onlyTrashed()->findOrFail($id);
+
+        if ($request->user()->cannot('restore', $handler)) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $handler->restore();
+        return redirect()->route('handler.trashed')
+            ->with('success', 'Handler restored.');
+    }
+
+    public function forceDelete(Request $request, string $id)
+    {
+        $handler = Handler::onlyTrashed()->findOrFail($id);
+
+        if ($request->user()->cannot('forceDelete', $handler)) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $handler->forceDelete();
+        return redirect()->route('handler.trashed')
+            ->with('success', 'Handler permanently deleted.');
     }
 }

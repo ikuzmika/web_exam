@@ -19,11 +19,12 @@ return new class extends Migration
             $table->foreignId('recorded_by_user_id')->constrained('users')->onDelete('cascade');
             $table->integer('points');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
 
-    
+
 
     /**
      * Reverse the migrations.

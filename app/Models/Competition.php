@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Competition extends Model
 {
+    use SoftDeletes;
+
     protected $fillable = [
         'organizer_id',
         'created_by_user_id',
