@@ -1,0 +1,58 @@
+:root {
+    --main-bg: #f4f6f2;
+    --card-bg: #ffffff;
+    --text-main: #1f2937;
+    --text-muted: #6b7280;
+    --accent: #8bc34a;
+    --accent-dark: #5f8f2f;
+    --accent-light: #eaf5dd;
+    --border: #dde4d9;
+}
+
+body {
+    background: var(--main-bg);
+    color: var(--text-main);
+    font-family: Arial, sans-serif;
+}
+
+.page-wrapper {
+    min-height: calc(100vh - 140px);
+    padding: 32px 0;
+}
+
+.site-footer {
+    background: #ffffff;
+    border-top: 1px solid var(--border);
+    padding: 18px 0;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+.btn-primary {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-dark);
+    border-color: var(--accent-dark);
+    color: #ffffff;
+}
+
+.btn-outline-primary {
+    color: var(--accent-dark);
+    border-color: var(--accent);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: #ffffff;
+}
+
+.btn:focus,
+.btn:active {
+    box-shadow: 0 0 0 0.2rem rgba(139, 195, 74, 0.25);
+}
