@@ -1,5 +1,5 @@
 :root {
-    --main-bg: #f4f6f2;
+    --main-bg: #f7f7f7;
     --card-bg: #ffffff;
     --text-main: #1f2937;
     --text-muted: #6b7280;
@@ -55,4 +55,95 @@ body {
 .btn:focus,
 .btn:active {
     box-shadow: 0 0 0 0.2rem rgba(139, 195, 74, 0.25);
+}
+
+/* Navigation menu */
+.site-navbar {
+    background: #ffffff;
+    border-bottom: 1px solid var(--border);
+}
+
+.navbar-brand {
+    font-weight: 700;
+    color: var(--accent-dark);
+}
+
+.navbar-brand:hover {
+    color: var(--accent-dark);
+}
+
+.nav-link {
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--accent-dark);
+}
+
+/* Dropdown menu */
+.dropdown-menu {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+}
+
+.dropdown-item:hover {
+    background: var(--accent-light);
+    color: var(--accent-dark);
+}
+
+/* Language switch */
+.language-switch {
+    display: flex;
+    gap: 4px;
+    margin-right: 16px;
+}
+
+.language-btn {
+    border: 1px solid var(--border);
+    background: #ffffff;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.language-btn.active {
+    background: var(--accent);
+    color: #ffffff;
+    border-color: var(--accent);
+}
+
+/* Login / user area */
+.auth-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-name {
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+/* Mobile view */
+@media (max-width: 991px) {
+    .language-switch {
+        margin: 12px 0;
+    }
+
+    .auth-area {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+/* Page width on large screens */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1450px;
+        padding-left: 24px;
+        padding-right: 24px;
+    }
 }
