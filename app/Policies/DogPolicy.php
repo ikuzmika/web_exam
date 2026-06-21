@@ -13,7 +13,7 @@ class DogPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,7 +21,7 @@ class DogPolicy
      */
     public function view(User $user, Dog $dog): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class DogPolicy
      */
     public function restore(User $user, Dog $dog): bool
     {
-        return false;
+        return $user->isAdmin();
     }
 
     /**
@@ -61,6 +61,14 @@ class DogPolicy
      */
     public function forceDelete(User $user, Dog $dog): bool
     {
-        return false;
+        return $user->isAdmin();
+    }
+
+    public function before(User $user, string $ability): ?bool
+    {
+        if ($user->isAdmin()) {
+            return true;
+        }
+        return null;
     }
 }

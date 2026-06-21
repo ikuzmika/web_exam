@@ -48,12 +48,17 @@ class CompetitionPolicy
         return (($user->isOrganizer()) && ($user->id === $competition->created_by_user_id));
     }
 
+    public function viewTrashed(User $user, Competition $competition): bool
+    {
+        return (($user->isOrganizer()) && ($user->id === $competition->created_by_user_id));
+    }
+
     /**
      * Determine whether the user can restore the model.
      */
     public function restore(User $user, Competition $competition): bool
     {
-        return $user->isOrganizer();
+        return $user->isAdmin();
     }
 
     /**
@@ -61,6 +66,14 @@ class CompetitionPolicy
      */
     public function forceDelete(User $user, Competition $competition): bool
     {
-        return false;
+        return $user->isAdmin();
+    }
+
+    public function before(User $user, string $ability): ?bool
+    {
+        if ($user->isAdmin()) {
+            return true;
+        }
+        return null;
     }
 }

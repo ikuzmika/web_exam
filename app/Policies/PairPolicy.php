@@ -13,7 +13,7 @@ class PairPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,7 +21,7 @@ class PairPolicy
      */
     public function view(User $user, Pair $pair): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class PairPolicy
      */
     public function restore(User $user, Pair $pair): bool
     {
-        return false;
+        return $user->isAdmin();
     }
 
     /**
@@ -61,6 +61,14 @@ class PairPolicy
      */
     public function forceDelete(User $user, Pair $pair): bool
     {
-        return false;
+        return $user->isAdmin();
+    }
+
+    public function before(User $user, string $ability): ?bool
+    {
+        if ($user->isAdmin()) {
+            return true;
+        }
+        return null;
     }
 }

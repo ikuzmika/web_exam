@@ -13,7 +13,7 @@ class PhotoPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,7 +21,7 @@ class PhotoPolicy
      */
     public function view(User $user, Photo $photo): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -29,7 +29,7 @@ class PhotoPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->isRegularUser() || $user->isOrganizer();
     }
 
     /**
@@ -37,7 +37,7 @@ class PhotoPolicy
      */
     public function update(User $user, Photo $photo): bool
     {
-        return false;
+        return (($user->isRegularUser() || $user->isOrganizer()) && ($user->id === $photo->uploaded_by_user_id));
     }
 
     /**
@@ -45,7 +45,12 @@ class PhotoPolicy
      */
     public function delete(User $user, Photo $photo): bool
     {
-        return false;
+        return (($user->isRegularUser() || $user->isOrganizer()) && ($user->id === $photo->uploaded_by_user_id));
+    }
+
+    public function viewTrashed(User $user, Photo $photo): bool
+    {
+        return (($user->isRegularUser() || $user->isOrganizer()) && ($user->id === $photo->uploaded_by_user_id));
     }
 
     /**
@@ -53,7 +58,7 @@ class PhotoPolicy
      */
     public function restore(User $user, Photo $photo): bool
     {
-        return false;
+        return $user->isAdmin();
     }
 
     /**
@@ -61,6 +66,14 @@ class PhotoPolicy
      */
     public function forceDelete(User $user, Photo $photo): bool
     {
-        return false;
+        return $user->isAdmin();
+    }
+
+    public function before(User $user, string $ability): ?bool
+    {
+        if ($user->isAdmin()) {
+            return true;
+        }
+        return null;
     }
 }

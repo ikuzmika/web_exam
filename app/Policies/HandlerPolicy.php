@@ -13,7 +13,7 @@ class HandlerPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,7 +21,7 @@ class HandlerPolicy
      */
     public function view(User $user, Handler $handler): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class HandlerPolicy
      */
     public function restore(User $user, Handler $handler): bool
     {
-        return false;
+        return $user->isAdmin();
     }
 
     /**
@@ -61,6 +61,14 @@ class HandlerPolicy
      */
     public function forceDelete(User $user, Handler $handler): bool
     {
-        return false;
+        return $user->isAdmin();
+    }
+
+    public function before(User $user, string $ability): ?bool
+    {
+        if ($user->isAdmin()) {
+            return true;
+        }
+        return null;
     }
 }

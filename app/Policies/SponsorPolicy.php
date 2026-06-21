@@ -13,7 +13,7 @@ class SponsorPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,7 +21,7 @@ class SponsorPolicy
      */
     public function view(User $user, Sponsor $sponsor): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -29,7 +29,7 @@ class SponsorPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->isOrganizer();
     }
 
     /**
@@ -37,7 +37,7 @@ class SponsorPolicy
      */
     public function update(User $user, Sponsor $sponsor): bool
     {
-        return false;
+        return (($user->isOrganizer()) && ($user->id === $sponsor->created_by_user_od));
     }
 
     /**
@@ -45,7 +45,12 @@ class SponsorPolicy
      */
     public function delete(User $user, Sponsor $sponsor): bool
     {
-        return false;
+        return (($user->isOrganizer()) && ($user->id === $sponsor->created_by_user_od));
+    }
+
+    public function viewTrashed(User $user, Sponsor $sponsor): bool
+    {
+        return (($user->isOrganizer()) && ($user->id === $sponsor->created_by_user_od));
     }
 
     /**
@@ -53,7 +58,7 @@ class SponsorPolicy
      */
     public function restore(User $user, Sponsor $sponsor): bool
     {
-        return false;
+        return $user->isAdmin();
     }
 
     /**
@@ -61,6 +66,14 @@ class SponsorPolicy
      */
     public function forceDelete(User $user, Sponsor $sponsor): bool
     {
-        return false;
+        return $user->isAdmin();
+    }
+
+    public function before(User $user, string $ability): ?bool
+    {
+        if ($user->isAdmin()) {
+            return true;
+        }
+        return null;
     }
 }
