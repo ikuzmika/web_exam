@@ -29,7 +29,7 @@ class ResultPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->isSecretary();
     }
 
     /**
@@ -37,7 +37,7 @@ class ResultPolicy
      */
     public function update(User $user, Result $result): bool
     {
-        return false;
+        return (($user->isSecretary()) && ($user->id === $result->recorded_by_user_id));
     }
 
     /**
@@ -45,7 +45,12 @@ class ResultPolicy
      */
     public function delete(User $user, Result $result): bool
     {
-        return false;
+        return (($user->isSecretary()) && ($user->id === $result->recorded_by_user_id));
+    }
+
+    public function viewTrashed(User $user, Result $result): bool
+    {
+        return (($user->isSecretary()) && ($user->id === $result->recorded_by_user_id));
     }
 
     /**

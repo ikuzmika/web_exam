@@ -29,7 +29,7 @@ class DogPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->isSecretary();
     }
 
     /**
@@ -37,7 +37,7 @@ class DogPolicy
      */
     public function update(User $user, Dog $dog): bool
     {
-        return false;
+        return (($user->isSecretary()) && ($user->id === $dog->created_by_user_id));
     }
 
     /**
@@ -45,7 +45,12 @@ class DogPolicy
      */
     public function delete(User $user, Dog $dog): bool
     {
-        return false;
+        return (($user->isSecretary()) && ($user->id === $dog->created_by_user_id));
+    }
+
+    public function viewTrashed(User $user, Dog $dog): bool
+    {
+        return (($user->isSecretary()) && ($user->id === $dog->created_by_user_id));
     }
 
     /**

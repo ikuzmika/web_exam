@@ -29,7 +29,7 @@ class PairPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->isSecretary();
     }
 
     /**
@@ -37,7 +37,7 @@ class PairPolicy
      */
     public function update(User $user, Pair $pair): bool
     {
-        return false;
+        return (($user->isSecretary()) && ($user->id === $pair->created_by_user_id));
     }
 
     /**
@@ -45,7 +45,12 @@ class PairPolicy
      */
     public function delete(User $user, Pair $pair): bool
     {
-        return false;
+        return (($user->isSecretary()) && ($user->id === $pair->created_by_user_id));
+    }
+
+    public function viewTrashed(User $user, Pair $pair): bool
+    {
+        return (($user->isSecretary()) && ($user->id === $pair->created_by_user_id));
     }
 
     /**

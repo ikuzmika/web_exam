@@ -29,7 +29,7 @@ class HandlerPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->isSecretary();
     }
 
     /**
@@ -37,7 +37,7 @@ class HandlerPolicy
      */
     public function update(User $user, Handler $handler): bool
     {
-        return false;
+        return (($user->isSecretary()) && ($user->id === $handler->created_by_user_id));
     }
 
     /**
@@ -45,7 +45,12 @@ class HandlerPolicy
      */
     public function delete(User $user, Handler $handler): bool
     {
-        return false;
+        return (($user->isSecretary()) && ($user->id === $handler->created_by_user_id));
+    }
+
+    public function viewTrashed(User $user, Handler $handler): bool
+    {
+        return (($user->isSecretary()) && ($user->id === $handler->created_by_user_id));
     }
 
     /**

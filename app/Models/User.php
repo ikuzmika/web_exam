@@ -80,4 +80,9 @@ class User extends Authenticatable
     {
         return $this->role === 'user';
     }
+
+    public function isSecretary(): bool
+    {
+        return $this->role === 'secretary';
+    }
 }
