@@ -16,8 +16,8 @@ body {
 }
 
 .page-wrapper {
-    min-height: calc(100vh - 140px);
-    padding: 32px 0;
+    min-height: 650px;
+    padding: 32px 0 14px;
 }
 
 .site-footer {
@@ -39,6 +39,14 @@ body {
     background-color: var(--accent-dark);
     border-color: var(--accent-dark);
     color: #ffffff;
+}
+
+.btn-primary:active,
+.btn-primary:focus {
+    background-color: var(--accent-dark) !important;
+    border-color: var(--accent-dark) !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 0 0.2rem rgba(139, 195, 74, 0.25) !important;
 }
 
 .btn-outline-primary {
@@ -131,7 +139,7 @@ body {
     color: var(--text-muted);
 }
 
-/* Mobile view */
+/* For tablets and smaller screens */
 @media (max-width: 991px) {
     .language-switch {
         margin: 12px 0;
@@ -143,7 +151,7 @@ body {
     }
 }
 
-/* Page width on large screens */
+/* For large screens */
 @media (min-width: 1200px) {
     .container {
         max-width: 1450px;
@@ -157,7 +165,7 @@ body {
     background: #ffffff;
     border: 1px solid var(--border);
     border-radius: 22px;
-    padding: 28px 56px;
+    padding: 28px 56px 12px;
     margin-bottom: 28px;
 }
 
@@ -202,7 +210,7 @@ body {
     text-decoration: underline;
 }
 
-/* Homepage on smaller screens */
+/* For smaller screens */
 @media (max-width: 768px) {
     .hero-section {
         padding: 32px;
@@ -215,11 +223,6 @@ body {
     .hero-text {
         font-size: 16px;
     }
-}
-
-/* Homepage dashboard section */
-.home-dashboard {
-    margin-bottom: 32px;
 }
 
 /* Search panel on homepage */
@@ -306,6 +309,10 @@ body {
     color: var(--text-muted);
 }
 
+.competition-preview-content .btn {
+    margin-top: 8px;
+}
+
 .competition-image-placeholder {
     width: 300px;
     min-height: 140px;
@@ -320,8 +327,8 @@ body {
     text-align: center;
 }
 
-/* Homepage dashboard on smaller screens */
-@media (max-width: 992px) {
+/* Homepage dashboard for smaller screens */
+@media (max-width: 991px) {
     .competition-preview-card {
         flex-direction: column;
     }
@@ -329,4 +336,219 @@ body {
     .competition-image-placeholder {
         width: 100%;
     }
+}
+
+/* General page header */
+.page-header {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    padding: 34px 42px;
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    align-items: center;
+}
+
+.page-label {
+    display: inline-block;
+    background: var(--accent-light);
+    color: var(--accent-dark);
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 14px;
+}
+
+.page-header h1 {
+    font-size: 38px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.page-header p {
+    color: var(--text-muted);
+    margin: 0;
+    max-width: 700px;
+}
+
+/* Filter/search block */
+.filter-bar {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 22px;
+    margin-bottom: 24px;
+}
+
+.filter-field {
+    max-width: 520px;
+}
+
+.filter-field .form-label {
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.filter-field .form-control {
+    border-color: var(--border);
+    border-radius: 10px;
+}
+
+.filter-field .form-control:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 0.2rem rgba(139, 195, 74, 0.2);
+}
+
+/* List cards */
+.content-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.list-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 24px;
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.list-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(31, 41, 55, 0.08);
+}
+
+.list-card-content h2 {
+    font-size: 24px;
+    margin-bottom: 14px;
+}
+
+.list-card-content p {
+    color: var(--text-muted);
+    margin-bottom: 6px;
+}
+
+.list-card-actions {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+/* Empty state */
+.empty-state {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 32px;
+    text-align: center;
+}
+
+.empty-state h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.empty-state p {
+    color: var(--text-muted);
+    margin: 0;
+}
+
+/* Responsive list pages */
+@media (max-width: 768px) {
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 28px;
+    }
+
+    .page-header h1 {
+        font-size: 32px;
+    }
+
+    .list-card {
+        flex-direction: column;
+    }
+}
+
+/* Authentication pages */
+.auth-page {
+    display: flex;
+    justify-content: center;
+    padding: 40px 0 52px;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 480px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    padding: 34px;
+    transition: box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.auth-card form .btn {
+    margin-top: 7px;
+}
+
+.auth-card:hover {
+    border-color: #cbd8c2;
+    box-shadow: 0 12px 28px rgba(31, 41, 55, 0.06);
+}
+
+.auth-card h1 {
+    font-size: 34px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.auth-text {
+    color: var(--text-muted);
+    margin-bottom: 15px;
+}
+
+.auth-card .form-label {
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.auth-card .form-control {
+    border-color: var(--border);
+    border-radius: 10px;
+    padding: 10px 14px;
+}
+
+.auth-card .form-control:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 0.2rem rgba(139, 195, 74, 0.2);
+}
+
+.form-error {
+    color: #b91c1c;
+    font-size: 14px;
+    margin-top: 6px;
+}
+
+.auth-bottom-text {
+    text-align: center;
+    color: var(--text-muted);
+    margin: 20px 0 0;
+}
+
+.auth-bottom-text a {
+    color: var(--accent-dark);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.auth-bottom-text a:hover {
+    text-decoration: underline;
 }
