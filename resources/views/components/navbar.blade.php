@@ -20,55 +20,67 @@
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('competition.*') ? 'active' : '' }}"
                        href="{{ route('competition.index') }}">
-                        Competitions
+                        <span data-translate="nav_competitions">Competitions</span>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('rankings.*') ? 'active' : '' }}"
                        href="{{ route('rankings.index') }}">
-                        Rankings
+                        <span data-translate="nav_rankings">Rankings</span>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('pair.*') ? 'active' : '' }}"
                        href="{{ route('pair.index') }}">
-                        Pairs
+                        <span data-translate="nav_pairs">Pairs</span>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('photo.*') ? 'active' : '' }}"
                        href="{{ route('photo.index') }}">
-                        Photos
+                        <span data-translate="nav_photos">Photos</span>
                     </a>
                 </li>
 
                 {{-- Dropdown with additional pages --}}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                        More
+                        <span data-translate="nav_more">More</span>
                     </a>
 
                     <ul class="dropdown-menu">
                         <li>
-                            <a class="dropdown-item" href="{{ route('handler.index') }}">Handlers</a>
+                            <a class="dropdown-item" href="{{ route('handler.index') }}">
+                                <span data-translate="nav_handlers">Handlers</span>
+                            </a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="{{ route('dog.index') }}">Dogs</a>
+                            <a class="dropdown-item" href="{{ route('dog.index') }}">
+                                <span data-translate="nav_dogs">Dogs</span>
+                            </a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="{{ route('track.index') }}">Tracks</a>
+                            <a class="dropdown-item" href="{{ route('track.index') }}">
+                                <span data-translate="nav_tracks">Tracks</span>
+                            </a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="{{ route('result.index') }}">Results</a>
+                            <a class="dropdown-item" href="{{ route('result.index') }}">
+                                <span data-translate="nav_results">Results</span>
+                            </a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="{{ route('organizer.index') }}">Organizers</a>
+                            <a class="dropdown-item" href="{{ route('organizer.index') }}">
+                                <span data-translate="nav_organizers">Organizers</span>
+                            </a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="{{ route('sponsor.index') }}">Sponsors</a>
+                            <a class="dropdown-item" href="{{ route('sponsor.index') }}">
+                                <span data-translate="nav_sponsors">Sponsors</span>
+                            </a>
                         </li>
 
                         @auth
@@ -87,19 +99,19 @@
 
             {{-- Language switch buttons --}}
             <div class="language-switch">
-                <button class="language-btn active" type="button">EN</button>
-                <button class="language-btn" type="button">LV</button>
+                <button class="language-btn active" type="button" data-lang="en">EN</button>
+                <button class="language-btn" type="button" data-lang="lv">LV</button>
             </div>
 
             {{-- Login / Register or user info --}}
             <div class="auth-area">
                 @guest
                    <a class="btn btn-primary btn-sm" href="{{ route('auth.login') }}">
-                        Login
+                        <span data-translate="nav_login">Login</span>
                     </a>
 
                     <a class="btn btn-primary btn-sm" href="{{ route('auth.register') }}">
-                        Register
+                        <span data-translate="nav_register">Register</span>
                     </a>
                 @endguest
 
