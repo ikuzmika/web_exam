@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('email', 150)->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('role', 30)->default('participant');
+            $table->string('role', 30)->default('user');
             $table->boolean('is_blocked')->default(false);
             $table->string('phone', 15)->nullable();
             $table->rememberToken();

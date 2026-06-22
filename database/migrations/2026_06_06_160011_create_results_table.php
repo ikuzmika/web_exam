@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('track_id')->constrained('tracks')->onDelete('cascade');
             $table->foreignId('result_status_id')->constrained('result_statuses')->onDelete('cascade');
             $table->foreignId('recorded_by_user_id')->constrained('users')->onDelete('cascade');
-            $table->integer('points');
+            $table->integer('points')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
