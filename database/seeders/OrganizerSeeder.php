@@ -14,21 +14,27 @@ class OrganizerSeeder extends Seeder
     public function run(): void
     {
         Organizer::create([
+            'created_by_user_id' => 1,
             'name' => 'Suņu sporta attīstības centrs',
             'venue' => 'Rīga'
         ]);
 
         Organizer::create([
+            'created_by_user_id' => 1,
             'name' => 'AgiLatLand',
-            'venue' => 'Zaķumuiža'
+            'venue' => 'Zaķumuiža',
+            'contact_person' => 'Svetlana Krēsliņa',
+            'contact_number' => '29891850'
         ]);
 
         Organizer::create([
+            'created_by_user_id' => 1,
             'name' => 'Rēzeknes kinoloģiskās attīstības centrs - RKAC',
             'venue' => 'Rēzekne'
         ]);
 
         Organizer::create([
+            'created_by_user_id' => 1,
             'name' => 'Suņu klubs "Mans draugs"',
             'venue' => 'Zibeņi'
         ]);

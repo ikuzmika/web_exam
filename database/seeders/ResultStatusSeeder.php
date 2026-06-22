@@ -13,10 +13,18 @@ class ResultStatusSeeder extends Seeder
      */
     public function run(): void
     {
-        ResultStatus::create(['name' => 'NS']);
+        ResultStatus::create([
+            'name' => 'NS',
+            'description' => 'not started',
+        ]);
 
-        ResultStatus::create(['name' => 'OK']);
+        ResultStatus::create([
+            'name' => 'OK'
+        ]);
 
-        ResultStatus::create(['name' => 'DQ']);
+        ResultStatus::create([
+            'name' => 'DQ',
+            'description' => 'disqualified',
+        ]);
     }
 }

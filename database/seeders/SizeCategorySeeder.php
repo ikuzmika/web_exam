@@ -14,13 +14,9 @@ class SizeCategorySeeder extends Seeder
     public function run(): void
     {
         SizeCategory::create(['name' => 'x-small']);
-
         SizeCategory::create(['name' => 'small']);
-
         SizeCategory::create(['name' => 'medium']);
-
         SizeCategory::create(['name' => 'intermedia']);
-
         SizeCategory::create(['name' => 'large']);
     }
 }

@@ -9,6 +9,8 @@ class OrganizerSponsor extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'organizer_sponsor';
+
     protected $fillable = [
         'organizer_id',
         'sponsor_id',

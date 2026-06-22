@@ -14,6 +14,7 @@ class ResultSeeder extends Seeder
     public function run(): void
     {
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 1,
             'track_id' => 1,
             'points' => 74,
@@ -21,6 +22,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 1,
             'track_id' => 2,
             'points' => null,
@@ -28,6 +30,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 1,
             'track_id' => 5,
             'points' => 84,
@@ -35,6 +38,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 1,
             'track_id' => 6,
             'points' => 88,
@@ -42,6 +46,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 1,
             'track_id' => 8,
             'points' => null,
@@ -49,6 +54,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 1,
             'track_id' => 9,
             'points' => null,
@@ -56,6 +62,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 1,
             'track_id' => 14,
             'points' => null,
@@ -63,6 +70,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 1,
             'track_id' => 15,
             'points' => 79,
@@ -70,6 +78,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 2,
             'track_id' => 1,
             'points' => 85,
@@ -77,6 +86,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 2,
             'track_id' => 2,
             'points' => 88,
@@ -84,6 +94,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 2,
             'track_id' => 4,
             'points' => 100,
@@ -91,6 +102,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 2,
             'track_id' => 11,
             'points' => 87,
@@ -98,6 +110,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 2,
             'track_id' => 13,
             'points' => 91,
@@ -105,6 +118,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 2,
             'track_id' => 14,
             'points' => null,
@@ -112,6 +126,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 2,
             'track_id' => 15,
             'points' => 94,
@@ -119,6 +134,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 3,
             'track_id' => 1,
             'points' => null,
@@ -126,6 +142,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 3,
             'track_id' => 2,
             'points' => 57,
@@ -133,6 +150,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 3,
             'track_id' => 3,
             'points' => 95,
@@ -140,6 +158,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 3,
             'track_id' => 4,
             'points' => null,
@@ -147,6 +166,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 3,
             'track_id' => 5,
             'points' => null,
@@ -154,6 +174,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 3,
             'track_id' => 7,
             'points' => 100,
@@ -161,6 +182,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 3,
             'track_id' => 8,
             'points' => 86,
@@ -168,6 +190,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 3,
             'track_id' => 15,
             'points' => 95,
@@ -175,6 +198,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 4,
             'track_id' => 1,
             'points' => 76,
@@ -182,6 +206,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 4,
             'track_id' => 2,
             'points' => 82,
@@ -189,6 +214,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 4,
             'track_id' => 4,
             'points' => 100,
@@ -196,6 +222,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 4,
             'track_id' => 5,
             'points' => 94,
@@ -203,6 +230,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 4,
             'track_id' => 6,
             'points' => 70,
@@ -210,6 +238,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 4,
             'track_id' => 7,
             'points' => 88,
@@ -217,6 +246,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 4,
             'track_id' => 9,
             'points' => 100,
@@ -224,6 +254,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 4,
             'track_id' => 10,
             'points' => null,
@@ -231,6 +262,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 4,
             'track_id' => 12,
             'points' => 73,
@@ -238,6 +270,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 4,
             'track_id' => 14,
             'points' => null,
@@ -245,6 +278,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 4,
             'track_id' => 15,
             'points' => null,
@@ -252,6 +286,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 5,
             'track_id' => 1,
             'points' => 100,
@@ -259,6 +294,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 5,
             'track_id' => 2,
             'points' => null,
@@ -266,6 +302,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 5,
             'track_id' => 3,
             'points' => 100,
@@ -273,6 +310,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 5,
             'track_id' => 5,
             'points' => 100,
@@ -280,6 +318,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 5,
             'track_id' => 6,
             'points' => 100,
@@ -287,6 +326,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 5,
             'track_id' => 7,
             'points' => null,
@@ -294,6 +334,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 5,
             'track_id' => 10,
             'points' => null,
@@ -301,6 +342,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 5,
             'track_id' => 11,
             'points' => 100,
@@ -308,6 +350,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 6,
             'track_id' => 4,
             'points' => 95,
@@ -315,6 +358,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 6,
             'track_id' => 5,
             'points' => null,
@@ -322,6 +366,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 6,
             'track_id' => 6,
             'points' => null,
@@ -329,6 +374,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 6,
             'track_id' => 8,
             'points' => 87,
@@ -336,6 +382,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 6,
             'track_id' => 9,
             'points' => 76,
@@ -343,6 +390,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 6,
             'track_id' => 11,
             'points' => 93,
@@ -350,6 +398,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 6,
             'track_id' => 13,
             'points' => 89,
@@ -357,6 +406,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 6,
             'track_id' => 15,
             'points' => 84,
@@ -364,6 +414,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 7,
             'track_id' => 1,
             'points' => null,
@@ -371,6 +422,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 7,
             'track_id' => 4,
             'points' => 97,
@@ -378,6 +430,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 7,
             'track_id' => 6,
             'points' => 85,
@@ -385,6 +438,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 7,
             'track_id' => 7,
             'points' => 81,
@@ -392,6 +446,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 7,
             'track_id' => 10,
             'points' => 91,
@@ -399,6 +454,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 7,
             'track_id' => 11,
             'points' => 83,
@@ -406,6 +462,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 7,
             'track_id' => 14,
             'points' => null,
@@ -413,6 +470,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 7,
             'track_id' => 15,
             'points' => null,
@@ -420,6 +478,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 8,
             'track_id' => 1,
             'points' => 95,
@@ -427,6 +486,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 8,
             'track_id' => 2,
             'points' => 98,
@@ -434,6 +494,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 8,
             'track_id' => 3,
             'points' => 78,
@@ -441,6 +502,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 8,
             'track_id' => 7,
             'points' => 100,
@@ -448,6 +510,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 8,
             'track_id' => 9,
             'points' => null,
@@ -455,6 +518,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 8,
             'track_id' => 10,
             'points' => 78,
@@ -462,6 +526,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 8,
             'track_id' => 12,
             'points' => null,
@@ -469,6 +534,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 8,
             'track_id' => 13,
             'points' => 88,
@@ -476,6 +542,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 8,
             'track_id' => 15,
             'points' => 86,
@@ -483,6 +550,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 9,
             'track_id' => 12,
             'points' => 96,
@@ -490,6 +558,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 9,
             'track_id' => 14,
             'points' => null,
@@ -497,6 +566,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 9,
             'track_id' => 15,
             'points' => 80,
@@ -504,6 +574,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 10,
             'track_id' => 1,
             'points' => null,
@@ -511,6 +582,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 10,
             'track_id' => 2,
             'points' => 87,
@@ -518,6 +590,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 10,
             'track_id' => 3,
             'points' => 75,
@@ -525,6 +598,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 10,
             'track_id' => 4,
             'points' => 84,
@@ -532,6 +606,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 10,
             'track_id' => 5,
             'points' => 99,
@@ -539,6 +614,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 10,
             'track_id' => 6,
             'points' => null,
@@ -546,6 +622,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 10,
             'track_id' => 7,
             'points' => null,
@@ -553,6 +630,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 11,
             'track_id' => 1,
             'points' => 86,
@@ -560,6 +638,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 11,
             'track_id' => 2,
             'points' => null,
@@ -567,6 +646,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 11,
             'track_id' => 13,
             'points' => 94,
@@ -574,6 +654,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 11,
             'track_id' => 14,
             'points' => 100,
@@ -581,6 +662,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 12,
             'track_id' => 1,
             'points' => 100,
@@ -588,6 +670,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 12,
             'track_id' => 3,
             'points' => 78,
@@ -595,6 +678,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 12,
             'track_id' => 5,
             'points' => 94,
@@ -602,6 +686,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 12,
             'track_id' => 6,
             'points' => null,
@@ -609,6 +694,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 12,
             'track_id' => 7,
             'points' => 84,
@@ -616,6 +702,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 12,
             'track_id' => 10,
             'points' => 91,
@@ -623,6 +710,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 12,
             'track_id' => 11,
             'points' => 93,
@@ -630,6 +718,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 12,
             'track_id' => 13,
             'points' => 95,
@@ -637,6 +726,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 12,
             'track_id' => 14,
             'points' => 88,
@@ -644,6 +734,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 12,
             'track_id' => 15,
             'points' => null,
@@ -651,6 +742,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 13,
             'track_id' => 1,
             'points' => 87,
@@ -658,6 +750,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 13,
             'track_id' => 3,
             'points' => 83,
@@ -665,6 +758,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 13,
             'track_id' => 5,
             'points' => 88,
@@ -672,6 +766,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 13,
             'track_id' => 6,
             'points' => 71,
@@ -679,6 +774,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 13,
             'track_id' => 8,
             'points' => 90,
@@ -686,6 +782,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 13,
             'track_id' => 9,
             'points' => null,
@@ -693,6 +790,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 13,
             'track_id' => 11,
             'points' => 94,
@@ -700,6 +798,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 13,
             'track_id' => 12,
             'points' => 79,
@@ -707,6 +806,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 13,
             'track_id' => 13,
             'points' => 74,
@@ -714,6 +814,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 14,
             'track_id' => 2,
             'points' => 74,
@@ -721,6 +822,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 14,
             'track_id' => 3,
             'points' => 80,
@@ -728,6 +830,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 14,
             'track_id' => 6,
             'points' => null,
@@ -735,6 +838,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 14,
             'track_id' => 15,
             'points' => 81,
@@ -742,6 +846,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 14,
             'track_id' => 1,
             'points' => null,
@@ -749,6 +854,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 14,
             'track_id' => 5,
             'points' => null,
@@ -756,6 +862,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 14,
             'track_id' => 8,
             'points' => 100,
@@ -763,6 +870,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 14,
             'track_id' => 12,
             'points' => 96,
@@ -770,6 +878,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 15,
             'track_id' => 2,
             'points' => 88,
@@ -777,6 +886,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 15,
             'track_id' => 4,
             'points' => null,
@@ -784,6 +894,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 15,
             'track_id' => 6,
             'points' => 70,
@@ -791,6 +902,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 15,
             'track_id' => 5,
             'points' => 100,
@@ -798,6 +910,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 15,
             'track_id' => 7,
             'points' => 85,
@@ -805,6 +918,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 15,
             'track_id' => 14,
             'points' => null,
@@ -812,6 +926,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 16,
             'track_id' => 1,
             'points' => 95,
@@ -819,6 +934,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 16,
             'track_id' => 2,
             'points' => 59,
@@ -826,6 +942,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 16,
             'track_id' => 3,
             'points' => 83,
@@ -833,6 +950,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 16,
             'track_id' => 4,
             'points' => 54,
@@ -840,6 +958,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 16,
             'track_id' => 5,
             'points' => 95,
@@ -847,6 +966,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 16,
             'track_id' => 6,
             'points' => null,
@@ -854,6 +974,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 16,
             'track_id' => 10,
             'points' => 69,
@@ -861,6 +982,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 16,
             'track_id' => 12,
             'points' => null,
@@ -868,6 +990,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 16,
             'track_id' => 13,
             'points' => 92,
@@ -875,6 +998,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 16,
             'track_id' => 15,
             'points' => 73,
@@ -882,6 +1006,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 17,
             'track_id' => 3,
             'points' => null,
@@ -889,6 +1014,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 17,
             'track_id' => 5,
             'points' => 97,
@@ -896,6 +1022,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 17,
             'track_id' => 10,
             'points' => 71,
@@ -903,6 +1030,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 17,
             'track_id' => 14,
             'points' => null,
@@ -910,6 +1038,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 18,
             'track_id' => 2,
             'points' => 78,
@@ -917,6 +1046,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 18,
             'track_id' => 15,
             'points' => 75,
@@ -924,6 +1054,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 19,
             'track_id' => 1,
             'points' => null,
@@ -931,6 +1062,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 19,
             'track_id' => 4,
             'points' => null,
@@ -938,6 +1070,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 19,
             'track_id' => 5,
             'points' => null,
@@ -945,6 +1078,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 19,
             'track_id' => 7,
             'points' => null,
@@ -952,6 +1086,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 19,
             'track_id' => 9,
             'points' => 70,
@@ -959,6 +1094,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 19,
             'track_id' => 10,
             'points' => 82,
@@ -966,6 +1102,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 19,
             'track_id' => 14,
             'points' => 88,
@@ -973,6 +1110,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 20,
             'track_id' => 2,
             'points' => null,
@@ -980,6 +1118,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 20,
             'track_id' => 4,
             'points' => 89,
@@ -987,6 +1126,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 20,
             'track_id' => 7,
             'points' => null,
@@ -994,6 +1134,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 20,
             'track_id' => 11,
             'points' => 92,
@@ -1001,6 +1142,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 20,
             'track_id' => 13,
             'points' => 78,
@@ -1008,6 +1150,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 20,
             'track_id' => 15,
             'points' => 92,
@@ -1015,6 +1158,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 21,
             'track_id' => 11,
             'points' => null,
@@ -1022,6 +1166,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 21,
             'track_id' => 2,
             'points' => 96,
@@ -1029,6 +1174,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 21,
             'track_id' => 4,
             'points' => 71,
@@ -1036,6 +1182,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 21,
             'track_id' => 6,
             'points' => 82,
@@ -1043,6 +1190,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 21,
             'track_id' => 10,
             'points' => null,
@@ -1050,6 +1198,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 21,
             'track_id' => 14,
             'points' => 88,
@@ -1057,6 +1206,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 22,
             'track_id' => 1,
             'points' => 75,
@@ -1064,6 +1214,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 22,
             'track_id' => 2,
             'points' => null,
@@ -1071,6 +1222,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 22,
             'track_id' => 4,
             'points' => 81,
@@ -1078,6 +1230,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 22,
             'track_id' => 7,
             'points' => 78,
@@ -1085,6 +1238,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 22,
             'track_id' => 13,
             'points' => null,
@@ -1092,6 +1246,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 22,
             'track_id' => 15,
             'points' => 84,
@@ -1099,6 +1254,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 23,
             'track_id' => 1,
             'points' => 74,
@@ -1106,6 +1262,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 23,
             'track_id' => 3,
             'points' => 82,
@@ -1113,6 +1270,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 23,
             'track_id' => 6,
             'points' => null,
@@ -1120,6 +1278,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 23,
             'track_id' => 11,
             'points' => null,
@@ -1127,6 +1286,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 23,
             'track_id' => 13,
             'points' => 85,
@@ -1134,6 +1294,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 23,
             'track_id' => 14,
             'points' => 79,
@@ -1141,6 +1302,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 24,
             'track_id' => 2,
             'points' => 92,
@@ -1148,6 +1310,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 24,
             'track_id' => 4,
             'points' => 89,
@@ -1155,6 +1318,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 24,
             'track_id' => 6,
             'points' => null,
@@ -1162,6 +1326,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 24,
             'track_id' => 8,
             'points' => 70,
@@ -1169,6 +1334,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 24,
             'track_id' => 12,
             'points' => 59,
@@ -1176,6 +1342,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 24,
             'track_id' => 15,
             'points' => null,
@@ -1183,6 +1350,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 25,
             'track_id' => 1,
             'points' => 100,
@@ -1190,6 +1358,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 25,
             'track_id' => 3,
             'points' => 100,
@@ -1197,6 +1366,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 25,
             'track_id' => 5,
             'points' => 100,
@@ -1204,6 +1374,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 25,
             'track_id' => 7,
             'points' => 100,
@@ -1211,6 +1382,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 25,
             'track_id' => 14,
             'points' => 100,
@@ -1218,6 +1390,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 26,
             'track_id' => 1,
             'points' => 88,
@@ -1225,6 +1398,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 26,
             'track_id' => 2,
             'points' => 72,
@@ -1232,6 +1406,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 26,
             'track_id' => 6,
             'points' => null,
@@ -1239,6 +1414,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 26,
             'track_id' => 8,
             'points' => 100,
@@ -1246,6 +1422,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 26,
             'track_id' => 9,
             'points' => null,
@@ -1253,6 +1430,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 26,
             'track_id' => 15,
             'points' => 91,
@@ -1260,6 +1438,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 27,
             'track_id' => 1,
             'points' => 82,
@@ -1267,6 +1446,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 27,
             'track_id' => 2,
             'points' => 62,
@@ -1274,6 +1454,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 27,
             'track_id' => 3,
             'points' => null,
@@ -1281,6 +1462,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 27,
             'track_id' => 5,
             'points' => 91,
@@ -1288,6 +1470,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 27,
             'track_id' => 7,
             'points' => 85,
@@ -1295,6 +1478,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 27,
             'track_id' => 12,
             'points' => 76,
@@ -1302,6 +1486,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 27,
             'track_id' => 14,
             'points' => 72,
@@ -1309,6 +1494,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 28,
             'track_id' => 2,
             'points' => 89,
@@ -1316,6 +1502,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 28,
             'track_id' => 4,
             'points' => null,
@@ -1323,6 +1510,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 28,
             'track_id' => 11,
             'points' => null,
@@ -1330,6 +1518,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 28,
             'track_id' => 15,
             'points' => 86,
@@ -1337,6 +1526,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 29,
             'track_id' => 1,
             'points' => 93,
@@ -1344,6 +1534,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 29,
             'track_id' => 3,
             'points' => 71,
@@ -1351,6 +1542,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 29,
             'track_id' => 5,
             'points' => 61,
@@ -1358,6 +1550,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 29,
             'track_id' => 6,
             'points' => 99,
@@ -1365,6 +1558,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 29,
             'track_id' => 8,
             'points' => null,
@@ -1372,6 +1566,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 29,
             'track_id' => 10,
             'points' => 90,
@@ -1379,6 +1574,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 29,
             'track_id' => 14,
             'points' => null,
@@ -1386,6 +1582,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 30,
             'track_id' => 8,
             'points' => 100,
@@ -1393,6 +1590,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 30,
             'track_id' => 10,
             'points' => null,
@@ -1400,6 +1598,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 30,
             'track_id' => 14,
             'points' => null,
@@ -1407,6 +1606,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 30,
             'track_id' => 15,
             'points' => 97,
@@ -1414,6 +1614,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 31,
             'track_id' => 4,
             'points' => 79,
@@ -1421,6 +1622,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 31,
             'track_id' => 5,
             'points' => 73,
@@ -1428,6 +1630,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 31,
             'track_id' => 7,
             'points' => null,
@@ -1435,6 +1638,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 31,
             'track_id' => 10,
             'points' => 100,
@@ -1442,6 +1646,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 31,
             'track_id' => 14,
             'points' => 76,
@@ -1449,6 +1654,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 32,
             'track_id' => 1,
             'points' => null,
@@ -1456,6 +1662,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 32,
             'track_id' => 3,
             'points' => 100,
@@ -1463,6 +1670,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 32,
             'track_id' => 6,
             'points' => 77,
@@ -1470,6 +1678,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 32,
             'track_id' => 8,
             'points' => 83,
@@ -1477,6 +1686,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 32,
             'track_id' => 12,
             'points' => 100,
@@ -1484,6 +1694,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 32,
             'track_id' => 14,
             'points' => 86,
@@ -1491,6 +1702,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 33,
             'track_id' => 3,
             'points' => 80,
@@ -1498,6 +1710,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 33,
             'track_id' => 2,
             'points' => 90,
@@ -1505,6 +1718,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 33,
             'track_id' => 5,
             'points' => null,
@@ -1512,6 +1726,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 33,
             'track_id' => 7,
             'points' => null,
@@ -1519,6 +1734,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 33,
             'track_id' => 11,
             'points' => 73,
@@ -1526,6 +1742,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 33,
             'track_id' => 14,
             'points' => 87,
@@ -1533,6 +1750,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 34,
             'track_id' => 1,
             'points' => null,
@@ -1540,6 +1758,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 34,
             'track_id' => 4,
             'points' => 72,
@@ -1547,6 +1766,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 34,
             'track_id' => 8,
             'points' => 94,
@@ -1554,6 +1774,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 34,
             'track_id' => 12,
             'points' => 97,
@@ -1561,6 +1782,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 34,
             'track_id' => 13,
             'points' => null,
@@ -1568,6 +1790,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 34,
             'track_id' => 15,
             'points' => 100,
@@ -1575,6 +1798,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 35,
             'track_id' => 1,
             'points' => null,
@@ -1582,6 +1806,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 35,
             'track_id' => 2,
             'points' => 90,
@@ -1589,6 +1814,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 35,
             'track_id' => 4,
             'points' => 96,
@@ -1596,6 +1822,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 35,
             'track_id' => 5,
             'points' => 70,
@@ -1603,6 +1830,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 35,
             'track_id' => 9,
             'points' => null,
@@ -1610,6 +1838,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 35,
             'track_id' => 15,
             'points' => 72,
@@ -1617,6 +1846,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 36,
             'track_id' => 1,
             'points' => 80,
@@ -1624,6 +1854,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 36,
             'track_id' => 3,
             'points' => 90,
@@ -1631,6 +1862,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 36,
             'track_id' => 4,
             'points' => null,
@@ -1638,6 +1870,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 36,
             'track_id' => 6,
             'points' => 65,
@@ -1645,6 +1878,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 36,
             'track_id' => 11,
             'points' => 86,
@@ -1652,6 +1886,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 36,
             'track_id' => 14,
             'points' => 96,
@@ -1659,6 +1894,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 37,
             'track_id' => 1,
             'points' => 87,
@@ -1666,6 +1902,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 37,
             'track_id' => 2,
             'points' => null,
@@ -1673,6 +1910,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 37,
             'track_id' => 6,
             'points' => 71,
@@ -1680,6 +1918,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 37,
             'track_id' => 8,
             'points' => 94,
@@ -1687,6 +1926,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 37,
             'track_id' => 13,
             'points' => null,
@@ -1694,6 +1934,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 37,
             'track_id' => 15,
             'points' => 84,
@@ -1701,6 +1942,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 38,
             'track_id' => 1,
             'points' => 78,
@@ -1708,6 +1950,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 38,
             'track_id' => 2,
             'points' => 88,
@@ -1715,6 +1958,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 38,
             'track_id' => 4,
             'points' => 96,
@@ -1722,6 +1966,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 38,
             'track_id' => 3,
             'points' => 84,
@@ -1729,6 +1974,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 38,
             'track_id' => 5,
             'points' => 92,
@@ -1736,6 +1982,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 38,
             'track_id' => 8,
             'points' => null,
@@ -1743,6 +1990,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 38,
             'track_id' => 10,
             'points' => 91,
@@ -1750,6 +1998,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 38,
             'track_id' => 12,
             'points' => 78,
@@ -1757,6 +2006,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 38,
             'track_id' => 13,
             'points' => 85,
@@ -1764,6 +2014,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 38,
             'track_id' => 14,
             'points' => null,
@@ -1771,6 +2022,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 39,
             'track_id' => 2,
             'points' => null,
@@ -1778,6 +2030,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 39,
             'track_id' => 4,
             'points' => 98,
@@ -1785,6 +2038,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 39,
             'track_id' => 6,
             'points' => 82,
@@ -1792,6 +2046,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 39,
             'track_id' => 7,
             'points' => 73,
@@ -1799,6 +2054,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 39,
             'track_id' => 13,
             'points' => 70,
@@ -1806,6 +2062,7 @@ class ResultSeeder extends Seeder
         ]);
 
         Result::create([
+            'recorded_by_user_id' => 1,
             'pair_id' => 39,
             'track_id' => 14,
             'points' => 70,

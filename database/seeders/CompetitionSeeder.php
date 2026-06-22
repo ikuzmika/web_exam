@@ -14,50 +14,57 @@ class CompetitionSeeder extends Seeder
     public function run(): void
     {
         Competition::create([
+            'created_by_user_id' => 1,
             'title' => 'Rēzeknes novada vasara kauss-24',
-            'date' => '2024-06-15 12:30:00',
+            'date' => date("Y-m-d", mktime(12, 30, 0,6 , 15, 2024)),
             'organizer_id' => 3,
             'judge_id' => 15
         ]);
 
         Competition::create([
+            'created_by_user_id' => 1,
             'title' => 'AFA Summer CUP 2024',
-            'date' => '2024-07-29 12:30:00',
+            'date' => date("Y-m-d", mktime(12, 30, 0,7 , 29, 2024)),
             'organizer_id' => 4,
             'judge_id' => 6
         ]);
 
         Competition::create([
+            'created_by_user_id' => 1,
             'title' => 'Rēzeknes novada vasara kauss-25',
-            'date' => '2025-06-10 12:30:00',
+            'date' => date("Y-m-d", mktime(12, 30, 0,6 , 10, 2025)),
             'organizer_id' => 3,
             'judge_id' => 30
         ]);
 
         Competition::create([
+            'created_by_user_id' => 1,
             'title' => 'AFA Summer CUP 2025',
-            'date' => '2025-06-30 12:30:00',
+            'date' => date("Y-m-d", mktime(12, 30, 0,6 , 30, 2025)),
             'organizer_id' => 4,
             'judge_id' => 18
         ]);
 
         Competition::create([
+            'created_by_user_id' => 1,
             'title' => 'Adžiliti sacensības Zaķumuižā',
-            'date' => '2025-08-04 12:30:00',
+            'date' => date("Y-m-d", mktime(12, 30, 0,8 , 4, 2025)),
             'organizer_id' => 2,
             'judge_id' => 14
         ]);
 
         Competition::create([
+            'created_by_user_id' => 1,
             'title' => 'Starptautiskās un nacionālās adžiliti sacensības',
-            'date' => '2025-05-31 12:30:00',
+            'date' => date("Y-m-d", mktime(12, 30, 0,5 , 31, 2025)),
             'organizer_id' => 1,
             'judge_id' => 17
         ]);
 
         Competition::create([
+            'created_by_user_id' => 1,
             'title' => 'Nacionālās adžiliti sacensības',
-            'date' => '2025-09-17 12:30:00',
+            'date' => date("Y-m-d", mktime(12, 30, 0,9 , 17, 2025)),
             'organizer_id' => 1,
             'judge_id' => 13
         ]);
