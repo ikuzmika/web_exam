@@ -41,7 +41,7 @@ class Competition extends Model
         return $this->hasMany(Track::class, 'competition_id');
     }
 
-    public function photos()
+    public function photo()
     {
         return $this->hasMany(Photo::class, 'competition_id');
     }

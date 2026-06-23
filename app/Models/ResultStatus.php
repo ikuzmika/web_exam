@@ -11,7 +11,7 @@ class ResultStatus extends Model
         'description'
     ];
 
-    public function results()
+    public function result()
     {
         return $this->hasMany(Result::class, 'result_status_id');
     }

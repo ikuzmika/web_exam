@@ -36,7 +36,7 @@ class Pair extends Model
         return $this->hasMany(Result::class, 'pair_id');
     }
 
-    public function photos()
+    public function photo()
     {
         return $this->hasMany(Photo::class, 'pair_id');
     }
