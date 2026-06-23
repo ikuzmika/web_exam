@@ -6,7 +6,7 @@
     <title>{{ $title ?? 'Agility Latvia' }}</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
@@ -36,6 +36,6 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{{ asset('js/language.js') }}"></script>
+    <script src="/js/language.js"></script>
 </body>
 </html>
