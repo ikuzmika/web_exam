@@ -637,3 +637,78 @@ body {
     background-color: #f3f4f6;
     border-color: var(--border);
 }
+
+/* Pairs page cards */
+.pairs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.pair-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 20px;
+    min-height: 115px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    transition: 0.2s ease;
+}
+
+.pair-card:hover {
+    background: #f9fafb;
+    border-color: #cbd8c2;
+}
+
+.pair-card h2 {
+    font-size: 22px;
+    margin-bottom: 12px;
+}
+
+.pair-card .btn {
+    width: fit-content;
+}
+
+.pair-card .btn-outline-primary:focus,
+.pair-card .btn-outline-primary:active {
+    color: #ffffff !important;
+    background-color: var(--accent) !important;
+    border-color: var(--accent) !important;
+    box-shadow: 0 0 0 0.2rem rgba(139, 195, 74, 0.25) !important;
+}
+
+.pair-modal {
+    border-radius: 18px;
+    border: 1px solid var(--border);
+}
+
+.pair-modal .modal-body p {
+    color: var(--text-muted);
+    margin-bottom: 8px;
+}
+
+@media (max-width: 991px) {
+    .pairs-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .pairs-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.pair-modal .btn-outline-primary:focus,
+.pair-modal .btn-outline-primary:active {
+    color: #ffffff !important;
+    background-color: var(--accent) !important;
+    border-color: var(--accent) !important;
+    box-shadow: 0 0 0 0.2rem rgba(139, 195, 74, 0.25) !important;
+}
+
+.pair-modal .btn-close:focus {
+    box-shadow: 0 0 0 0.2rem rgba(139, 195, 74, 0.25) !important;
+}

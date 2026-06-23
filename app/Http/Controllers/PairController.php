@@ -20,7 +20,10 @@ class PairController extends Controller
      */
     public function index()
     {
-        $pairs = Pair::all();
+        $pairs = Pair::with([
+            'dog.handler',
+            'dog.sizeCategory',
+        ])->get();
         return view('pairs.index', compact('pairs'));
     }
 
