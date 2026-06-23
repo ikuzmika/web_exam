@@ -614,3 +614,26 @@ body {
 .auth-bottom-text a:hover {
     text-decoration: underline;
 }
+
+.pagination .page-link {
+    color: var(--accent-dark);
+    border-color: var(--border);
+}
+
+.pagination .page-link:hover {
+    color: #ffffff;
+    background-color: var(--accent);
+    border-color: var(--accent);
+}
+
+.pagination .active .page-link {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: #ffffff;
+}
+
+.pagination .disabled .page-link {
+    color: var(--text-muted);
+    background-color: #f3f4f6;
+    border-color: var(--border);
+}

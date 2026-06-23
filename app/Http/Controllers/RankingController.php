@@ -15,7 +15,7 @@ class RankingController extends Controller
     {
         $query = Result::query()
             ->with([
-                'pair.handler',
+                'pair.dog.handler',
                 'pair.dog.sizeCategory',
                 'track.competition',
                 'track.difficultyLevel',
@@ -29,7 +29,7 @@ class RankingController extends Controller
         // Filtrs pēc gada
         if ($request->filled('year')) {
             $query->whereHas('track.competition', function ($q) use ($request) {
-                $q->whereYear('date_from', $request->year);
+                $q->whereYear('date', $request->year);
             });
         }
 
@@ -56,11 +56,11 @@ class RankingController extends Controller
 
         $rankings = $query->paginate(10)->withQueryString();
 
-        $competitions = Competition::orderByDesc('date_from')->get();
+        $competitions = Competition::orderByDesc('date')->get();
         $sizeCategories = SizeCategory::orderBy('name')->get();
         $difficultyLevels = DifficultyLevel::orderBy('name')->get();
 
-        $years = Competition::selectRaw('YEAR(date_from) as year')
+        $years = Competition::selectRaw('YEAR(date) as year')
             ->distinct()
             ->orderByDesc('year')
             ->pluck('year');
