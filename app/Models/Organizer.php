@@ -18,7 +18,7 @@ class Organizer extends Model
         'venue',
     ];
 
-    public function sponsors(){
+    public function sponsor(){
         return $this->belongsToMany(Sponsor::class, 'sponsor_organizer')
             ->withPivot('contribution_type', 'contribution_amount')
             ->withTimestamps();
