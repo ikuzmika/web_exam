@@ -52,12 +52,15 @@ body {
 .btn-outline-primary {
     color: var(--accent-dark);
     border-color: var(--accent);
+    background-color: #ffffff;
 }
 
-.btn-outline-primary:hover {
-    background-color: var(--accent);
-    border-color: var(--accent);
-    color: #ffffff;
+.btn-outline-primary:hover,
+.btn-outline-primary:focus,
+.btn-outline-primary:active {
+    background-color: var(--accent) !important;
+    border-color: var(--accent) !important;
+    color: #ffffff !important;
 }
 
 .btn:focus,
@@ -671,14 +674,6 @@ body {
     width: fit-content;
 }
 
-.pair-card .btn-outline-primary:focus,
-.pair-card .btn-outline-primary:active {
-    color: #ffffff !important;
-    background-color: var(--accent) !important;
-    border-color: var(--accent) !important;
-    box-shadow: 0 0 0 0.2rem rgba(139, 195, 74, 0.25) !important;
-}
-
 .pair-modal {
     border-radius: 18px;
     border: 1px solid var(--border);
@@ -699,14 +694,6 @@ body {
     .pairs-grid {
         grid-template-columns: 1fr;
     }
-}
-
-.pair-modal .btn-outline-primary:focus,
-.pair-modal .btn-outline-primary:active {
-    color: #ffffff !important;
-    background-color: var(--accent) !important;
-    border-color: var(--accent) !important;
-    box-shadow: 0 0 0 0.2rem rgba(139, 195, 74, 0.25) !important;
 }
 
 .pair-modal .btn-close:focus {
