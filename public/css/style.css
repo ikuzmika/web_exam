@@ -134,11 +134,6 @@ body {
     gap: 10px;
 }
 
-/* .auth-area .btn {
-    min-width: 110px;
-    text-align: center;
-} */
-
 .user-name {
     font-size: 14px;
     color: var(--text-muted);
