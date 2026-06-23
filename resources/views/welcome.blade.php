@@ -51,7 +51,7 @@
                 </div>
             </div>
 
-            {{-- Planned competitions block --}}
+            {{-- Planned competitions --}}
             <div class="col-lg-9">
                 <div class="section-heading">
                     <h2>Planned competitions</h2>
@@ -60,53 +60,36 @@
                     </a>
                 </div>
 
-                <div class="competition-preview-card">
-                    <div class="competition-preview-content">
-                        <h3>Agility Competition in Zvejniekciems</h3>
-                        <p><strong>Date:</strong> 05.06.2026</p>
-                        <p><strong>Venue:</strong> Zvejniekciems</p>
+                @forelse($upcomingCompetitions as $competition)
+                    <div class="competition-preview-card">
+                        <div class="competition-preview-content">
+                            <h3>{{ $competition->title }}</h3>
 
-                        <a href="{{ route('competition.index') }}" class="btn btn-primary btn-sm">
-                            Open
-                        </a>
+                            <p>
+                                <strong>Date:</strong>
+                                {{ \Carbon\Carbon::parse($competition->date)->format('d.m.Y') }}
+                            </p>
+
+                            <p>
+                                <strong>Venue:</strong>
+                                {{ optional($competition->organizer)->venue ?? 'Not specified' }}
+                            </p>
+
+                            <a href="{{ route('competition.show', $competition->id) }}" class="btn btn-primary btn-sm">
+                                Open
+                            </a>
+                        </div>
+
+                        <div class="competition-image-placeholder">
+                            Competition image
+                        </div>
                     </div>
-
-                    <div class="competition-image-placeholder">
-                        Competition image
+                @empty
+                    <div class="empty-state">
+                        <h2>No planned competitions</h2>
+                        <p>There are no upcoming competitions added yet.</p>
                     </div>
-                </div>
-
-                <div class="competition-preview-card">
-                    <div class="competition-preview-content">
-                        <h3>Rēzekne Spring Cup 2026</h3>
-                        <p><strong>Date:</strong> 11.05.2026</p>
-                        <p><strong>Venue:</strong> Rēzekne</p>
-
-                        <a href="{{ route('competition.index') }}" class="btn btn-primary btn-sm">
-                            Open
-                        </a>
-                    </div>
-
-                    <div class="competition-image-placeholder">
-                        Competition image
-                    </div>
-                </div>
-
-                <div class="competition-preview-card">
-                    <div class="competition-preview-content">
-                        <h3>National Agility Championship</h3>
-                        <p><strong>Date:</strong> 31.05.2026</p>
-                        <p><strong>Venue:</strong> Riga</p>
-
-                        <a href="{{ route('competition.index') }}" class="btn btn-primary btn-sm">
-                            Open
-                        </a>
-                    </div>
-
-                    <div class="competition-image-placeholder">
-                        Competition image
-                    </div>
-                </div>
+                @endforelse
             </div>
 
         </div>

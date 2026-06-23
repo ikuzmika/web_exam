@@ -21,7 +21,9 @@ class CompetitionController extends Controller
      */
     public function index()
     {
-        $competitions = Competition::all();
+        $competitions = Competition::with('organizer')
+            ->orderByDesc('date')
+            ->get();
         return view('competitions.index', compact('competitions'));
     }
 

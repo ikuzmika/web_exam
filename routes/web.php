@@ -13,9 +13,16 @@ use App\Http\Controllers\ResultController;
 use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\TrackController;
 use Illuminate\Support\Facades\Route;
+use App\Models\Competition;
 
 Route::get('/', function () {
-    return view('welcome');
+    $upcomingCompetitions = Competition::with('organizer')
+        ->whereDate('date', '>=', now()->toDateString())
+        ->orderBy('date')
+        ->take(3)
+        ->get();
+
+    return view('welcome', compact('upcomingCompetitions'));
 });
 
 Route::resource('handler', HandlerController::class);
