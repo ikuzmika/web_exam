@@ -17,6 +17,10 @@ class Competition extends Model
         'date'
     ];
 
+    protected $casts = [
+        'date' => 'datetime',
+    ];
+
     public function organizer()
     {
         return $this->belongsTo(Organizer::class, 'organizer_id');

@@ -16,6 +16,7 @@ class SponsorSeeder extends Seeder
         Sponsor::create([
             'name' => 'Joy for Friends',
             'created_by_user_id' => 1,
+            'email' => 'info@tervetefood.lv'
         ]);
 
         Sponsor::create([

@@ -16,6 +16,11 @@ class Pair extends Model
         'active_until',
     ];
 
+    protected array $dates = [
+        'active_from',
+        'active_until',
+    ];
+
     public function dog()
     {
         return $this->belongsTo(Dog::class, 'dog_id');

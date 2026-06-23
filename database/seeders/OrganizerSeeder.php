@@ -16,7 +16,8 @@ class OrganizerSeeder extends Seeder
         Organizer::create([
             'created_by_user_id' => 1,
             'name' => 'Suņu sporta attīstības centrs',
-            'venue' => 'Rīga'
+            'venue' => 'Rīga',
+            'email' => 'lidia_ice@inbox.lv'
         ]);
 
         Organizer::create([
@@ -30,7 +31,8 @@ class OrganizerSeeder extends Seeder
         Organizer::create([
             'created_by_user_id' => 1,
             'name' => 'Rēzeknes kinoloģiskās attīstības centrs - RKAC',
-            'venue' => 'Rēzekne'
+            'venue' => 'Rēzekne',
+            'contact_person' => 'Nataļja Zuiča'
         ]);
 
         Organizer::create([
