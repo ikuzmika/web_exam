@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Pair;
+use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use function Illuminate\Support\years;
@@ -17,6 +18,7 @@ class PairSeeder extends Seeder
         Pair::create([
             'created_by_user_id' => 1,
             'dog_id' => 1,
+            'active_from' => Carbon::create(2010),
         ]);
 
 

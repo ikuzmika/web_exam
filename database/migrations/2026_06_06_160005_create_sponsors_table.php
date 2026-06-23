@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('created_by_user_id')->constrained('users')->onDelete('cascade');
             $table->string('name');
             $table->string('description')->nullable();
-            $table->string('email', 150)->nullable();
+            $table->string('email', 50)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
