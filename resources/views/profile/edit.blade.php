@@ -1,6 +1,6 @@
 <x-layout>
     <x-slot name="title">
-        My profile
+        {{ __('profile.title') }}
     </x-slot>
 
     <section class="profile-page-wrapper">
@@ -9,11 +9,11 @@
                 @csrf
                 @method('PATCH')
 
-                <h2>Account information</h2>
+                <h2>{{ __('profile.account_information') }}</h2>
 
                 <div class="mb-3">
                     <label for="name" class="form-label">
-                        Name
+                        {{ __('profile.name') }}
                     </label>
 
                     <input type="text"
@@ -26,7 +26,7 @@
 
                 <div class="mb-3">
                     <label for="email" class="form-label">
-                        Email
+                        {{ __('profile.email') }}
                     </label>
 
                     <input type="email"
@@ -39,7 +39,7 @@
 
                 <div class="mb-3">
                     <label for="phone" class="form-label">
-                        Phone
+                        {{ __('profile.phone') }}
                     </label>
 
                     <input type="text"
@@ -51,46 +51,50 @@
 
                 <div class="mb-3">
                     <label class="form-label">
-                        Role
+                        {{ __('profile.role') }}
                     </label>
 
                     <input type="text"
                            class="form-control"
-                           value="{{ ucfirst($user->role) }}"
+                           value="@if ($user->role === 'participant'){{ __('profile.participant') }}
+                                  @elseif ($user->role === 'organizer'){{ __('profile.organizer') }}
+                                  @elseif ($user->role === 'secretary'){{ __('profile.secretary') }}
+                                  @elseif ($user->role === 'admin'){{ __('profile.admin') }}
+                                  @else{{ ucfirst($user->role) }}@endif"
                            disabled>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">
-                        Account status
+                        {{ __('profile.account_status') }}
                     </label>
 
                     @if ($user->is_blocked)
                         <div>
                         <span class="badge bg-danger">
-                            Blocked
+                            {{ __('profile.blocked') }}
                         </span>
                         </div>
                     @else
                         <div>
                         <span class="badge bg-success">
-                            Active
+                            {{ __('profile.active') }}
                         </span>
                         </div>
                     @endif
                 </div>
 
-                <hr class = "profile-section-divider">
+                <hr class="profile-section-divider">
 
-                <h2>Change password</h2>
+                <h2>{{ __('profile.change_password') }}</h2>
 
                 <p class="text-muted">
-                    Leave password fields empty if you do not want to change your password.
+                    {{ __('profile.password_help') }}
                 </p>
 
                 <div class="mb-3">
                     <label for="current_password" class="form-label">
-                        Current password
+                        {{ __('profile.current_password') }}
                     </label>
 
                     <input type="password"
@@ -102,7 +106,7 @@
 
                 <div class="mb-3">
                     <label for="password" class="form-label">
-                        New password
+                        {{ __('profile.new_password') }}
                     </label>
 
                     <input type="password"
@@ -114,7 +118,7 @@
 
                 <div class="mb-3">
                     <label for="password_confirmation" class="form-label">
-                        Confirm new password
+                        {{ __('profile.confirm_new_password') }}
                     </label>
 
                     <input type="password"
@@ -126,11 +130,11 @@
 
                 <div class="d-flex gap-2">
                     <button type="submit" class="btn btn-primary">
-                        Save changes
+                        {{ __('common.save_changes') }}
                     </button>
 
                     <a href="{{ route('home') }}" class="btn btn-outline-primary">
-                        Back
+                        {{ __('common.back') }}
                     </a>
                 </div>
             </form>

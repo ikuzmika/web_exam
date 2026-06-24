@@ -6,7 +6,6 @@ return [
     'show_title' => 'Pāra informācija',
     'create_title' => 'Izveidot pāri',
     'edit_title' => 'Labot pāri',
-
     'pair' => 'Pāris',
     'handler' => 'Hendlers',
     'dog' => 'Suns',
@@ -17,12 +16,21 @@ return [
     'status' => 'Statuss',
     'active' => 'Aktīvs',
     'inactive' => 'Neaktīvs',
-
     'results' => 'Rezultāti',
     'photos' => 'Fotogrāfijas',
     'no_pairs' => 'Pāri nav atrasti.',
     'back_to_pairs' => 'Atpakaļ uz pāriem',
-
     'create_button' => 'Izveidot pāri',
     'update_button' => 'Atjaunināt pāri',
+    'agility_pairs' => 'Adžiliti pāri',
+    'index_description' => 'Apskati adžiliti pārus, hendlerus, suņus un izmēra kategorijas.',
+    'add_pair' => 'Pievienot pāri',
+    'search_pair' => 'Meklēt pāri',
+    'search_placeholder' => 'Ievadi hendlera vai suņa vārdu',
+    'dog_size' => 'Suņa izmērs',
+    'active_from' => 'Aktīvs no',
+    'active_until' => 'Aktīvs līdz',
+    'unknown_dog' => 'Nezināms suns',
+    'no_pairs_description' => 'Vēl nav pievienotu pāru.',
+    'choose_pair' => 'Izvēlies pāri',
 ];

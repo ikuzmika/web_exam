@@ -29,7 +29,7 @@ class DogController extends Controller
      */
     public function create(Request $request)
     {
-        if ($request->user()->cannnot('create', Dog::class)) {
+        if ($request->user()->cannot('create', Dog::class)) {
             abort(403, 'Unauthorized action.');
         }
 
@@ -43,7 +43,7 @@ class DogController extends Controller
      */
     public function store(Request $request, Dog $dog)
     {
-        if ($request->user()->cannnot('create', $dog)) {
+        if ($request->user()->cannot('create', $dog)) {
             abort(403, 'Unauthorized action.');
         }
 
@@ -79,7 +79,7 @@ class DogController extends Controller
     {
         $dog = Dog::findOrFail($id);
 
-        if ($request->user()->cannnot('update', $dog)) {
+        if ($request->user()->cannot('update', $dog)) {
             abort(403, 'Unauthorized action.');
         }
 
@@ -95,7 +95,7 @@ class DogController extends Controller
     {
         $dog = Dog::findOrFail($id);
 
-        if ($request->user()->cannnot('update', $dog)) {
+        if ($request->user()->cannot('update', $dog)) {
             abort(403, 'Unauthorized action.');
         }
 
@@ -118,7 +118,7 @@ class DogController extends Controller
      */
     public function destroy(Request $request , Dog $dog)
     {
-        if ($request->user()->cannnot('delete', $dog)) {
+        if ($request->user()->cannot('delete', $dog)) {
             abort(403, 'Unauthorized action.');
         }
 
@@ -129,7 +129,7 @@ class DogController extends Controller
 
     public function trashed(Request $request)
     {
-        if ($request->user()->cannnot('viewTrashed', Dog::class)) {
+        if ($request->user()->cannot('viewTrashed', Dog::class)) {
             abort(403, 'Unauthorized action.');
         }
 
@@ -140,7 +140,7 @@ class DogController extends Controller
     {
         $dog = Dog::onlyTrashed()->findOrFail($id);
 
-        if ($request->user()->cannnot('restore', Dog::class)) {
+        if ($request->user()->cannot('restore', Dog::class)) {
             abort(403, 'Unauthorized action.');
         }
 
@@ -153,7 +153,7 @@ class DogController extends Controller
     {
         $dog = Dog::onlyTrashed()->findOrFail($id);
 
-        if ($request->user()->cannnot('forceDelete', Dog::class)) {
+        if ($request->user()->cannot('forceDelete', Dog::class)) {
             abort(403, 'Unauthorized action.');
         }
         $dog->forceDelete();

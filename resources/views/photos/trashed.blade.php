@@ -1,16 +1,16 @@
 <x-layout>
     <x-slot name="title">
-        Deleted photos
+        {{ __('photos.deleted_photos') }}
     </x-slot>
 
     <section class="page-header">
         <div>
-            <h1>Deleted photos</h1>
-            <p>Photos that were soft deleted. Admin can restore them or permanently delete them.</p>
+            <h1>{{ __('photos.deleted_photos') }}</h1>
+            <p>{{ __('photos.deleted_description') }}</p>
         </div>
 
         <a href="{{ route('photo.index') }}" class="btn btn-outline-primary">
-            Back to gallery
+            {{ __('photos.back_to_gallery') }}
         </a>
     </section>
 
@@ -20,26 +20,47 @@
                 <div class="list-card-content">
 
                     <img src="{{ asset('storage/' . $photo->file_path) }}"
-                         alt="{{ $photo->title ?? 'Photo' }}"
+                         alt="{{ translate_db($photo->title) ?: __('photos.photo') }}"
                          style="width: 100%; max-height: 300px; object-fit: cover; border-radius: 12px; opacity: 0.75;">
 
                     <h2 class="mt-3">
-                        {{ $photo->title ?? 'Untitled photo' }}
+                        {{ translate_db($photo->title) ?: __('photos.untitled_photo') }}
                     </h2>
 
                     <p>
-                        <strong>Deleted at:</strong>
+                        <strong>{{ __('common.deleted_at') }}:</strong>
                         {{ $photo->deleted_at?->format('d.m.Y H:i') }}
                     </p>
 
                     <p>
-                        <strong>Competition:</strong>
-                        {{ $photo->competition?->title ?? 'Not specified' }}
+                        <strong>{{ __('photos.competition') }}:</strong>
+                        {{ translate_db($photo->competition?->title) ?: __('common.not_specified') }}
                     </p>
+
+                    @if ($photo->track)
+                        <p>
+                            <strong>{{ __('photos.type') }}:</strong>
+                            {{ __('photos.track_scheme') }}
+                        </p>
+
+                        <p>
+                            <strong>{{ __('photos.track') }}:</strong>
+                            {{ translate_db($photo->track->competition?->title) ?: __('competitions.no_competition') }}
+                            —
+                            {{ translate_db($photo->track->difficultyLevel?->name) ?: __('tracks.no_level') }}
+                            —
+                            {{ __('tracks.track_number', ['id' => $photo->track->id]) }}
+                        </p>
+                    @else
+                        <p>
+                            <strong>{{ __('photos.type') }}:</strong>
+                            {{ __('photos.gallery_photo') }}
+                        </p>
+                    @endif
 
                     @if ($photo->pair)
                         <p>
-                            <strong>Pair:</strong>
+                            <strong>{{ __('photos.pair') }}:</strong>
 
                             {{ $photo->pair->dog?->handler?->name }}
                             {{ $photo->pair->dog?->handler?->surname }}
@@ -53,8 +74,8 @@
                     @endif
 
                     <p>
-                        <strong>Uploaded by:</strong>
-                        {{ $photo->uploadedBy?->name ?? 'Unknown user' }}
+                        <strong>{{ __('photos.uploaded_by') }}:</strong>
+                        {{ $photo->uploadedBy?->name ?? __('photos.unknown_user') }}
                     </p>
 
                     <div class="d-flex gap-2 mt-3">
@@ -64,7 +85,7 @@
                             @method('PATCH')
 
                             <button type="submit" class="btn btn-success">
-                                Restore
+                                {{ __('common.restore') }}
                             </button>
                         </form>
 
@@ -74,8 +95,8 @@
 
                             <button type="submit"
                                     class="btn btn-danger"
-                                    onclick="return confirm('This will permanently delete the photo. Are you sure?')">
-                                Delete permanently
+                                    onclick="return confirm(@js(__('photos.confirm_permanent_delete_photo')))">
+                                {{ __('photos.delete_permanently') }}
                             </button>
                         </form>
 
@@ -85,8 +106,8 @@
             </article>
         @empty
             <div class="empty-state">
-                <h2>No deleted photos found</h2>
-                <p>There are no soft deleted photos.</p>
+                <h2>{{ __('photos.no_deleted_photos') }}</h2>
+                <p>{{ __('photos.no_deleted_photos_description') }}</p>
             </div>
         @endforelse
     </section>

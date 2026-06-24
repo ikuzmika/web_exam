@@ -1,9 +1,8 @@
-
 <nav class="navbar navbar-expand-lg navbar-light site-navbar sticky-top">
     <div class="container">
 
         <a class="navbar-brand" href="{{ url('/') }}">
-            {{__('navigation.agility_latvia')}}
+            {{ __('navigation.agility_latvia') }}
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
@@ -16,65 +15,70 @@
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('competition.*') ? 'active' : '' }}"
                        href="{{ route('competition.index') }}">
-                        <span data-translate="nav_competitions">Competitions</span>
+                        {{ __('navigation.competitions') }}
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('rankings.*') ? 'active' : '' }}"
                        href="{{ route('rankings.index') }}">
-                        <span data-translate="nav_rankings">Rankings</span>
+                        {{ __('navigation.rankings') }}
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('pair.*') ? 'active' : '' }}"
                        href="{{ route('pair.index') }}">
-                        <span data-translate="nav_pairs">Pairs</span>
+                        {{ __('navigation.pairs') }}
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('photo.*') ? 'active' : '' }}"
                        href="{{ route('photo.index') }}">
-                        <span data-translate="nav_photos">Photos</span>
+                        {{ __('navigation.photos') }}
                     </a>
                 </li>
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                        <span data-translate="nav_more">More</span>
+                        {{ __('navigation.more') }}
                     </a>
 
                     <ul class="dropdown-menu">
                         <li>
                             <a class="dropdown-item" href="{{ route('handler.index') }}">
-                                <span data-translate="nav_handlers">Handlers</span>
+                                {{ __('navigation.handlers') }}
                             </a>
                         </li>
+
                         <li>
                             <a class="dropdown-item" href="{{ route('dog.index') }}">
-                                <span data-translate="nav_dogs">Dogs</span>
+                                {{ __('navigation.dogs') }}
                             </a>
                         </li>
+
                         <li>
                             <a class="dropdown-item" href="{{ route('track.index') }}">
-                                <span data-translate="nav_tracks">Tracks</span>
+                                {{ __('navigation.tracks') }}
                             </a>
                         </li>
+
                         <li>
                             <a class="dropdown-item" href="{{ route('result.index') }}">
-                                <span data-translate="nav_results">Results</span>
+                                {{ __('navigation.results') }}
                             </a>
                         </li>
+
                         <li>
                             <a class="dropdown-item" href="{{ route('organizer.index') }}">
-                                <span data-translate="nav_organizers">Organizers</span>
+                                {{ __('navigation.organizers') }}
                             </a>
                         </li>
+
                         <li>
                             <a class="dropdown-item" href="{{ route('sponsor.index') }}">
-                                <span data-translate="nav_sponsors">Sponsors</span>
+                                {{ __('navigation.sponsors') }}
                             </a>
                         </li>
 
@@ -83,9 +87,10 @@
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
+
                                 <li>
                                     <a class="dropdown-item" href="{{ route('admin.users.index') }}">
-                                        User management
+                                        {{ __('navigation.user_management') }}
                                     </a>
                                 </li>
                             @endif
@@ -109,23 +114,24 @@
             <div class="auth-area">
                 @guest
                     <a class="btn btn-primary btn-sm" href="{{ route('auth.login') }}">
-                        <span data-translate="nav_login">Login</span>
+                        {{ __('navigation.login') }}
                     </a>
 
                     <a class="btn btn-primary btn-sm" href="{{ route('auth.register') }}">
-                        <span data-translate="nav_register">Register</span>
+                        {{ __('navigation.register') }}
                     </a>
                 @endguest
 
                 @auth
-                    <a href="{{route('profile.edit')}}" class="user-name nav-link">
+                    <a href="{{ route('profile.edit') }}" class="user-name nav-link">
                         <strong>{{ Auth::user()->name }}</strong>
                     </a>
 
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
+
                         <button class="btn btn-outline-danger btn-sm">
-                            Logout
+                            {{ __('navigation.logout') }}
                         </button>
                     </form>
                 @endauth

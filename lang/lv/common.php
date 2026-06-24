@@ -12,7 +12,7 @@ return [
     'cancel' => 'Atcelt',
     'back' => 'Atpakaļ',
     'back_home' => 'Atpakaļ uz sākumu',
-    'view_details' => 'Skatīt detaļas',
+    'view_details' => 'Skatīt sīkāk',
     'filter' => 'Filtrēt',
     'reset' => 'Atiestatīt',
     'search' => 'Meklēt',
@@ -34,4 +34,5 @@ return [
     'confirm_permanent_delete' => 'Šī darbība ir neatgriezeniska. Vai tiešām turpināt?',
     'success' => 'Veiksmīgi',
     'error' => 'Kļūda',
+    'close' => 'Aizvērt',
 ];

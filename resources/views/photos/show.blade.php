@@ -1,16 +1,16 @@
 <x-layout>
     <x-slot name="title">
-        Photo details
+        {{ __('photos.photo_details') }}
     </x-slot>
 
     <section class="page-header">
         <div>
-            <h1>Photo details</h1>
-            <p>View information about the selected photo.</p>
+            <h1>{{ __('photos.photo_details') }}</h1>
+            <p>{{ __('photos.show_description') }}</p>
         </div>
 
         <a href="{{ route('photo.index') }}" class="btn btn-outline-primary">
-            Back to gallery
+            {{ __('photos.back_to_gallery') }}
         </a>
     </section>
 
@@ -20,43 +20,35 @@
 
                 <div class="photo-show-image-wrapper">
                     <img src="{{ asset('storage/' . $photo->file_path) }}"
-                         alt="{{ $photo->title ?? 'Photo' }}" class="photo-show-image">
+                         alt="{{ translate_db($photo->title) ?: __('photos.photo') }}"
+                         class="photo-show-image">
                 </div>
+
                 <h2 class="mt-3">
-                    {{ $photo->title ?? 'Untitled photo' }}
+                    {{ translate_db($photo->title) ?: __('photos.untitled_photo') }}
                 </h2>
-
-                <p>
-                    <strong>Status:</strong>
-
-                    @if ($photo->is_approved)
-                        <span class="badge bg-success">Approved</span>
-                    @else
-                        <span class="badge bg-warning text-dark">Waiting for approval</span>
-                    @endif
-                </p>
 
                 @if($photo->competition)
                     <p>
-                        <strong>Competition:</strong>
-                        {{ $photo->competition?->title}}
+                        <strong>{{ __('photos.competition') }}:</strong>
+                        {{ translate_db($photo->competition?->title) ?: __('common.not_specified') }}
                     </p>
                 @endif
 
                 @if ($photo->track)
                     <p>
-                        <strong>Track:</strong>
-                        {{ $photo->track->competition?->title}}
+                        <strong>{{ __('photos.track') }}:</strong>
+                        {{ translate_db($photo->track->competition?->title) ?: __('competitions.no_competition') }}
                         —
-                        {{ $photo->track->difficultyLevel?->name ?? 'No level' }}
+                        {{ translate_db($photo->track->difficultyLevel?->name) ?: __('tracks.no_level') }}
                         —
-                        Track #{{ $photo->track->id }}
+                        {{ __('tracks.track_number', ['id' => $photo->track->id]) }}
                     </p>
                 @endif
 
                 @if ($photo->pair)
                     <p>
-                        <strong>Pair:</strong>
+                        <strong>{{ __('photos.pair') }}:</strong>
 
                         {{ $photo->pair->dog?->handler?->name }}
                         {{ $photo->pair->dog?->handler?->surname }}
@@ -70,12 +62,12 @@
                 @endif
 
                 <p>
-                    <strong>Uploaded by:</strong>
-                    {{ $photo->uploadedBy?->name ?? 'Unknown user' }}
+                    <strong>{{ __('photos.uploaded_by') }}:</strong>
+                    {{ $photo->uploadedBy?->name ?? __('photos.unknown_user') }}
                 </p>
 
                 <p>
-                    <strong>Uploaded at:</strong>
+                    <strong>{{ __('photos.uploaded_at') }}:</strong>
                     {{ $photo->created_at?->format('d.m.Y H:i') }}
                 </p>
 
@@ -83,7 +75,7 @@
                     @auth
                         @can('update', $photo)
                             <a href="{{ route('photo.edit', $photo) }}" class="btn btn-primary">
-                                Edit
+                                {{ __('common.edit') }}
                             </a>
                         @endcan
 
@@ -92,19 +84,15 @@
                                 @csrf
                                 @method('DELETE')
 
-                                <button type="submit" class="btn btn-danger"
-                                        onclick="return confirm('Are you sure you want to delete this photo?')">
-                                    Delete
+                                <button type="submit"
+                                        class="btn btn-danger"
+                                        onclick="return confirm(@js(__('photos.confirm_delete_photo')))">
+                                    {{ __('common.delete') }}
                                 </button>
                             </form>
                         @endcan
                     @endauth
-
-                    <a href="{{ route('photo.index') }}" class="btn btn-outline-primary">
-                        Back
-                    </a>
                 </div>
-
             </div>
         </article>
     </section>

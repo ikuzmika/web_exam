@@ -1,19 +1,20 @@
 <x-layout>
     <x-slot name="title">
-        Register
+        {{ __('auth.register') }}
     </x-slot>
 
-    {{-- Register page --}}
     <section class="auth-page">
         <div class="auth-card">
 
-            <h1>Create account</h1>
+            <h1>{{ __('auth.create_account') }}</h1>
 
             <form action="{{ route('register') }}" method="POST">
                 @csrf
 
                 <div class="mb-3">
-                    <label for="name" class="form-label">Name</label>
+                    <label for="name" class="form-label">
+                        {{ __('auth.name') }}
+                    </label>
 
                     <input
                         type="text"
@@ -21,19 +22,21 @@
                         name="name"
                         class="form-control"
                         value="{{ old('name') }}"
-                        placeholder="Enter your name"
+                        placeholder="{{ __('auth.enter_your_name') }}"
                         required
                     >
 
                     @error('name')
-                        <div class="form-error">
-                            {{ $message }}
-                        </div>
+                    <div class="form-error">
+                        {{ $message }}
+                    </div>
                     @enderror
                 </div>
 
                 <div class="mb-3">
-                    <label for="email" class="form-label">Email address</label>
+                    <label for="email" class="form-label">
+                        {{ __('auth.email_address') }}
+                    </label>
 
                     <input
                         type="email"
@@ -41,57 +44,69 @@
                         name="email"
                         class="form-control"
                         value="{{ old('email') }}"
-                        placeholder="Enter your email"
+                        placeholder="{{ __('auth.enter_your_email') }}"
                         required
                     >
 
                     @error('email')
-                        <div class="form-error">
-                            {{ $message }}
-                        </div>
+                    <div class="form-error">
+                        {{ $message }}
+                    </div>
                     @enderror
                 </div>
 
                 <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
+                    <label for="password" class="form-label">
+                        {{ __('auth.password') }}
+                    </label>
 
                     <input
                         type="password"
                         id="password"
                         name="password"
                         class="form-control"
-                        placeholder="Create a password"
+                        placeholder="{{ __('auth.create_password') }}"
                         required
                     >
 
                     @error('password')
-                        <div class="form-error">
-                            {{ $message }}
-                        </div>
+                    <div class="form-error">
+                        {{ $message }}
+                    </div>
                     @enderror
                 </div>
 
                 <div class="mb-3">
-                    <label for="password_confirmation" class="form-label">Confirm password</label>
+                    <label for="password_confirmation" class="form-label">
+                        {{ __('auth.confirm_password') }}
+                    </label>
 
                     <input
                         type="password"
                         id="password_confirmation"
                         name="password_confirmation"
                         class="form-control"
-                        placeholder="Repeat your password"
+                        placeholder="{{ __('auth.repeat_password') }}"
                         required
                     >
+
+                    @error('password_confirmation')
+                    <div class="form-error">
+                        {{ $message }}
+                    </div>
+                    @enderror
                 </div>
 
                 <button type="submit" class="btn btn-primary w-100">
-                    Register
+                    {{ __('auth.register') }}
                 </button>
             </form>
 
             <p class="auth-bottom-text">
-                Already have an account?
-                <a href="{{ route('auth.login') }}">Login</a>
+                {{ __('auth.already_registered') }}
+                <a href="{{ route('auth.login') }}">
+                    {{ __('auth.login') }}
+                </a>
             </p>
         </div>
     </section>

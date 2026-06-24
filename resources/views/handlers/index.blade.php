@@ -1,21 +1,21 @@
 <x-layout>
     <x-slot name="title">
-        Handlers
+        {{ __('handlers.title') }}
     </x-slot>
 
     <section class="competitions-top">
         <div class="page-header competitions-title-card">
             <div>
-                <h1>Handlers</h1>
+                <h1>{{ __('handlers.title') }}</h1>
 
                 <p>
-                    View handlers who participate in agility competitions.
+                    {{ __('handlers.index_description') }}
                 </p>
             </div>
 
             @auth
                 <a href="{{ route('handler.create') }}" class="btn btn-primary">
-                    Add handler
+                    {{ __('handlers.add_handler') }}
                 </a>
             @endauth
         </div>
@@ -23,14 +23,15 @@
         <div class="filter-bar competitions-search-card">
             <div class="filter-field">
                 <label for="handlerSearch" class="form-label">
-                    Search handler
+                    {{ __('handlers.search_handler') }}
                 </label>
 
                 <input
                     type="text"
                     id="handlerSearch"
                     class="form-control"
-                    placeholder="Enter handler name, email or phone"
+                    value="{{ request('search') }}"
+                    placeholder="{{ __('handlers.search_placeholder') }}"
                 >
             </div>
         </div>
@@ -57,7 +58,7 @@
                     data-bs-toggle="modal"
                     data-bs-target="#handlerModal{{ $handler->id }}"
                 >
-                    Details
+                    {{ __('common.view_details') }}
                 </button>
             </article>
 
@@ -74,35 +75,35 @@
 
                         <div class="modal-body">
                             <p>
-                                <strong>Name:</strong>
+                                <strong>{{ __('handlers.name') }}:</strong>
                                 {{ $handler->name }}
                             </p>
 
                             <p>
-                                <strong>Surname:</strong>
+                                <strong>{{ __('handlers.surname') }}:</strong>
                                 {{ $handler->surname }}
                             </p>
 
                             <p>
-                                <strong>Email:</strong>
-                                {{ $handler->email ?? 'Not specified' }}
+                                <strong>{{ __('handlers.email') }}:</strong>
+                                {{ $handler->email ?? __('common.not_specified') }}
                             </p>
 
                             <p>
-                                <strong>Contact number:</strong>
-                                {{ $handler->contact_number ?? 'Not specified' }}
+                                <strong>{{ __('handlers.contact_number') }}:</strong>
+                                {{ $handler->contact_number ?? __('common.not_specified') }}
                             </p>
                         </div>
 
                         <div class="modal-footer">
                             @auth
                                 <a href="{{ route('handler.edit', $handler->id) }}" class="btn btn-outline-primary">
-                                    Edit
+                                    {{ __('common.edit') }}
                                 </a>
                             @endauth
 
                             <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">
-                                Close
+                                {{ __('common.close') }}
                             </button>
                         </div>
                     </div>
@@ -110,8 +111,8 @@
             </div>
         @empty
             <div class="empty-state">
-                <h2>No handlers found</h2>
-                <p>There are no handlers added yet.</p>
+                <h2>{{ __('handlers.no_handlers') }}</h2>
+                <p>{{ __('handlers.no_handlers_description') }}</p>
             </div>
         @endforelse
     </section>
@@ -120,8 +121,8 @@
         const handlerSearch = document.getElementById('handlerSearch');
         const handlerCards = document.querySelectorAll('.handler-card-js');
 
-        handlerSearch.addEventListener('input', function () {
-            const searchText = this.value.toLowerCase();
+        function filterHandlers() {
+            const searchText = handlerSearch.value.toLowerCase();
 
             handlerCards.forEach(function (card) {
                 const cardText = card.dataset.search.toLowerCase();
@@ -132,6 +133,10 @@
                     card.style.display = 'none';
                 }
             });
-        });
+        }
+
+        handlerSearch.addEventListener('input', filterHandlers);
+
+        filterHandlers();
     </script>
 </x-layout>

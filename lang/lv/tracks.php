@@ -6,7 +6,6 @@ return [
     'show_title' => 'Trases informācija',
     'create_title' => 'Izveidot trasi',
     'edit_title' => 'Labot trasi',
-
     'track' => 'Trase',
     'track_number' => 'Trase #:id',
     'competition' => 'Sacensības',
@@ -16,14 +15,14 @@ return [
     'max_points' => 'Maksimālie punkti',
     'date' => 'Datums',
     'description' => 'Apraksts',
-
     'track_schemes' => 'Trases shēmas',
     'no_track_schemes' => 'Trases shēmas nav augšupielādētas',
     'no_track_schemes_description' => 'Šai trasei vēl nav apstiprinātu shēmu.',
     'upload_scheme' => 'Augšupielādēt trases shēmu',
-
     'back_to_tracks' => 'Atpakaļ uz trasēm',
     'no_tracks' => 'Trases nav atrastas.',
     'create_button' => 'Izveidot trasi',
     'update_button' => 'Atjaunināt trasi',
+    'choose_track' => 'Izvēlies trasi',
+    'no_level' => 'Bez līmeņa',
 ];
