@@ -149,27 +149,6 @@ body {
     color: var(--text-muted);
 }
 
-/* For tablets and smaller screens */
-@media (max-width: 991px) {
-    .language-switch {
-        margin: 12px 0;
-    }
-
-    .auth-area {
-        align-items: flex-start;
-        flex-direction: column;
-    }
-}
-
-/* For large screens */
-@media (min-width: 1200px) {
-    .container {
-        max-width: 1450px;
-        padding-left: 24px;
-        padding-right: 24px;
-    }
-}
-
 /* Homepage hero section */
 .hero-section {
     background: #ffffff;
@@ -218,21 +197,6 @@ body {
 
 .card-link:hover {
     text-decoration: underline;
-}
-
-/* For smaller screens */
-@media (max-width: 768px) {
-    .hero-section {
-        padding: 32px;
-    }
-
-    .hero-title {
-        font-size: 36px;
-    }
-
-    .hero-text {
-        font-size: 16px;
-    }
 }
 
 /* Search panel on homepage */
@@ -350,17 +314,6 @@ body {
     align-items: center;
     justify-content: center;
     text-align: center;
-}
-
-/* Homepage dashboard for smaller screens */
-@media (max-width: 991px) {
-    .competition-preview-card {
-        flex-direction: column;
-    }
-
-    .competition-image-placeholder {
-        width: 100%;
-    }
 }
 
 /* General page header */
@@ -520,36 +473,6 @@ body {
     margin: 0;
 }
 
-@media (max-width: 768px) {
-    .page-header {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 28px;
-    }
-
-    .page-header h1 {
-        font-size: 32px;
-    }
-
-    .competitions-top {
-        flex-direction: column;
-    }
-
-    .competitions-title-card,
-    .competitions-search-card {
-        width: 100%;
-        height: auto;
-    }
-
-    .list-card {
-        flex-direction: column;
-    }
-
-    .list-card-actions {
-        justify-content: flex-start;
-    }
-}
-
 /* Authentication pages */
 .auth-page {
     display: flex;
@@ -701,18 +624,6 @@ body {
     margin-bottom: 8px;
 }
 
-@media (max-width: 991px) {
-    .pairs-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 768px) {
-    .pairs-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
 .pair-modal .btn-close:focus {
     box-shadow: 0 0 0 0.2rem rgba(139, 195, 74, 0.25) !important;
 }
@@ -764,18 +675,6 @@ body {
     box-shadow: 0 0 0 0.2rem rgba(139, 195, 74, 0.25) !important;
 }
 
-@media (max-width: 991px) {
-    .handlers-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 768px) {
-    .handlers-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
 .ranking-page-header {
     display: flex;
     align-items: flex-start;
@@ -790,12 +689,6 @@ body {
 .ranking-description {
     width: 100%;
     max-width: none;
-}
-
-@media (min-width: 992px) {
-    .ranking-description {
-        white-space: nowrap;
-    }
 }
 
 .profile-page-wrapper {
@@ -871,18 +764,6 @@ body {
     box-shadow: 0 0 0 0.2rem rgba(139, 195, 74, 0.25) !important;
 }
 
-@media (max-width: 991px) {
-    .dogs-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 768px) {
-    .dogs-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
 /* Tracks page cards */
 .tracks-grid {
     display: grid;
@@ -934,18 +815,6 @@ body {
 
 .track-modal .btn-close:focus {
     box-shadow: 0 0 0 0.2rem rgba(139, 195, 74, 0.25) !important;
-}
-
-@media (max-width: 991px) {
-    .tracks-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 768px) {
-    .tracks-grid {
-        grid-template-columns: 1fr;
-    }
 }
 
 /* Results page table */
@@ -1048,12 +917,6 @@ body {
     box-shadow: 0 0 0 0.2rem rgba(139, 195, 74, 0.25) !important;
 }
 
-@media (max-width: 768px) {
-    .organizers-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
 /* Sponsors page cards */
 .sponsors-grid {
     display: grid;
@@ -1108,13 +971,123 @@ body {
     box-shadow: 0 0 0 0.2rem rgba(139, 195, 74, 0.25) !important;
 }
 
+/* For large screens */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1450px;
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+}
+
+@media (min-width: 992px) {
+    .ranking-description {
+        white-space: nowrap;
+    }
+}
+
+/* For tablets and smaller screens */
 @media (max-width: 991px) {
+    .language-switch {
+        margin: 12px 0;
+    }
+
+    .auth-area {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .competition-preview-card {
+        flex-direction: column;
+    }
+
+    .competition-image-placeholder {
+        width: 100%;
+    }
+
+    .pairs-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .handlers-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .dogs-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+     .tracks-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
     .sponsors-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
+/* For smaller screens */
 @media (max-width: 768px) {
+    .hero-section {
+        padding: 32px;
+    }
+
+    .hero-title {
+        font-size: 36px;
+    }
+
+    .hero-text {
+        font-size: 16px;
+    }
+
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 28px;
+    }
+
+    .page-header h1 {
+        font-size: 32px;
+    }
+
+    .competitions-top {
+        flex-direction: column;
+    }
+
+    .competitions-title-card,
+    .competitions-search-card {
+        width: 100%;
+        height: auto;
+    }
+
+    .list-card {
+        flex-direction: column;
+    }
+
+    .list-card-actions {
+        justify-content: flex-start;
+    }
+
+    .pairs-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .handlers-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dogs-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tracks-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .organizers-grid {
+        grid-template-columns: 1fr;
+    }
+
     .sponsors-grid {
         grid-template-columns: 1fr;
     }
