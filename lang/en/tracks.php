@@ -1,0 +1,29 @@
+<?php
+
+return [
+    'title' => 'Tracks',
+    'page_description' => 'View agility tracks and their schemes.',
+    'show_title' => 'Track details',
+    'create_title' => 'Create track',
+    'edit_title' => 'Edit track',
+
+    'track' => 'Track',
+    'track_number' => 'Track #:id',
+    'competition' => 'Competition',
+    'difficulty_level' => 'Difficulty level',
+    'size_category' => 'Size category',
+    'judge' => 'Judge',
+    'max_points' => 'Maximum points',
+    'date' => 'Date',
+    'description' => 'Description',
+
+    'track_schemes' => 'Track schemes',
+    'no_track_schemes' => 'No track schemes uploaded',
+    'no_track_schemes_description' => 'There are no approved schemes for this track yet.',
+    'upload_scheme' => 'Upload track scheme',
+
+    'back_to_tracks' => 'Back to tracks',
+    'no_tracks' => 'No tracks found.',
+    'create_button' => 'Create track',
+    'update_button' => 'Update track',
+];

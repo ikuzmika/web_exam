@@ -195,6 +195,27 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'name' => 'name',
+        'email' => 'email',
+        'phone' => 'phone',
+        'password' => 'password',
+        'password_confirmation' => 'password confirmation',
+        'current_password' => 'current password',
+        'role' => 'role',
+
+        'title' => 'title',
+        'description' => 'description',
+        'photo' => 'photo',
+        'competition_id' => 'competition',
+        'track_id' => 'track',
+        'pair_id' => 'pair',
+        'size_category_id' => 'dog size',
+        'difficulty_level_id' => 'difficulty level',
+        'result_status_id' => 'result status',
+        'points' => 'points',
+        'date' => 'date',
+        'venue' => 'venue'
+    ],
 
 ];

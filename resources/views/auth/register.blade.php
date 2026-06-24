@@ -6,7 +6,7 @@
     {{-- Register page --}}
     <section class="auth-page">
         <div class="auth-card">
-            <span class="page-label">Register</span>
+
             <h1>Create account</h1>
 
             <form action="{{ route('register') }}" method="POST">

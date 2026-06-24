@@ -1,29 +1,39 @@
 <x-layout>
     <x-slot name="title">
-        Manage users
+        {{ __('admin.users_title') }}
     </x-slot>
 
     <section class="page-header">
         <div>
-            <h1>Manage users</h1>
-            <p>View all registered users, change roles and block or unblock accounts.</p>
+            <h1>{{ __('admin.users_title') }}</h1>
+            <p>{{ __('admin.users_description') }}</p>
         </div>
     </section>
+
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul class="mb-0">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
     <section class="content-list">
         <div class="table-responsive">
             <table class="table table-bordered align-middle">
                 <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Save info</th>
-                    <th>Role</th>
-                    <th>Blocked</th>
-                    <th>Change role</th>
-                    <th>Block / Unblock</th>
+                    <th>{{ __('admin.id') }}</th>
+                    <th>{{ __('admin.name') }}</th>
+                    <th>{{ __('admin.email') }}</th>
+                    <th>{{ __('admin.phone') }}</th>
+                    <th>{{ __('admin.change_info') }}</th>
+                    <th>{{ __('admin.role') }}</th>
+                    <th>{{ __('admin.blocked') }}</th>
+                    <th>{{ __('admin.change_role') }}</th>
+                    <th>{{ __('admin.block_unblock') }}</th>
                 </tr>
                 </thead>
 
@@ -68,26 +78,34 @@
                                 @method('PATCH')
 
                                 <button type="submit" class="btn btn-primary btn-sm">
-                                    Save info
+                                    {{ __('admin.save_info') }}
                                 </button>
                             </form>
                         </td>
 
                         <td>
-                                <span class="badge bg-secondary">
+                            <span class="badge bg-secondary">
+                                @if ($user->role === 'user')
+                                    {{ __('admin.participant') }}
+                                @elseif ($user->role === 'organizer')
+                                    {{ __('admin.organizer') }}
+                                @elseif ($user->role === 'admin')
+                                    {{ __('admin.admin') }}
+                                @else
                                     {{ ucfirst($user->role) }}
-                                </span>
+                                @endif
+                            </span>
                         </td>
 
                         <td>
                             @if ($user->is_blocked)
                                 <span class="badge bg-danger">
-                                        Yes
-                                    </span>
+                                    {{ __('common.yes') }}
+                                </span>
                             @else
                                 <span class="badge bg-success">
-                                        No
-                                    </span>
+                                    {{ __('common.no') }}
+                                </span>
                             @endif
                         </td>
 
@@ -99,20 +117,20 @@
                                 <div class="d-flex gap-2">
                                     <select name="role" class="form-control">
                                         <option value="participant" @selected($user->role === 'user')>
-                                            User
+                                            {{ __('admin.participant') }}
                                         </option>
 
                                         <option value="organizer" @selected($user->role === 'organizer')>
-                                            Organizer
+                                            {{ __('admin.organizer') }}
                                         </option>
 
                                         <option value="admin" @selected($user->role === 'admin')>
-                                            Admin
+                                            {{ __('admin.admin') }}
                                         </option>
                                     </select>
 
                                     <button type="submit" class="btn btn-primary btn-sm">
-                                        Save
+                                        {{ __('admin.save_role') }}
                                     </button>
                                 </div>
                             </form>
@@ -121,8 +139,8 @@
                         <td>
                             @if (auth()->id() === $user->id)
                                 <span class="text-muted">
-                                        Current admin
-                                    </span>
+                                    {{ __('admin.current_admin') }}
+                                </span>
                             @else
                                 <form method="POST" action="{{ route('admin.users.block', $user) }}">
                                     @csrf
@@ -130,13 +148,13 @@
 
                                     @if ($user->is_blocked)
                                         <button type="submit" class="btn btn-success btn-sm">
-                                            Unblock
+                                            {{ __('admin.unblock') }}
                                         </button>
                                     @else
                                         <button type="submit"
                                                 class="btn btn-danger btn-sm"
-                                                onclick="return confirm('Are you sure you want to block this user?')">
-                                            Block
+                                                onclick="return confirm('{{ __('admin.confirm_block') }}')">
+                                            {{ __('admin.block') }}
                                         </button>
                                     @endif
                                 </form>
@@ -145,8 +163,8 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="8" class="text-center">
-                            No users found.
+                        <td colspan="9" class="text-center">
+                            {{ __('admin.no_users') }}
                         </td>
                     </tr>
                 @endforelse

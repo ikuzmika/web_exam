@@ -64,9 +64,16 @@ class TrackController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Track $track)
     {
-        $track = Track::with(['competition', 'difficultyLevel'])->findOrFail($id);
+        $track->load([
+            'competition',
+            'difficultyLevel',
+            'schemePhotos' => function ($query) {
+                $query->where('is_approved', true)
+                    ->latest();
+            },
+        ]);
 
         return view('track.show', compact('track'));
     }

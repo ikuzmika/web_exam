@@ -1,20 +1,24 @@
 <?php
 
 return [
+    'login' => 'Ienākt',
+    'register' => 'Reģistrēties',
+    'logout' => 'Iziet',
 
-    /*
-    |--------------------------------------------------------------------------
-    | Authentication Language Lines IR JĀIZMAINA
-    |--------------------------------------------------------------------------
-    |
-    | The following language lines are used during authentication for various
-    | messages that we need to display to the user. You are free to modify
-    | these language lines according to your application's requirements.
-    |
-    */
+    'name' => 'Vārds',
+    'email' => 'E-pasts',
+    'phone' => 'Telefons',
+    'password' => 'Parole',
+    'confirm_password' => 'Apstiprini paroli',
+    'remember_me' => 'Atcerēties mani',
 
-    'failed' => 'These credentials do not match our records.',
-    'password' => 'The provided password is incorrect.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'already_registered' => 'Jau esi reģistrējies?',
+    'not_registered' => 'Vēl nav konta?',
+    'forgot_password' => 'Aizmirsi paroli?',
 
+    'login_button' => 'Ienākt',
+    'register_button' => 'Reģistrēties',
+
+    'failed' => 'Piekļuves dati neatbilst mūsu reģistriem.',
+    'password_error' => 'Ievadītā parole ir nepareiza.',
 ];

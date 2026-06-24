@@ -30,6 +30,7 @@ class PhotoController extends Controller
             'track.competition',
             'track.difficultyLevel'
         ])->where('is_approved', true)
+            ->whereNull('track_id')
             ->latest()->paginate(5);
 
         return view('photos.index', compact('photos'));
@@ -90,12 +91,14 @@ class PhotoController extends Controller
      */
     public function show(Photo $photo)
     {
+        if ($photo->track_id) {
+            return redirect()->route('track.show', $photo->track_id);
+        }
+
         $photo->load([
             'uploadedBy',
             'competition',
             'pair.dog.handler',
-            'track.competition',
-            'track.difficultyLevel'
         ]);
 
         return view('photos.show', compact('photo'));

@@ -3,7 +3,6 @@
         Competitions
     </x-slot>
 
-    {{-- Competitions page header and search --}}
     <section class="competitions-top">
         <div class="page-header competitions-title-card">
             <div>
@@ -37,15 +36,14 @@
         </div>
     </section>
 
-    {{-- Competition list --}}
     <section class="content-list">
         @forelse($competitions as $competition)
             <article
                 class="competition-preview-card competition-card-js"
-                data-search="{{ $competition->title }} {{ optional($competition->organizer)->venue }}"
+                data-search="{{ translate_db($competition->title) }} {{ optional($competition->organizer)->venue }}"
             >
                 <div class="competition-preview-content">
-                    <h3>{{ $competition->title }}</h3>
+                    <h3>{{ translate_db($competition->title) }}</h3>
 
                     <p>
                         <strong>Date:</strong>

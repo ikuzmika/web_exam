@@ -36,4 +36,9 @@ class Track extends Model
         return $this->hasMany(Result::class, 'track_id');
     }
 
+    public function schemePhotos()
+    {
+        return $this->hasMany(Photo::class, 'track_id');
+    }
+
 }
