@@ -699,3 +699,62 @@ body {
 .pair-modal .btn-close:focus {
     box-shadow: 0 0 0 0.2rem rgba(139, 195, 74, 0.25) !important;
 }
+
+/* Handlers page cards */
+.handlers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.handler-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 20px;
+    min-height: 115px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    transition: 0.2s ease;
+}
+
+.handler-card:hover {
+    background: #f9fafb;
+    border-color: #cbd8c2;
+}
+
+.handler-card h2 {
+    font-size: 22px;
+    margin-bottom: 12px;
+}
+
+.handler-card .btn {
+    width: fit-content;
+}
+
+.handler-modal {
+    border-radius: 18px;
+    border: 1px solid var(--border);
+}
+
+.handler-modal .modal-body p {
+    color: var(--text-muted);
+    margin-bottom: 8px;
+}
+
+.handler-modal .btn-close:focus {
+    box-shadow: 0 0 0 0.2rem rgba(139, 195, 74, 0.25) !important;
+}
+
+@media (max-width: 991px) {
+    .handlers-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .handlers-grid {
+        grid-template-columns: 1fr;
+    }
+}
