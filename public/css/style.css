@@ -9,14 +9,21 @@
     --border: #dde4d9;
 }
 
+html {
+    height: 100%;
+}
+
 body {
+    min-height: 100%;
     background: var(--main-bg);
     color: var(--text-main);
     font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
 }
 
 .page-wrapper {
-    min-height: 650px;
+    flex: 1;
     padding: 25px 0 14px;
 }
 
@@ -572,12 +579,7 @@ body {
 .auth-card h1 {
     font-size: 34px;
     font-weight: 700;
-    margin-bottom: 5px;
-}
-
-.auth-text {
-    color: var(--text-muted);
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .auth-card .form-label {

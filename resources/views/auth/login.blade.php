@@ -7,12 +7,7 @@
     <section class="auth-page">
         <div class="auth-card">
             <span class="page-label">Login</span>
-
             <h1>Welcome back!</h1>
-
-            <p class="auth-text">
-                Log in to manage agility competitions, results, pairs and photos.
-            </p>
 
             <form action="{{ route('login') }}" method="POST">
                 @csrf

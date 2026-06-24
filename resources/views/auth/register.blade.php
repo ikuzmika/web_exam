@@ -7,12 +7,7 @@
     <section class="auth-page">
         <div class="auth-card">
             <span class="page-label">Register</span>
-
             <h1>Create account</h1>
-
-            <p class="auth-text">
-                Create an account to add and manage agility competitions, dogs, pairs, results and photos.
-            </p>
 
             <form action="{{ route('register') }}" method="POST">
                 @csrf
