@@ -55,7 +55,7 @@ class AdminController extends Controller
         $this->checkAdmin();
 
         $validated = $request->validate([
-            'role' => 'required|string|in:admin,user,organizer',
+            'role' => 'required|string|in:admin,user,organizer,secretary',
         ]);
 
         $user->update(['role' => $validated['role']]);

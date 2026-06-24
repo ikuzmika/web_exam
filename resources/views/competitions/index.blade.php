@@ -13,11 +13,11 @@
                 </p>
             </div>
 
-            @auth
+            @can('create', App\Models\Competition::class)
                 <a href="{{ route('competition.create') }}" class="btn btn-primary">
                     {{ __('competitions.add_competition') }}
                 </a>
-            @endauth
+            @endcan
         </div>
 
         <div class="filter-bar competitions-search-card">
@@ -66,12 +66,12 @@
                             {{ __('common.view_details') }}
                         </a>
 
-                        @auth
+                        @can('update', $competition)
                             <a href="{{ route('competition.edit', $competition->id) }}"
                                class="btn btn-outline-primary btn-sm">
                                 {{ __('common.edit') }}
                             </a>
-                        @endauth
+                        @endcan
                     </div>
                 </div>
 

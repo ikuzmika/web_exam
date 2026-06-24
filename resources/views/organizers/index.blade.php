@@ -13,11 +13,11 @@
                 </p>
             </div>
 
-            @auth
+            @can('create', App\Models\Organizer::class)
                 <a href="{{ route('organizer.create') }}" class="btn btn-primary">
                     Add organizer
                 </a>
-            @endauth
+            @endcan
         </div>
 
         <div class="filter-bar competitions-search-card">
@@ -117,11 +117,11 @@
                         </div>
 
                         <div class="modal-footer">
-                            @auth
+                            @can('update', $organizer)
                                 <a href="{{ route('organizer.edit', $organizer->id) }}" class="btn btn-outline-primary">
                                     Edit
                                 </a>
-                            @endauth
+                            @endcan
 
                             <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">
                                 Close

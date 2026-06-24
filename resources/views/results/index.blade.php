@@ -13,11 +13,11 @@
                 </p>
             </div>
 
-            @auth
+            @can('create', App\Models\Result::class)
                 <a href="{{ route('result.create') }}" class="btn btn-primary">
                     Add result
                 </a>
-            @endauth
+            @endcan
         </div>
 
         <div class="filter-bar competitions-search-card">
@@ -150,11 +150,11 @@
                                     </div>
 
                                     <div class="modal-footer">
-                                        @auth
+                                        @can('update', $result)
                                             <a href="{{ route('result.edit', $result->id) }}" class="btn btn-outline-primary">
                                                 Edit
                                             </a>
-                                        @endauth
+                                        @endcan
 
                                         <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">
                                             Close

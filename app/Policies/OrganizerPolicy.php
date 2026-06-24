@@ -37,7 +37,7 @@ class OrganizerPolicy
      */
     public function update(User $user, Organizer $organizer): bool
     {
-        return (($user->isOrganizer()) && ($user->id === $organizer->created_by_user_od));
+        return (($user->isOrganizer()) && ($user->id === $organizer->created_by_user_id));
     }
 
     /**
@@ -45,12 +45,12 @@ class OrganizerPolicy
      */
     public function delete(User $user, Organizer $organizer): bool
     {
-        return (($user->isOrganizer()) && ($user->id === $organizer->created_by_user_od));
+        return (($user->isOrganizer()) && ($user->id === $organizer->created_by_user_id));
     }
 
     public function viewTrashed(User $user, Organizer $organizer): bool
     {
-        return (($user->isOrganizer()) && ($user->id === $organizer->created_by_user_od));
+        return (($user->isOrganizer()) && ($user->id === $organizer->created_by_user_id));
     }
 
     /**

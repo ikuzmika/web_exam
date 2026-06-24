@@ -37,7 +37,7 @@ class SponsorPolicy
      */
     public function update(User $user, Sponsor $sponsor): bool
     {
-        return (($user->isOrganizer()) && ($user->id === $sponsor->created_by_user_od));
+        return (($user->isOrganizer()) && ($user->id === $sponsor->created_by_user_id));
     }
 
     /**
@@ -45,12 +45,12 @@ class SponsorPolicy
      */
     public function delete(User $user, Sponsor $sponsor): bool
     {
-        return (($user->isOrganizer()) && ($user->id === $sponsor->created_by_user_od));
+        return (($user->isOrganizer()) && ($user->id === $sponsor->created_by_user_id));
     }
 
     public function viewTrashed(User $user, Sponsor $sponsor): bool
     {
-        return (($user->isOrganizer()) && ($user->id === $sponsor->created_by_user_od));
+        return (($user->isOrganizer()) && ($user->id === $sponsor->created_by_user_id));
     }
 
     /**

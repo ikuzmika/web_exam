@@ -118,7 +118,7 @@
 
                                 <div class="d-flex gap-2">
                                     <select name="role" class="form-control">
-                                        <option value="participant" @selected($user->role === 'user')>
+                                        <option value="user" @selected($user->role === 'user')>
                                             {{ __('admin.participant') }}
                                         </option>
 
@@ -126,7 +126,7 @@
                                             {{ __('admin.organizer') }}
                                         </option>
 
-                                        <option value="admin" @selected($user->role === 'secretary')>
+                                        <option value="secretary" @selected($user->role === 'secretary')>
                                             {{ __('admin.secretary') }}
                                         </option>
 

@@ -13,11 +13,11 @@
                 </p>
             </div>
 
-            @auth
+            @can('create', App\Models\Track::class)
                 <a href="{{ route('track.create') }}" class="btn btn-primary">
                     Add track
                 </a>
-            @endauth
+            @endcan
         </div>
 
         <div class="filter-bar competitions-search-card">
@@ -102,11 +102,11 @@
                         </div>
 
                         <div class="modal-footer">
-                            @auth
+                            @can('update', $track)
                                 <a href="{{ route('track.edit', $track->id) }}" class="btn btn-outline-primary">
                                     Edit
                                 </a>
-                            @endauth
+                            @endcan
 
                             <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">
                                 Close

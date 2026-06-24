@@ -13,11 +13,11 @@
                 </p>
             </div>
 
-            @auth
+            @can('create', App\Models\Dog::class)
                 <a href="{{ route('dog.create') }}" class="btn btn-primary">
                     {{ __('dogs.add_dog') }}
                 </a>
-            @endauth
+            @endcan
         </div>
 
         <div class="filter-bar competitions-search-card">
@@ -98,11 +98,11 @@
                         </div>
 
                         <div class="modal-footer">
-                            @auth
+                            @can('update', $dog)
                                 <a href="{{ route('dog.edit', $dog->id) }}" class="btn btn-outline-primary">
                                     {{ __('common.edit') }}
                                 </a>
-                            @endauth
+                            @endcan
 
                             <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">
                                 {{ __('common.close') }}

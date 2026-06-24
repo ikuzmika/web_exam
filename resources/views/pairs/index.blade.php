@@ -10,11 +10,11 @@
                 <p>{{ __('pairs.index_description') }}</p>
             </div>
 
-            @auth
+            @can('create', App\Models\Pair::class)
                 <a href="{{ route('pair.create') }}" class="btn btn-primary">
                     {{ __('pairs.add_pair') }}
                 </a>
-            @endauth
+            @endcan
         </div>
 
         <div class="filter-bar competitions-search-card">
@@ -111,6 +111,12 @@
                         </div>
 
                         <div class="modal-footer">
+                            @can('update', $pair)
+                                <a href="{{ route('pair.edit', $pair->id) }}" class="btn btn-outline-primary">
+                                    {{ __('common.edit') }}
+                                </a>
+                            @endcan
+                            
                             <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">
                                 {{ __('common.close') }}
                             </button>

@@ -13,11 +13,11 @@
                 </p>
             </div>
 
-            @auth
+            @can('create', App\Models\Sponsor::class)
                 <a href="{{ route('sponsor.create') }}" class="btn btn-primary">
                     Add sponsor
                 </a>
-            @endauth
+            @endcan
         </div>
 
         <div class="filter-bar competitions-search-card">
@@ -105,11 +105,11 @@
                         </div>
 
                         <div class="modal-footer">
-                            @auth
+                            @can('update', $sponsor)
                                 <a href="{{ route('sponsor.edit', $sponsor->id) }}" class="btn btn-outline-primary">
                                     Edit
                                 </a>
-                            @endauth
+                            @endcan
 
                             <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">
                                 Close
