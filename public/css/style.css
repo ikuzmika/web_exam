@@ -882,3 +882,68 @@ body {
         grid-template-columns: 1fr;
     }
 }
+
+/* Tracks page cards */
+.tracks-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+
+.track-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 18px;
+    min-height: 105px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    transition: 0.2s ease;
+}
+
+.track-card:hover {
+    background: #f9fafb;
+    border-color: #cbd8c2;
+}
+
+.track-card-text {
+    color: var(--text-muted);
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.track-card h2 {
+    font-size: 21px;
+    margin-bottom: 10px;
+}
+
+.track-card .btn {
+    width: fit-content;
+}
+
+.track-modal {
+    border-radius: 18px;
+    border: 1px solid var(--border);
+}
+
+.track-modal .modal-body p {
+    color: var(--text-muted);
+    margin-bottom: 8px;
+}
+
+.track-modal .btn-close:focus {
+    box-shadow: 0 0 0 0.2rem rgba(139, 195, 74, 0.25) !important;
+}
+
+@media (max-width: 991px) {
+    .tracks-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .tracks-grid {
+        grid-template-columns: 1fr;
+    }
+}

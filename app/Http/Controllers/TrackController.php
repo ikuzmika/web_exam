@@ -21,7 +21,7 @@ class TrackController extends Controller
      */
     public function index()
     {
-        $tracks = Track::all();
+        $tracks = Track::with(['competition', 'difficultyLevel'])->get();
         return view('track.index', compact('tracks'));
     }
 
