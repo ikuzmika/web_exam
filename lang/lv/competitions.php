@@ -1,0 +1,34 @@
+<?php
+
+return [
+    'title' => 'Sacensības',
+    'page_description' => 'Apskati agility sacensības un to informāciju.',
+    'create_title' => 'Izveidot sacensības',
+    'edit_title' => 'Labot sacensības',
+    'show_title' => 'Sacensību informācija',
+
+    'name' => 'Nosaukums',
+    'title_field' => 'Nosaukums',
+    'description' => 'Apraksts',
+    'location' => 'Norises vieta',
+    'date_from' => 'Sākuma datums',
+    'date_to' => 'Beigu datums',
+    'organizer' => 'Organizators',
+    'sponsors' => 'Sponsori',
+    'tracks' => 'Trases',
+    'results' => 'Rezultāti',
+
+    'all_competitions' => 'Visas sacensības',
+    'upcoming' => 'Gaidāmās',
+    'past' => 'Iepriekšējās',
+    'no_competitions' => 'Sacensības nav atrastas.',
+    'back_to_competitions' => 'Atpakaļ uz sacensībām',
+
+    'create_button' => 'Izveidot sacensības',
+    'update_button' => 'Atjaunināt sacensības',
+    'delete_button' => 'Dzēst sacensības',
+
+    'competition_created' => 'Sacensības veiksmīgi izveidotas.',
+    'competition_updated' => 'Sacensības veiksmīgi atjauninātas.',
+    'competition_deleted' => 'Sacensības veiksmīgi dzēstas.',
+];

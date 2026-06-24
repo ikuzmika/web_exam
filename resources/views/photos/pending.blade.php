@@ -61,6 +61,11 @@
 
                     @if ($photo->track)
                         <p>
+                            <strong>Type:</strong>
+                            Track scheme
+                        </p>
+
+                        <p>
                             <strong>Track:</strong>
                             {{ $photo->track->competition?->title ?? 'No competition' }}
                             —

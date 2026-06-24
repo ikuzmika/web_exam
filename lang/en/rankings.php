@@ -1,0 +1,28 @@
+<?php
+
+return [
+    'latvian_ranking' => 'Latvian ranking',
+    'latvian_best_pairs' => 'Latvian best pairs',
+
+    'latvian_ranking_description' => 'This list includes only pairs that completed at least 60% of tracks in the selected year with status OK or DQ.',
+    'best_pairs_description' => 'This list shows the best pairs by total points. The 60% track participation rule is not used here.',
+
+    'year' => 'Year',
+    'latest_year' => 'Latest year',
+    'competition' => 'Competition',
+    'all_competitions' => 'All competitions',
+    'dog_size' => 'Dog size',
+    'all_sizes' => 'All sizes',
+    'difficulty' => 'Difficulty',
+    'all_levels' => 'All levels',
+
+    'total_tracks_message' => 'In the selected year there are :total tracks. To be included in the Latvian ranking, a pair must complete at least :minimum tracks with status OK or DQ.',
+    'total_points' => 'Total points',
+    'completed_tracks' => 'Completed tracks',
+    'results_counted' => 'Results counted',
+    'dog_size_label' => 'Dog size',
+
+    'no_ranking_results' => 'No ranking results found',
+    'no_latvian_ranking_results_description' => 'There are no pairs that match the selected filters and the 60% participation rule.',
+    'no_best_pairs_results_description' => 'There are no results for selected filters.',
+];

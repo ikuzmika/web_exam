@@ -1,0 +1,34 @@
+<?php
+
+return [
+    'title' => 'Competitions',
+    'page_description' => 'View agility competitions and their details.',
+    'create_title' => 'Create competition',
+    'edit_title' => 'Edit competition',
+    'show_title' => 'Competition details',
+
+    'name' => 'Name',
+    'title_field' => 'Title',
+    'description' => 'Description',
+    'location' => 'Location',
+    'date_from' => 'Start date',
+    'date_to' => 'End date',
+    'organizer' => 'Organizer',
+    'sponsors' => 'Sponsors',
+    'tracks' => 'Tracks',
+    'results' => 'Results',
+
+    'all_competitions' => 'All competitions',
+    'upcoming' => 'Upcoming',
+    'past' => 'Past',
+    'no_competitions' => 'No competitions found.',
+    'back_to_competitions' => 'Back to competitions',
+
+    'create_button' => 'Create competition',
+    'update_button' => 'Update competition',
+    'delete_button' => 'Delete competition',
+
+    'competition_created' => 'Competition created successfully.',
+    'competition_updated' => 'Competition updated successfully.',
+    'competition_deleted' => 'Competition deleted successfully.',
+];

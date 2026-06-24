@@ -19,6 +19,16 @@ use App\Models\Competition;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+Route::get('/language/{locale}', function ($locale) {
+    if (! in_array($locale, ['en', 'lv'])) {
+        abort(404);
+    }
+
+    session(['locale' => $locale]);
+
+    return back();
+})->name('language.switch');
+
 Route::resource('handler', HandlerController::class);
 
 Route::resource('dog', DogController::class);

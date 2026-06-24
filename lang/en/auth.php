@@ -1,20 +1,24 @@
 <?php
 
 return [
+    'login' => 'Login',
+    'register' => 'Register',
+    'logout' => 'Logout',
 
-    /*
-    |--------------------------------------------------------------------------
-    | Authentication Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | The following language lines are used during authentication for various
-    | messages that we need to display to the user. You are free to modify
-    | these language lines according to your application's requirements.
-    |
-    */
+    'name' => 'Name',
+    'email' => 'Email',
+    'phone' => 'Phone',
+    'password' => 'Password',
+    'confirm_password' => 'Confirm password',
+    'remember_me' => 'Remember me',
+
+    'already_registered' => 'Already registered?',
+    'not_registered' => 'Do not have an account?',
+    'forgot_password' => 'Forgot your password?',
+
+    'login_button' => 'Login',
+    'register_button' => 'Register',
 
     'failed' => 'These credentials do not match our records.',
-    'password' => 'The provided password is incorrect.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-
+    'password_error' => 'The provided password is incorrect.',
 ];

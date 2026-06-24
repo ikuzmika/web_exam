@@ -3,10 +3,9 @@
         Login
     </x-slot>
 
-    {{-- Login page --}}
     <section class="auth-page">
         <div class="auth-card">
-            <span class="page-label">Login</span>
+
             <h1>Welcome back!</h1>
 
             <form action="{{ route('login') }}" method="POST">

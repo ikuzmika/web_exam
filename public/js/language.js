@@ -36,39 +36,3 @@ const translations = {
     }
 };
 
-function setLanguage(language) {
-    localStorage.setItem("siteLanguage", language);     //lai saglabātu izvēlēto valodu
-
-    const elements = document.querySelectorAll("[data-translate]"); //lai sameklētu visus elementus, kurus vajag tulkot
-
-    elements.forEach(function (element) {  //eju cauri visiem atrastiem elementiem
-        const key = element.getAttribute("data-translate"); //ņemu elementa vērtību
-
-        if (translations[language][key]) {  //pārbaudu, vai ir tāds tulkojums
-            element.textContent = translations[language][key]; //maina vajadzīgo tekstu HTMLā
-        }
-    });
-
-    const languageButtons = document.querySelectorAll(".language-btn");
-
-    languageButtons.forEach(function (button) {
-        button.classList.remove("active");
-
-        if (button.getAttribute("data-lang") === language) {  //ja poga atbilst izvēlētai valodai,
-            button.classList.add("active");                   //tad to pogu taisa active
-        }
-    });
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-    const savedLanguage = localStorage.getItem("siteLanguage") || "en";  //paņemu saglabāto valodu
-    setLanguage(savedLanguage);   //liekam saglabāto valodu saitē
-    const languageButtons = document.querySelectorAll(".language-btn");
-
-    languageButtons.forEach(function (button) {
-        button.addEventListener("click", function () {   //kad lietotājs uzspied uz pogas
-            const selectedLanguage = button.getAttribute("data-lang");  //paņemam valodu, uz kuras uzspieda
-            setLanguage(selectedLanguage);  //izsaucu funkciju priekš valodas maiņas
-        });
-    });
-});

@@ -1,19 +1,15 @@
-{{-- Main navigation menu --}}
 
 <nav class="navbar navbar-expand-lg navbar-light site-navbar sticky-top">
     <div class="container">
 
-        {{-- Website name --}}
         <a class="navbar-brand" href="{{ url('/') }}">
-            Agility Latvia
+            {{__('navigation.agility_latvia')}}
         </a>
 
-        {{-- Button for mobile menu --}}
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        {{-- Menu links --}}
         <div class="collapse navbar-collapse" id="mainNavbar">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
@@ -45,7 +41,6 @@
                     </a>
                 </li>
 
-                {{-- Dropdown with additional pages --}}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                         <span data-translate="nav_more">More</span>
@@ -99,13 +94,18 @@
                 </li>
             </ul>
 
-            {{-- Language switch buttons --}}
             <div class="language-switch">
-                <button class="language-btn active" type="button" data-lang="en">EN</button>
-                <button class="language-btn" type="button" data-lang="lv">LV</button>
+                <a href="{{ route('language.switch', 'en') }}"
+                   class="btn btn-sm {{ app()->getLocale() === 'en' ? 'btn-primary' : 'btn-outline-primary' }}">
+                    EN
+                </a>
+
+                <a href="{{ route('language.switch', 'lv') }}"
+                   class="btn btn-sm {{ app()->getLocale() === 'lv' ? 'btn-primary' : 'btn-outline-primary' }}">
+                    LV
+                </a>
             </div>
 
-            {{-- Login / Register or user info --}}
             <div class="auth-area">
                 @guest
                     <a class="btn btn-primary btn-sm" href="{{ route('auth.login') }}">
