@@ -794,3 +794,29 @@ body {
         white-space: nowrap;
     }
 }
+
+.profile-page-wrapper {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+
+.profile-form-card {
+    background-color: #ffffff;
+    border: 1px solid #dfe4d8;
+    border-radius: 18px;
+    padding: 28px;
+}
+
+.profile-form-card h2 {
+    font-size: 24px;
+    margin-bottom: 18px;
+}
+
+.profile-form-card .form-control {
+    max-width: 100%;
+}
+
+.profile-section-divider {
+    margin: 28px 0;
+}

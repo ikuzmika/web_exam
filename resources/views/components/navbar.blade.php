@@ -85,7 +85,9 @@
 
                         @auth
                             @if(Auth::user()->isAdmin())
-                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
                                 <li>
                                     <a class="dropdown-item" href="{{ route('admin.users.index') }}">
                                         User management
@@ -106,7 +108,7 @@
             {{-- Login / Register or user info --}}
             <div class="auth-area">
                 @guest
-                   <a class="btn btn-primary btn-sm" href="{{ route('auth.login') }}">
+                    <a class="btn btn-primary btn-sm" href="{{ route('auth.login') }}">
                         <span data-translate="nav_login">Login</span>
                     </a>
 
@@ -116,9 +118,9 @@
                 @endguest
 
                 @auth
-                    <span class="user-name">
-                        Hi, <strong>{{ Auth::user()->name }}</strong>
-                    </span>
+                    <a href="{{route('profile.edit')}}" class="user-name nav-link">
+                        <strong>{{ Auth::user()->name }}</strong>
+                    </a>
 
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf

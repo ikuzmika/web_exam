@@ -9,6 +9,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrganizerController;
 use App\Http\Controllers\PairController;
 use App\Http\Controllers\PhotoController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RankingController;
 use App\Http\Controllers\ResultController;
 use App\Http\Controllers\SponsorController;
@@ -52,6 +53,12 @@ Route::get('/rankings/filter', [RankingController::class, 'filter'])
     ->name('rankings.filter');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])
+        ->name('profile.edit');
+
+    Route::patch('/profile', [ProfileController::class, 'update'])
+        ->name('profile.update');
+
     Route::get('/organizer-trashed', [OrganizerController::class, 'trashed'])
         ->name('organizer.trashed');
 
@@ -83,6 +90,9 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/users', [AdminController::class, 'index'])
         ->name('admin.users.index');
+
+    Route::patch('/admin/users/{user}/info', [AdminController::class, 'updateInfo'])
+        ->name('admin.users.updateInfo');
 
     Route::patch('/admin/users/{user}/role', [AdminController::class, 'updateRole'])
         ->name('admin.users.updateRole');

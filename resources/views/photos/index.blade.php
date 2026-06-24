@@ -76,13 +76,13 @@
                         {{ $photo->uploadedBy?->name ?? 'Unknown user' }}
                     </p>
 
-                    @auth
-                        <div class="d-flex gap-2">
+                    <div class="d-flex gap-2">
 
-                            <a href="{{ route('photo.show', $photo) }}" class="btn btn-outline-primary btn-sm">
-                                View details
-                            </a>
+                        <a href="{{ route('photo.show', $photo) }}" class="btn btn-outline-primary btn-sm">
+                            View details
+                        </a>
 
+                        @auth
                             @can('update', $photo)
                                 <a href="{{ route('photo.edit', $photo) }}" class="btn btn-outline-primary btn-sm">
                                     Edit
@@ -99,8 +99,9 @@
                                     </button>
                                 </form>
                             @endcan
-                        </div>
-                    @endauth
+                        @endauth
+                    </div>
+
                 </div>
             </article>
         @empty
