@@ -62,7 +62,7 @@ class ResultController extends Controller
         Result::create($validated);
 
         return redirect()->route('result.index')
-            ->with('success', 'Result created.');
+            ->with('success', __('controllers.new_result'));
     }
 
     /**
@@ -113,7 +113,7 @@ class ResultController extends Controller
         $validated['recorded_by_user_id'] = Auth::id();
         $result->update($validated);
         return redirect()->route('result.show', $result->id)
-            ->with('success', 'Result updated.');
+            ->with('success', __('controllers.updated_result'));
     }
 
     /**
@@ -127,7 +127,7 @@ class ResultController extends Controller
 
         $result->delete();
         return redirect()->route('result.index')
-            ->with('success', 'Result deleted.');
+            ->with('success', __('controllers.deleted_result'));
     }
 
     public function trashed(Request $request)
@@ -150,7 +150,7 @@ class ResultController extends Controller
 
         $result->restore();
         return redirect()->route('result.trashed')
-            ->with('success', 'Result restored.');
+            ->with('success', __('controllers.restored_result'));
     }
 
     public function forceDelete(Request $request, string $id)
@@ -162,6 +162,6 @@ class ResultController extends Controller
         }
         $result->forceDelete();
         return redirect()->route('result.trashed')
-            ->with('success', 'Result permanently deleted.');
+            ->with('success', __('controllers.force_deleted_result'));
     }
 }

@@ -59,7 +59,7 @@ class PairController extends Controller
 
         Pair::create($validated);
         return redirect()->route('pair.index')
-            ->with('success', 'Pair created.');
+            ->with('success', __('controllers.new_pair'));
     }
 
     /**
@@ -107,7 +107,7 @@ class PairController extends Controller
 
         $pair->update($validated);
         return redirect()->route('pair.show', $pair->id)
-            ->with('success', 'Pair updated.');
+            ->with('success', __('controllers.updated_pair'));
     }
 
     /**
@@ -121,7 +121,7 @@ class PairController extends Controller
 
         $pair->delete();
         return redirect()->route('pair.index')
-            ->with('success', 'Pair deleted.');
+            ->with('success', __('controllers.deleted_pair'));
     }
 
     public function trashed(Request $request)
@@ -143,7 +143,7 @@ class PairController extends Controller
         }
         $pair->restore();
         return redirect()->route('pair.trashed')
-            ->with('success', 'Pair restored.');
+            ->with('success', __('controllers.restored_pair'));
     }
 
     public function forceDelete(Request $request, string $id)
@@ -156,6 +156,6 @@ class PairController extends Controller
 
         $pair->forceDelete();
         return redirect()->route('pair.trashed')
-            ->with('success', 'Pair permanently deleted.');
+            ->with('success', __('controllers.force_deleted_pair'));
     }
 }

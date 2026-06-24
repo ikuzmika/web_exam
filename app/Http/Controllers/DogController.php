@@ -59,7 +59,7 @@ class DogController extends Controller
         Dog::create($validated);
 
         return redirect()->route('dog.index')
-            ->with('success', 'Dog has been created.');
+            ->with('success', __('controllers.new_dog'));
     }
 
     /**
@@ -110,7 +110,7 @@ class DogController extends Controller
 
         $dog->update($validated);
         return redirect()->route('dog.show', $dog->id)
-            ->with('success', 'Dog has been updated.');
+            ->with('success', __('controllers.updated_dog'));
     }
 
     /**
@@ -124,7 +124,7 @@ class DogController extends Controller
 
         $dog->delete();
         return redirect()->route('dog.index')
-            ->with('success', 'Dog has been deleted.');
+            ->with('success', __('controllers.deleted_dog'));
     }
 
     public function trashed(Request $request)
@@ -146,7 +146,7 @@ class DogController extends Controller
 
         $dog->restore();
         return redirect()->route('dog.trashed')
-            ->with('success', 'Dog has been restored.');
+            ->with('success', __('controllers.restored_dog'));
     }
 
     public function forceDelete(Request $request , string $id)
@@ -158,6 +158,6 @@ class DogController extends Controller
         }
         $dog->forceDelete();
         return redirect()->route('dog.trashed')
-            ->with('success', 'Dog permanently deleted.');
+            ->with('success', __('controllers.force_deleted_dog'));
     }
 }
