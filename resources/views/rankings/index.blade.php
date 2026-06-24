@@ -23,10 +23,10 @@
         }
     @endphp
 
-    <section class="page-header">
-        <div>
+    <section class="page-header ranking-page-header">
+        <div class = "ranking-page-header-text">
             <h1>{{$rankingTitle}}</h1>
-            <p>{{$rankingDescription}}</p>
+            <p class = "ranking-description">{{$rankingDescription}}</p>
         </div>
     </section>
 
@@ -60,19 +60,23 @@
                 </select>
             </div>
 
-            <div class="col-md-3">
-                <label for="competition_id" class="form-label">Competition</label>
+            @if ($rankingType === 'best')
 
-                <select name="competition_id" id="competition_id" class="form-control">
-                    <option value="">All competitions</option>
+                <div class="col-md-3">
+                    <label for="competition_id" class="form-label">Competition</label>
 
-                    @foreach($competitions as $competition)
-                        <option value="{{ $competition->id }}" @selected(request('competition_id') == $competition->id)>
-                            {{ $competition->title }}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
+                    <select name="competition_id" id="competition_id" class="form-control">
+                        <option value="">All competitions</option>
+
+                        @foreach($competitions as $competition)
+                            <option
+                                value="{{ $competition->id }}" @selected(request('competition_id') == $competition->id)>
+                                {{ $competition->title }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+            @endif
 
             <div class="col-md-2">
                 <label for="size_category_id" class="form-label">Dog size</label>
@@ -89,27 +93,30 @@
                 </select>
             </div>
 
-            <div class="col-md-2">
-                <label for="difficulty_level_id" class="form-label">Difficulty</label>
+            @if ($rankingType === 'best')
+                <div class="col-md-2">
+                    <label for="difficulty_level_id" class="form-label">Difficulty</label>
 
-                <select name="difficulty_level_id" id="difficulty_level_id" class="form-control">
-                    <option value="">All levels</option>
+                    <select name="difficulty_level_id" id="difficulty_level_id" class="form-control">
+                        <option value="">All levels</option>
 
-                    @foreach($difficultyLevels as $difficultyLevel)
-                        <option
-                            value="{{ $difficultyLevel->id }}" @selected(request('difficulty_level_id') == $difficultyLevel->id)>
-                            {{ $difficultyLevel->name }}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
+                        @foreach($difficultyLevels as $difficultyLevel)
+                            <option
+                                value="{{ $difficultyLevel->id }}" @selected(request('difficulty_level_id') == $difficultyLevel->id)>
+                                {{ $difficultyLevel->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+            @endif
 
             <div class="col-md-2 d-flex align-items-end gap-2">
                 <button type="submit" class="btn btn-primary">
                     Filter
                 </button>
 
-                <a href="{{ route('rankings.index', ['ranking_type' => $rankingType]) }}" class="btn btn-outline-primary">
+                <a href="{{ route('rankings.index', ['ranking_type' => $rankingType]) }}"
+                   class="btn btn-outline-primary">
                     Reset
                 </a>
             </div>

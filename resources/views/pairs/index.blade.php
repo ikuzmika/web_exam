@@ -93,10 +93,12 @@
                                 {{ optional(optional($pair->dog)->sizeCategory)->name ?? 'Not specified' }}
                             </p>
 
-                            <p>
-                                <strong>Active from:</strong>
-                                {{ \Carbon\Carbon::parse($pair->active_from)->format('d.m.Y') }}
-                            </p>
+                            @if($pair->active_from)
+                                <p>
+                                    <strong>Active from:</strong>
+                                    {{ \Carbon\Carbon::parse($pair->active_from)->format('d.m.Y') }}
+                                </p>
+                            @endif
 
                             @if($pair->active_until)
                                 <p>
