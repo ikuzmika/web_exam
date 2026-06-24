@@ -122,38 +122,12 @@
         const dogNameInput = document.getElementById('dogName');
         const competitionNameInput = document.getElementById('competitionName');
 
-        const competitionCards = document.querySelectorAll('.home-competition-card-js');
-        const noCompetitionSearchResults = document.getElementById('noCompetitionSearchResults');
-
         const handlerIndexUrl = @json(route('handler.index'));
         const dogIndexUrl = @json(route('dog.index'));
+        const competitionIndexUrl = @json(route('competition.index'));
 
         function redirectWithSearch(url, searchText) {
             window.location.href = url + '?search=' + encodeURIComponent(searchText);
-        }
-
-        function filterPlannedCompetitions(searchText) {
-            let visibleCards = 0;
-            const normalizedSearch = searchText.toLowerCase();
-
-            competitionCards.forEach(function (card) {
-                const cardText = card.dataset.search.toLowerCase();
-
-                if (normalizedSearch === '' || cardText.includes(normalizedSearch)) {
-                    card.style.display = 'flex';
-                    visibleCards++;
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-
-            if (noCompetitionSearchResults) {
-                if (competitionCards.length > 0 && visibleCards === 0) {
-                    noCompetitionSearchResults.classList.remove('d-none');
-                } else {
-                    noCompetitionSearchResults.classList.add('d-none');
-                }
-            }
         }
 
         quickSearchForm.addEventListener('submit', function (event) {
@@ -173,12 +147,8 @@
                 return;
             }
 
-            filterPlannedCompetitions(competitionName);
-        });
-
-        competitionNameInput.addEventListener('input', function () {
-            if (handlerNameInput.value.trim() === '' && dogNameInput.value.trim() === '') {
-                filterPlannedCompetitions(this.value.trim());
+            if (competitionName !== '') {
+                redirectWithSearch(competitionIndexUrl, competitionName);
             }
         });
     </script>

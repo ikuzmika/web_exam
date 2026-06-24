@@ -30,6 +30,7 @@
                     type="text"
                     id="competitionSearch"
                     class="form-control"
+                    value="{{ request('search') }}"
                     placeholder="{{ __('competitions.search_placeholder') }}"
                 >
             </div>
@@ -40,7 +41,12 @@
         @forelse($competitions as $competition)
             <article
                 class="competition-preview-card competition-card-js"
-                data-search="{{ translate_db($competition->title) }} {{ translate_db(optional($competition->organizer)->venue) }}"
+                data-search="
+                    {{ $competition->title }}
+                    {{ translate_db($competition->title) }}
+                    {{ optional($competition->organizer)->venue }}
+                    {{ translate_db(optional($competition->organizer)->venue) }}
+                "
             >
                 <div class="competition-preview-content">
                     <h3>{{ translate_db($competition->title) }}</h3>
@@ -61,7 +67,8 @@
                         </a>
 
                         @auth
-                            <a href="{{ route('competition.edit', $competition->id) }}" class="btn btn-outline-primary btn-sm">
+                            <a href="{{ route('competition.edit', $competition->id) }}"
+                               class="btn btn-outline-primary btn-sm">
                                 {{ __('common.edit') }}
                             </a>
                         @endauth
@@ -84,18 +91,22 @@
         const competitionSearch = document.getElementById('competitionSearch');
         const competitionCards = document.querySelectorAll('.competition-card-js');
 
-        competitionSearch.addEventListener('input', function () {
-            const searchText = this.value.toLowerCase();
+        function filterCompetitions() {
+            const searchText = competitionSearch.value.toLowerCase();
 
             competitionCards.forEach(function (card) {
                 const cardText = card.dataset.search.toLowerCase();
 
-                if (cardText.includes(searchText)) {
+                if (searchText === '' || cardText.includes(searchText)) {
                     card.style.display = 'flex';
                 } else {
                     card.style.display = 'none';
                 }
             });
-        });
+        }
+
+        competitionSearch.addEventListener('input', filterCompetitions);
+
+        filterCompetitions();
     </script>
 </x-layout>
