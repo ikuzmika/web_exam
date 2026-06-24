@@ -791,6 +791,7 @@ body {
     width: 100%;
     max-width: none;
 }
+
 @media (min-width: 992px) {
     .ranking-description {
         white-space: nowrap;
@@ -821,4 +822,63 @@ body {
 
 .profile-section-divider {
     margin: 28px 0;
+}
+
+/* Dogs page cards */
+.dogs-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+
+.dog-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 18px;
+    min-height: 105px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    transition: 0.2s ease;
+}
+
+.dog-card:hover {
+    background: #f9fafb;
+    border-color: #cbd8c2;
+}
+
+.dog-card h2 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.dog-card .btn {
+    width: fit-content;
+}
+
+.dog-modal {
+    border-radius: 18px;
+    border: 1px solid var(--border);
+}
+
+.dog-modal .modal-body p {
+    color: var(--text-muted);
+    margin-bottom: 8px;
+}
+
+.dog-modal .btn-close:focus {
+    box-shadow: 0 0 0 0.2rem rgba(139, 195, 74, 0.25) !important;
+}
+
+@media (max-width: 991px) {
+    .dogs-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .dogs-grid {
+        grid-template-columns: 1fr;
+    }
 }
