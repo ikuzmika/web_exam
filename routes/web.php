@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CompetitionController;
 use App\Http\Controllers\DogController;
 use App\Http\Controllers\HandlerController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrganizerController;
 use App\Http\Controllers\PairController;
 use App\Http\Controllers\PhotoController;
@@ -15,15 +16,7 @@ use App\Http\Controllers\TrackController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Competition;
 
-Route::get('/', function () {
-    $upcomingCompetitions = Competition::with('organizer')
-        ->whereDate('date', '>=', now()->toDateString())
-        ->orderBy('date')
-        ->take(3)
-        ->get();
-
-    return view('welcome', compact('upcomingCompetitions'));
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::resource('handler', HandlerController::class);
 
@@ -132,6 +125,15 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     Route::delete('/pair/{id}/force-delete', [PairController::class, 'forceDelete'])
         ->name('pair.forceDelete');
+
+    Route::get('/photo-pending', [PhotoController::class, 'pending'])
+        ->name('photo.pending');
+
+    Route::patch('/photo/{photo}/approve', [PhotoController::class, 'approve'])
+        ->name('photo.approve');
+
+    Route::patch('/photo/{photo}/reject', [PhotoController::class, 'reject'])
+        ->name('photo.reject');
 
     Route::patch('photo/{id}/restore', [PhotoController::class, 'restore'])
         ->name('photo.restore');

@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Competition;
 use App\Models\Pair;
 use App\Models\Photo;
+use App\Models\Track;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PhotoController extends Controller
 {
@@ -21,7 +23,15 @@ class PhotoController extends Controller
      */
     public function index()
     {
-        $photos = Photo::all();
+        $photos = Photo::with([
+            'uploadedBy',
+            'competition',
+            'pair.dog.handler',
+            'track.competition',
+            'track.difficultyLevel'
+        ])->where('is_approved', true)
+            ->latest()->paginate(5);
+
         return view('photos.index', compact('photos'));
     }
 
@@ -34,9 +44,12 @@ class PhotoController extends Controller
             abort(403, 'Unauthorized action.');
         }
 
-        $competitions = Competition::all();
-        $pairs = Pair::all();
-        return view('photos.create', compact('competitions', 'pairs'));
+        $competitions = Competition::orderByDesc('date')->get();
+        $pairs = Pair::with(['dog.handler'])->orderBy('id')->get();
+        $tracks = Track::with(['competition', 'difficultyLevel'])
+            ->orderBy('competition_id')->orderBy('id')->get();
+
+        return view('photos.create', compact('competitions', 'pairs', 'tracks'));
     }
 
     /**
@@ -49,26 +62,41 @@ class PhotoController extends Controller
         }
 
         $validated = $request->validate([
-            'competition_id' => 'required|integer|exists:competitions,id',
-            'pair_id' => 'required|integer|exists:pairs,id',
-            'title' => 'string|max:200',
-            'file_path' => 'required|file|mimes:jpg,jpeg,png|max:255',
+            'competition_id' => 'nullable|integer|exists:competitions,id',
+            'pair_id' => 'nullable|integer|exists:pairs,id',
+            'track_id' => 'nullable|integer|exists:tracks,id',
+            'title' => 'nullable|string|max:200',
+            'photo' => 'required|file|mimes:jpg,jpeg,png,webp|max:4096',
         ]);
 
-        $validated['uploded_by_user_id'] = Auth::id();
+        $filePath = $request->file('photo')->store('gallery', 'public');
 
-        Photo::create($validated);
+        Photo::create([
+            'uploaded_by_user_id' => Auth::id(),
+            'competition_id' => $validated['competition_id'] ?? null,
+            'pair_id' => $validated['pair_id'] ?? null,
+            'track_id' => $validated['track_id'] ?? null,
+            'title' => $validated['title'] ?? null,
+            'file_path' => $filePath,
+            'is_approved' => $request->user()->isAdmin()
+        ]);
 
         return redirect()->route('photo.index')
-            ->with('success', 'Photo uploaded successfully.');
+            ->with('success', 'Photo uploaded successfully. It will appear in the gallery after admin approval.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Photo $photo)
     {
-        $photo = Photo::with(['competition', 'pair'])->findOrFail($id);
+        $photo->load([
+            'uploadedBy',
+            'competition',
+            'pair.dog.handler',
+            'track.competition',
+            'track.difficultyLevel'
+        ]);
 
         return view('photos.show', compact('photo'));
     }
@@ -76,42 +104,58 @@ class PhotoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Request $request, string $id)
+    public function edit(Request $request, Photo $photo)
     {
-        $photo = Photo::findOrFail($id);
-
         if ($request->user()->cannot('update', $photo)) {
             abort(403, 'Unauthorized action.');
         }
 
-        $competitions = Competition::all();
-        $pairs = Pair::all();
-        return view('photos.edit', compact('competitions', 'pairs', 'photo'));
+        $competitions = Competition::orderByDesc('date')->get();
+        $pairs = Pair::with('dog.handler')
+            ->orderBy('id')->get();
+        $tracks = Track::with(['competition', 'difficultyLevel'])
+            ->orderBy('competition_id')->orderBy('id')->get();
+        return view('photos.edit', compact('competitions', 'pairs', 'photo', 'tracks'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Photo $photo)
     {
-        $photo = Photo::findOrFail($id);
-
         if ($request->user()->cannot('update', $photo)) {
             abort(403, 'Unauthorized action.');
         }
 
         $validated = $request->validate([
-            'competition_id' => 'required|integer|exists:competitions,id',
-            'pair_id' => 'required|integer|exists:pairs,id',
-            'title' => 'string|max:200',
-            'file_path' => 'file|mimes:jpg,jpeg,png|max:255',
+            'competition_id' => 'nullable|integer|exists:competitions,id',
+            'pair_id' => 'nullable|integer|exists:pairs,id',
+            'track_id' => 'nullable|integer|exists:tracks,id',
+            'title' => 'nullable|string|max:200',
+            'photo' => 'file|mimes:jpg,jpeg,png,webp|max:4096',
         ]);
 
-        $validated['uploded_by_user_id'] = Auth::id();
+        $filePath = $photo->file_path;
 
-        $photo->update($validated);
-        return redirect()->route('photo.show', $photo->id)
-            ->with('success', 'Photo updated successfully.');
+        if ($request->hasFile('file_path')) {
+            if ($photo->file_path) {
+                Storage::disk('public')->delete($photo->file_path);
+            }
+
+            $filePath = $request->file('photo')->store('gallery', 'public');
+        }
+
+        $photo->update([
+            'competition_id' => $validated['competition_id'] ?? null,
+            'pair_id' => $validated['pair_id'] ?? null,
+            'track_id' => $validated['track_id'] ?? null,
+            'title' => $validated['title'] ?? null,
+            'file_path' => $filePath,
+            'is_approved' => $request->user()->isAdmin()
+        ]);
+
+        return redirect()->route('photo.index', $photo->id)
+            ->with('success', 'Photo updated successfully. It will appear in the gallery after admin approval.');
     }
 
     /**
@@ -128,13 +172,60 @@ class PhotoController extends Controller
             ->with('success', 'Photo deleted.');
     }
 
+    public function pending(Request $request)
+    {
+        if (!$request->user()->isAdmin()) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $photos = Photo::with([
+            'uploadedBy',
+            'competition',
+            'pair.dog.handler'
+        ])->where('is_approved', false)->latest()->paginate(5);
+
+        return view('photos.pending', compact('photos'));
+    }
+
+    public function approve(Request $request, Photo $photo)
+    {
+        if (!$request->user()->isAdmin()) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $photo->update([
+            'is_approved' => true
+        ]);
+        return redirect()->route('photo.pending')
+            ->with('success', 'Photo approved successfully.');
+    }
+
+    public function reject(Request $request, Photo $photo)
+    {
+        if (!$request->user()->isAdmin()) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $photo->delete();
+
+        return redirect()->route('photo.pending')
+            ->with('success', 'Photo rejected.');
+    }
+
     public function trashed(Request $request)
     {
         if ($request->user()->cannot('viewTrashed', Photo::class)) {
             abort(403, 'Unauthorized action.');
         }
 
-        $photos = Photo::onlyTrashed()->get();
+        $photos = Photo::onlyTrashed()->with([
+            'uploadedBy',
+            'competition',
+            'pair.dog.handler',
+            'track.competition',
+            'track.difficultyLevel'
+        ])->latest()->paginate(5);
+
         return view('photos.trashed', compact('photos'));
     }
 
@@ -157,6 +248,10 @@ class PhotoController extends Controller
 
         if ($request->user()->cannot('forceDelete', $photo)) {
             abort(403, 'Unauthorized action.');
+        }
+
+        if ($photo->file_path){
+            Storage::disk('public')->delete($photo->file_path);
         }
 
         $photo->forceDelete();

@@ -60,7 +60,7 @@
                     </a>
                 </div>
 
-                @forelse($upcomingCompetitions as $competition)
+                @forelse($upcomingCompetitions ?? [] as $competition)
                     <div class="competition-preview-card">
                         <div class="competition-preview-content">
                             <h3>{{ $competition->title }}</h3>

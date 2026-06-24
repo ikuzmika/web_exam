@@ -31,7 +31,7 @@ class AuthController extends Controller
 
         Auth::login($user);
 
-        return view('welcome');
+        return redirect()->route('home');
     }
 
     public function login(Request $request)
@@ -44,7 +44,7 @@ class AuthController extends Controller
         if (Auth::attempt($validated)) {
             $request->session()->regenerate();
 
-            return view('welcome');
+            return redirect()->route('home');
         }
 
         throw ValidationException::withMessages([

@@ -6,7 +6,7 @@ use App\Models\Track;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class TrackSeeder extends Seeder
+class   TrackSeeder extends Seeder
 {
     /**
      * Run the database seeds.

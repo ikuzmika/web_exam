@@ -641,6 +641,21 @@ body {
     border-color: var(--border);
 }
 
+.photo-show-image-wrapper {
+    width: 100%;
+    background-color: #f8f8f8;
+    border-radius: 12px;
+    text-align: center;
+    padding: 10px;
+}
+
+.photo-show-image {
+    max-width: 100%;
+    max-height: 700px;
+    object-fit: contain;
+    border-radius: 12px;
+}
+
 /* Pairs page cards */
 .pairs-grid {
     display: grid;
