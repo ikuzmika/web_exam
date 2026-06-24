@@ -91,6 +91,8 @@
                                     {{ __('admin.organizer') }}
                                 @elseif ($user->role === 'admin')
                                     {{ __('admin.admin') }}
+                                @elseif($user->role === 'secretary')
+                                    {{__('admin.secretary')}}
                                 @else
                                     {{ ucfirst($user->role) }}
                                 @endif
@@ -122,6 +124,10 @@
 
                                         <option value="organizer" @selected($user->role === 'organizer')>
                                             {{ __('admin.organizer') }}
+                                        </option>
+
+                                        <option value="admin" @selected($user->role === 'secretary')>
+                                            {{ __('admin.secretary') }}
                                         </option>
 
                                         <option value="admin" @selected($user->role === 'admin')>

@@ -6,7 +6,6 @@ return [
     'create_title' => 'Create competition',
     'edit_title' => 'Edit competition',
     'show_title' => 'Competition details',
-
     'name' => 'Name',
     'title_field' => 'Title',
     'description' => 'Description',
@@ -17,18 +16,25 @@ return [
     'sponsors' => 'Sponsors',
     'tracks' => 'Tracks',
     'results' => 'Results',
-
     'all_competitions' => 'All competitions',
     'upcoming' => 'Upcoming',
     'past' => 'Past',
     'no_competitions' => 'No competitions found.',
     'back_to_competitions' => 'Back to competitions',
-
+    'choose_competition' => 'Select competition',
     'create_button' => 'Create competition',
     'update_button' => 'Update competition',
     'delete_button' => 'Delete competition',
-
     'competition_created' => 'Competition created successfully.',
     'competition_updated' => 'Competition updated successfully.',
     'competition_deleted' => 'Competition deleted successfully.',
+    'agility_competitions' => 'Agility competitions',
+    'index_description' => 'View agility competitions, dates and venues.',
+    'add_competition' => 'Add competition',
+    'search_competition' => 'Search competition',
+    'search_placeholder' => 'Enter competition name or venue',
+    'date' => 'Date',
+    'venue' => 'Venue',
+    'competition_image' => 'Competition image',
+    'no_competitions_description' => 'There are no competitions added yet.',
 ];

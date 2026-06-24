@@ -56,7 +56,7 @@ class HandlerController extends Controller
         Handler::create($validated);
 
         return redirect()->route('handler.index')
-            ->with('success', 'Handler created.');
+            ->with('success', __('controllers.new_handler'));
     }
 
     /**
@@ -105,7 +105,7 @@ class HandlerController extends Controller
 
         $handler->update($validated);
         return redirect()->route('handler.show', $handler->id)
-            ->with('success', 'Handler updated.');
+            ->with('success', __('controllers.updated_handler'));
     }
 
     /**
@@ -119,7 +119,7 @@ class HandlerController extends Controller
 
         $handler->delete();
         return redirect()->route('handler.index')
-            ->with('success', 'Handler deleted.');
+            ->with('success', __('controllers.deleted_handler'));
     }
 
     public function trashed(Request $request)
@@ -143,7 +143,7 @@ class HandlerController extends Controller
 
         $handler->restore();
         return redirect()->route('handler.trashed')
-            ->with('success', 'Handler restored.');
+            ->with('success', __('controllers.restored_handler'));
     }
 
     public function forceDelete(Request $request, string $id)
@@ -156,6 +156,6 @@ class HandlerController extends Controller
 
         $handler->forceDelete();
         return redirect()->route('handler.trashed')
-            ->with('success', 'Handler permanently deleted.');
+            ->with('success', __('controllers.force_deleted_handler'));
     }
 }

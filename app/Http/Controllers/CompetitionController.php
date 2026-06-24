@@ -62,7 +62,7 @@ class CompetitionController extends Controller
         Competition::create($validated);
 
         return redirect()->route('competition.index')
-            ->with('success', 'Competition created.');
+            ->with('success', __('controllers.new_competition.'));
     }
 
     /**
@@ -113,7 +113,7 @@ class CompetitionController extends Controller
 
         $competition->update($validated);
         return redirect()->route('competition.show', $competition->id)
-            ->with('success', 'Competition updated.');
+            ->with('success', __('controllers.updated_competition.'));
 
     }
 
@@ -128,7 +128,7 @@ class CompetitionController extends Controller
 
         $competition->delete();
         return redirect()->route('competition.index')
-            ->with('success', 'Competition deleted.');
+            ->with('success', __('controllers.deleted_competition.'));
     }
 
     public function trashed(Request $request)
@@ -151,7 +151,7 @@ class CompetitionController extends Controller
 
         $competition->restore();
         return redirect()->route('competition.trashed')
-            ->with('success', 'Competition restored.');
+            ->with('success', __('controllers.restored_competition.'));
     }
 
     public function forceDelete(Request $request, string $id)
@@ -164,6 +164,6 @@ class CompetitionController extends Controller
 
         $competition->forceDelete();
         return redirect()->route('competition.trashed')
-            ->with('success', 'Competition permanently deleted.');
+            ->with('success', __('controllers.force_deleted_competition.'));
     }
 }

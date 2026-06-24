@@ -34,4 +34,5 @@ return [
     'confirm_permanent_delete' => 'This action is permanent. Are you sure?',
     'success' => 'Success',
     'error' => 'Error',
+    'close' => 'Close',
 ];

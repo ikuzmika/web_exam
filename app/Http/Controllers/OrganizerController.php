@@ -73,7 +73,7 @@ class OrganizerController extends Controller
         $organizer->sponsors()->sync($this->prepareSponsorSyncData($request));
 
         return redirect()->route('organizer.index')
-            ->with('success', 'Organizer created.');
+            ->with('success', __('controllers.new_organizer'));
     }
 
     /**
@@ -137,7 +137,7 @@ class OrganizerController extends Controller
 
         $organizer->sponsors()->sync($this->prepareSponsorSyncData($request));
         return redirect()->route('organizer.show', $organizer->id)
-            ->with('success', 'Organizer updated.');
+            ->with('success', __('controllers.updated_organizer'));
     }
 
     /**
@@ -151,7 +151,7 @@ class OrganizerController extends Controller
 
         $organizer->delete();
         return redirect()->route('organizer.index')
-            ->with('success', 'Organizer deleted.');
+            ->with('success', __('controllers.deleted_organizer'));
     }
 
     public function trashed(Request $request)
@@ -176,7 +176,7 @@ class OrganizerController extends Controller
 
         $organizer->restore();
         return redirect()->route('organizer.trashed')
-            ->with('success', 'Organizer restored.');
+            ->with('success', __('controllers.restored_organizer'));
     }
 
     public function forceDelete(Request $request, string $id)
@@ -189,7 +189,7 @@ class OrganizerController extends Controller
 
         $organizer->forceDelete();
         return redirect()->route('organizer.trashed')
-            ->with('success', 'Organizer permanently deleted.');
+            ->with('success', __('controllers.force_deleted_handler'));
     }
 
     private function prepareSponsorSyncData(Request $request): array

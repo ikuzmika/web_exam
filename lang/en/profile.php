@@ -4,25 +4,24 @@ return [
     'title' => 'My profile',
     'description' => 'View and update your account information.',
     'account_information' => 'Account information',
-
     'name' => 'Name',
     'email' => 'Email',
     'phone' => 'Phone',
     'role' => 'Role',
     'account_status' => 'Account status',
-
     'active' => 'Active',
     'blocked' => 'Blocked',
-
     'change_password' => 'Change password',
     'password_help' => 'Leave password fields empty if you do not want to change your password.',
     'current_password' => 'Current password',
     'new_password' => 'New password',
     'confirm_new_password' => 'Confirm new password',
-
     'save_changes' => 'Save changes',
     'back' => 'Back',
-
     'updated_successfully' => 'Profile information updated successfully.',
     'current_password_incorrect' => 'Current password is incorrect.',
+    'participant' => 'Participant',
+    'organizer' => 'Organizer',
+    'secretary' => 'Secretary',
+    'admin' => 'Admin',
 ];

@@ -83,7 +83,7 @@ class PhotoController extends Controller
         ]);
 
         return redirect()->route('photo.index')
-            ->with('success', 'Photo uploaded successfully. It will appear in the gallery after admin approval.');
+            ->with('success', __('controllers.new_photo'));
     }
 
     /**
@@ -158,7 +158,7 @@ class PhotoController extends Controller
         ]);
 
         return redirect()->route('photo.index', $photo->id)
-            ->with('success', 'Photo updated successfully. It will appear in the gallery after admin approval.');
+            ->with('success', __('controllers.updated_photo'));
     }
 
     /**
@@ -172,7 +172,7 @@ class PhotoController extends Controller
 
         $photo->delete();
         return redirect()->route('photo.index')
-            ->with('success', 'Photo deleted.');
+            ->with('success', __('controllers.deleted_photo'));
     }
 
     public function pending(Request $request)
@@ -200,7 +200,7 @@ class PhotoController extends Controller
             'is_approved' => true
         ]);
         return redirect()->route('photo.pending')
-            ->with('success', 'Photo approved successfully.');
+            ->with('success', __('controllers.approved_photo'));
     }
 
     public function reject(Request $request, Photo $photo)
@@ -212,7 +212,7 @@ class PhotoController extends Controller
         $photo->delete();
 
         return redirect()->route('photo.pending')
-            ->with('success', 'Photo rejected.');
+            ->with('success', __('controllers.rejected_photo'));
     }
 
     public function trashed(Request $request)
@@ -242,7 +242,7 @@ class PhotoController extends Controller
 
         $photo->restore();
         return redirect()->route('photo.trashed')
-            ->with('success', 'Photo restored.');
+            ->with('success', __('controllers.restored_photo'));
     }
 
     public function forceDelete(Request $request, string $id)
@@ -259,6 +259,6 @@ class PhotoController extends Controller
 
         $photo->forceDelete();
         return redirect()->route('photo.trashed')
-            ->with('success', 'Photo permanently deleted.');
+            ->with('success', __('controllers.force_deleted_photo'));
     }
 }

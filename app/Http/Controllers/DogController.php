@@ -29,7 +29,7 @@ class DogController extends Controller
      */
     public function create(Request $request)
     {
-        if ($request->user()->cannnot('create', Dog::class)) {
+        if ($request->user()->cannot('create', Dog::class)) {
             abort(403, 'Unauthorized action.');
         }
 
@@ -43,7 +43,7 @@ class DogController extends Controller
      */
     public function store(Request $request, Dog $dog)
     {
-        if ($request->user()->cannnot('create', $dog)) {
+        if ($request->user()->cannot('create', $dog)) {
             abort(403, 'Unauthorized action.');
         }
 
@@ -59,7 +59,7 @@ class DogController extends Controller
         Dog::create($validated);
 
         return redirect()->route('dog.index')
-            ->with('success', 'Dog has been created.');
+            ->with('success', __('controllers.new_dog'));
     }
 
     /**
@@ -79,7 +79,7 @@ class DogController extends Controller
     {
         $dog = Dog::findOrFail($id);
 
-        if ($request->user()->cannnot('update', $dog)) {
+        if ($request->user()->cannot('update', $dog)) {
             abort(403, 'Unauthorized action.');
         }
 
@@ -95,7 +95,7 @@ class DogController extends Controller
     {
         $dog = Dog::findOrFail($id);
 
-        if ($request->user()->cannnot('update', $dog)) {
+        if ($request->user()->cannot('update', $dog)) {
             abort(403, 'Unauthorized action.');
         }
 
@@ -110,7 +110,7 @@ class DogController extends Controller
 
         $dog->update($validated);
         return redirect()->route('dog.show', $dog->id)
-            ->with('success', 'Dog has been updated.');
+            ->with('success', __('controllers.updated_dog'));
     }
 
     /**
@@ -118,18 +118,18 @@ class DogController extends Controller
      */
     public function destroy(Request $request , Dog $dog)
     {
-        if ($request->user()->cannnot('delete', $dog)) {
+        if ($request->user()->cannot('delete', $dog)) {
             abort(403, 'Unauthorized action.');
         }
 
         $dog->delete();
         return redirect()->route('dog.index')
-            ->with('success', 'Dog has been deleted.');
+            ->with('success', __('controllers.deleted_dog'));
     }
 
     public function trashed(Request $request)
     {
-        if ($request->user()->cannnot('viewTrashed', Dog::class)) {
+        if ($request->user()->cannot('viewTrashed', Dog::class)) {
             abort(403, 'Unauthorized action.');
         }
 
@@ -140,24 +140,24 @@ class DogController extends Controller
     {
         $dog = Dog::onlyTrashed()->findOrFail($id);
 
-        if ($request->user()->cannnot('restore', Dog::class)) {
+        if ($request->user()->cannot('restore', Dog::class)) {
             abort(403, 'Unauthorized action.');
         }
 
         $dog->restore();
         return redirect()->route('dog.trashed')
-            ->with('success', 'Dog has been restored.');
+            ->with('success', __('controllers.restored_dog'));
     }
 
     public function forceDelete(Request $request , string $id)
     {
         $dog = Dog::onlyTrashed()->findOrFail($id);
 
-        if ($request->user()->cannnot('forceDelete', Dog::class)) {
+        if ($request->user()->cannot('forceDelete', Dog::class)) {
             abort(403, 'Unauthorized action.');
         }
         $dog->forceDelete();
         return redirect()->route('dog.trashed')
-            ->with('success', 'Dog permanently deleted.');
+            ->with('success', __('controllers.force_deleted_dog'));
     }
 }

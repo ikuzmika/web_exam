@@ -1,97 +1,155 @@
 <x-layout>
     <x-slot name="title">
-        Agility Latvia
+        {{ __('home.title') }}
     </x-slot>
 
-    {{-- Main welcome section --}}
     <section class="hero-section">
         <div class="hero-content">
-            <span class="hero-label">Agility competition system</span>
-
             <h1 class="hero-title">
-                Agility Latvia
+                {{ __('home.hero_title') }}
             </h1>
 
             <p class="hero-text">
-                A web system for viewing agility competitions, tracks, results,
-                rankings, participating pairs and competition photos.
+                {{ __('home.hero_text') }}
             </p>
         </div>
     </section>
 
-    {{-- Main page preview section with search and planned competitions --}}
     <section class="home-dashboard">
         <div class="row g-4">
 
-            {{-- Quick search block --}}
             <div class="col-lg-3">
                 <div class="search-panel">
-                    <h2>Quick search</h2>
+                    <h2>{{ __('home.quick_search') }}</h2>
 
-                    <form>
+                    <form id="quickSearchForm">
                         <div class="mb-3">
-                            <label for="handlerName" class="form-label">Handler name</label>
-                            <input type="text" id="handlerName" class="form-control" placeholder="Enter handler name">
+                            <label for="handlerName" class="form-label">
+                                {{ __('home.handler_name') }}
+                            </label>
+
+                            <input type="text"
+                                   id="handlerName"
+                                   class="form-control"
+                                   placeholder="{{ __('home.handler_placeholder') }}">
                         </div>
 
                         <div class="mb-3">
-                            <label for="dogName" class="form-label">Dog name</label>
-                            <input type="text" id="dogName" class="form-control" placeholder="Enter dog name">
+                            <label for="dogName" class="form-label">
+                                {{ __('home.dog_name') }}
+                            </label>
+
+                            <input type="text"
+                                   id="dogName"
+                                   class="form-control"
+                                   placeholder="{{ __('home.dog_placeholder') }}">
                         </div>
 
                         <div class="mb-3">
-                            <label for="competitionName" class="form-label">Competition name</label>
-                            <input type="text" id="competitionName" class="form-control" placeholder="Enter competition">
+                            <label for="competitionName" class="form-label">
+                                {{ __('home.competition_name') }}
+                            </label>
+
+                            <input type="text"
+                                   id="competitionName"
+                                   class="form-control"
+                                   placeholder="{{ __('home.competition_placeholder') }}">
                         </div>
 
-                        <button type="button" class="btn btn-primary w-100">
-                            Search
+                        <button type="submit" class="btn btn-primary w-100">
+                            {{ __('common.search') }}
                         </button>
                     </form>
                 </div>
             </div>
 
-            {{-- Planned competitions --}}
             <div class="col-lg-9">
                 <div class="section-heading">
-                    <h2>Planned competitions</h2>
+                    <h2>{{ __('home.planned_competitions') }}</h2>
+
                     <a href="{{ route('competition.index') }}" class="card-link">
-                        View all
+                        {{ __('home.view_all') }}
                     </a>
                 </div>
 
-                @forelse($upcomingCompetitions ?? [] as $competition)
-                    <div class="competition-preview-card">
-                        <div class="competition-preview-content">
-                            <h3>{{ $competition->title }}</h3>
+                <div id="plannedCompetitionsList">
+                    @forelse($upcomingCompetitions ?? [] as $competition)
+                        <div class="competition-preview-card home-competition-card-js"
+                             data-search="{{ translate_db($competition->title) }} {{ translate_db(optional($competition->organizer)->venue) }}">
+                            <div class="competition-preview-content">
+                                <h3>{{ translate_db($competition->title) }}</h3>
 
-                            <p>
-                                <strong>Date:</strong>
-                                {{ \Carbon\Carbon::parse($competition->date)->format('d.m.Y') }}
-                            </p>
+                                <p>
+                                    <strong>{{ __('common.date') }}:</strong>
+                                    {{ \Carbon\Carbon::parse($competition->date)->format('d.m.Y') }}
+                                </p>
 
-                            <p>
-                                <strong>Venue:</strong>
-                                {{ optional($competition->organizer)->venue ?? 'Not specified' }}
-                            </p>
+                                <p>
+                                    <strong>{{ __('competitions.venue') }}:</strong>
+                                    {{ translate_db(optional($competition->organizer)->venue) ?: __('common.not_specified') }}
+                                </p>
 
-                            <a href="{{ route('competition.show', $competition->id) }}" class="btn btn-primary btn-sm">
-                                Open
-                            </a>
+                                <a href="{{ route('competition.show', $competition->id) }}" class="btn btn-primary btn-sm">
+                                    {{ __('common.open') }}
+                                </a>
+                            </div>
+
+                            <div class="competition-image-placeholder">
+                                {{ __('competitions.competition_image') }}
+                            </div>
                         </div>
-
-                        <div class="competition-image-placeholder">
-                            Competition image
+                    @empty
+                        <div class="empty-state">
+                            <h2>{{ __('home.no_planned_competitions') }}</h2>
+                            <p>{{ __('home.no_planned_description') }}</p>
                         </div>
-                    </div>
-                @empty
-                    <div class="empty-state">
-                        <h2>No planned competitions</h2>
-                        <p>There are no upcoming competitions added yet.</p>
-                    </div>
-                @endforelse
+                    @endforelse
+                </div>
+
+                <div id="noCompetitionSearchResults" class="empty-state d-none">
+                    <h2>{{ __('home.no_matching_competitions') }}</h2>
+                    <p>{{ __('home.no_matching_competitions_description') }}</p>
+                </div>
             </div>
 
         </div>
     </section>
+
+    <script>
+        const quickSearchForm = document.getElementById('quickSearchForm');
+
+        const handlerNameInput = document.getElementById('handlerName');
+        const dogNameInput = document.getElementById('dogName');
+        const competitionNameInput = document.getElementById('competitionName');
+
+        const handlerIndexUrl = @json(route('handler.index'));
+        const dogIndexUrl = @json(route('dog.index'));
+        const competitionIndexUrl = @json(route('competition.index'));
+
+        function redirectWithSearch(url, searchText) {
+            window.location.href = url + '?search=' + encodeURIComponent(searchText);
+        }
+
+        quickSearchForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const handlerName = handlerNameInput.value.trim();
+            const dogName = dogNameInput.value.trim();
+            const competitionName = competitionNameInput.value.trim();
+
+            if (handlerName !== '') {
+                redirectWithSearch(handlerIndexUrl, handlerName);
+                return;
+            }
+
+            if (dogName !== '') {
+                redirectWithSearch(dogIndexUrl, dogName);
+                return;
+            }
+
+            if (competitionName !== '') {
+                redirectWithSearch(competitionIndexUrl, competitionName);
+            }
+        });
+    </script>
 </x-layout>

@@ -1,19 +1,18 @@
 <x-layout>
     <x-slot name="title">
-        Pairs
+        {{ __('pairs.title') }}
     </x-slot>
 
-    {{-- Pairs page header and search --}}
     <section class="competitions-top">
         <div class="page-header competitions-title-card">
             <div>
-                <h1>Agility pairs</h1>
-                <p>View agility pairs, handlers, dogs and size categories.</p>
+                <h1>{{ __('pairs.agility_pairs') }}</h1>
+                <p>{{ __('pairs.index_description') }}</p>
             </div>
 
             @auth
                 <a href="{{ route('pair.create') }}" class="btn btn-primary">
-                    Add pair
+                    {{ __('pairs.add_pair') }}
                 </a>
             @endauth
         </div>
@@ -21,20 +20,19 @@
         <div class="filter-bar competitions-search-card">
             <div class="filter-field">
                 <label for="pairSearch" class="form-label">
-                    Search pair
+                    {{ __('pairs.search_pair') }}
                 </label>
 
                 <input
                     type="text"
                     id="pairSearch"
                     class="form-control"
-                    placeholder="Enter handler or dog name"
+                    placeholder="{{ __('pairs.search_placeholder') }}"
                 >
             </div>
         </div>
     </section>
 
-    {{-- Pair list --}}
     <section class="pairs-grid">
         @forelse($pairs as $pair)
             <article
@@ -46,10 +44,10 @@
                 "
             >
                 <h2>
-                    {{ optional(optional($pair->dog)->handler)->name ?? 'Unknown' }}
+                    {{ optional(optional($pair->dog)->handler)->name ?? __('common.unknown') }}
                     {{ optional(optional($pair->dog)->handler)->surname ?? '' }}
                     &
-                    {{ optional($pair->dog)->name ?? 'Unknown dog' }}
+                    {{ optional($pair->dog)->name ?? __('pairs.unknown_dog') }}
                 </h2>
 
                 <button
@@ -58,7 +56,7 @@
                     data-bs-toggle="modal"
                     data-bs-target="#pairModal{{ $pair->id }}"
                 >
-                    Details
+                    {{ __('common.view_details') }}
                 </button>
             </article>
 
@@ -67,10 +65,10 @@
                     <div class="modal-content pair-modal">
                         <div class="modal-header">
                             <h5 class="modal-title">
-                                {{ optional(optional($pair->dog)->handler)->name ?? 'Unknown' }}
+                                {{ optional(optional($pair->dog)->handler)->name ?? __('common.unknown') }}
                                 {{ optional(optional($pair->dog)->handler)->surname ?? '' }}
                                 &
-                                {{ optional($pair->dog)->name ?? 'Unknown dog' }}
+                                {{ optional($pair->dog)->name ?? __('pairs.unknown_dog') }}
                             </h5>
 
                             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
@@ -78,31 +76,35 @@
 
                         <div class="modal-body">
                             <p>
-                                <strong>Handler:</strong>
-                                {{ optional(optional($pair->dog)->handler)->name ?? 'Not specified' }}
+                                <strong>{{ __('pairs.handler') }}:</strong>
+                                {{ optional(optional($pair->dog)->handler)->name ?? __('common.not_specified') }}
                                 {{ optional(optional($pair->dog)->handler)->surname ?? '' }}
                             </p>
 
                             <p>
-                                <strong>Dog:</strong>
-                                {{ optional($pair->dog)->name ?? 'Not specified' }}
+                                <strong>{{ __('pairs.dog') }}:</strong>
+                                {{ optional($pair->dog)->name ?? __('common.not_specified') }}
                             </p>
 
                             <p>
-                                <strong>Dog size:</strong>
-                                {{ optional(optional($pair->dog)->sizeCategory)->name ?? 'Not specified' }}
+                                <strong>{{ __('pairs.dog_size') }}:</strong>
+                                @if (optional(optional($pair->dog)->sizeCategory)->name)
+                                    {{ translate_db(optional(optional($pair->dog)->sizeCategory)->name) }}
+                                @else
+                                    {{ __('common.not_specified') }}
+                                @endif
                             </p>
 
                             @if($pair->active_from)
                                 <p>
-                                    <strong>Active from:</strong>
+                                    <strong>{{ __('pairs.active_from') }}:</strong>
                                     {{ \Carbon\Carbon::parse($pair->active_from)->format('d.m.Y') }}
                                 </p>
                             @endif
 
                             @if($pair->active_until)
                                 <p>
-                                    <strong>Active until:</strong>
+                                    <strong>{{ __('pairs.active_until') }}:</strong>
                                     {{ \Carbon\Carbon::parse($pair->active_until)->format('d.m.Y') }}
                                 </p>
                             @endif
@@ -110,7 +112,7 @@
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">
-                                Close
+                                {{ __('common.close') }}
                             </button>
                         </div>
                     </div>
@@ -118,8 +120,8 @@
             </div>
         @empty
             <div class="empty-state">
-                <h2>No pairs found</h2>
-                <p>There are no agility pairs added yet.</p>
+                <h2>{{ __('pairs.no_pairs') }}</h2>
+                <p>{{ __('pairs.no_pairs_description') }}</p>
             </div>
         @endforelse
     </section>
@@ -132,10 +134,10 @@
             const searchText = this.value.toLowerCase();
 
             pairCards.forEach(function (card) {
-                const cardText = card.dataset.search.toLowerCase();     //ņemu tekstu no meklēšanas
+                const cardText = card.dataset.search.toLowerCase();
 
                 if (cardText.includes(searchText)) {
-                    card.style.display = '';    //ja pāris der, tad to parādam
+                    card.style.display = '';
                 } else {
                     card.style.display = 'none';
                 }

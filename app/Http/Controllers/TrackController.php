@@ -58,7 +58,7 @@ class TrackController extends Controller
 
         Track::create($validated);
         return redirect()->route('track.index')
-            ->with('success', 'Track created.');
+            ->with('success', __('controllers.new_track'));
     }
 
     /**
@@ -115,7 +115,7 @@ class TrackController extends Controller
 
         $track->update($validated);
         return redirect()->route('track.show', $track->id)
-            ->with('success', 'Track updated.');
+            ->with('success', __('controllers.updated_track'));
     }
 
     /**
@@ -129,7 +129,7 @@ class TrackController extends Controller
 
         $track->delete();
         return redirect()->route('track.index')
-            ->with('success', 'Track deleted.');
+            ->with('success', __('controllers.deleted_track'));
     }
 
     public function trashed(Request $request)
@@ -150,7 +150,7 @@ class TrackController extends Controller
         }
         $track->restore();
         return redirect()->route('track.trashed')
-            ->with('success', 'Track restored.');
+            ->with('success', __('controllers.restored_track'));
     }
 
     public function forceDelete(Request $request, string $id)
@@ -163,6 +163,6 @@ class TrackController extends Controller
 
         $track->forceDelete();
         return redirect()->route('track.trashed')
-            ->with('success', 'Track permanently deleted.');
+            ->with('success', __('controllers.force_deleted_track'));
     }
 }

@@ -1,21 +1,21 @@
 <x-layout>
     <x-slot name="title">
-        Competitions
+        {{ __('competitions.title') }}
     </x-slot>
 
     <section class="competitions-top">
         <div class="page-header competitions-title-card">
             <div>
-                <h1>Agility competitions</h1>
+                <h1>{{ __('competitions.agility_competitions') }}</h1>
 
                 <p>
-                    View agility competitions, dates and venues.
+                    {{ __('competitions.index_description') }}
                 </p>
             </div>
 
             @auth
                 <a href="{{ route('competition.create') }}" class="btn btn-primary">
-                    Add competition
+                    {{ __('competitions.add_competition') }}
                 </a>
             @endauth
         </div>
@@ -23,14 +23,15 @@
         <div class="filter-bar competitions-search-card">
             <div class="filter-field">
                 <label for="competitionSearch" class="form-label">
-                    Search competition
+                    {{ __('competitions.search_competition') }}
                 </label>
 
                 <input
                     type="text"
                     id="competitionSearch"
                     class="form-control"
-                    placeholder="Enter competition name or venue"
+                    value="{{ request('search') }}"
+                    placeholder="{{ __('competitions.search_placeholder') }}"
                 >
             </div>
         </div>
@@ -40,42 +41,48 @@
         @forelse($competitions as $competition)
             <article
                 class="competition-preview-card competition-card-js"
-                data-search="{{ translate_db($competition->title) }} {{ optional($competition->organizer)->venue }}"
+                data-search="
+                    {{ $competition->title }}
+                    {{ translate_db($competition->title) }}
+                    {{ optional($competition->organizer)->venue }}
+                    {{ translate_db(optional($competition->organizer)->venue) }}
+                "
             >
                 <div class="competition-preview-content">
                     <h3>{{ translate_db($competition->title) }}</h3>
 
                     <p>
-                        <strong>Date:</strong>
+                        <strong>{{ __('competitions.date') }}:</strong>
                         {{ \Carbon\Carbon::parse($competition->date)->format('d.m.Y') }}
                     </p>
 
                     <p>
-                        <strong>Venue:</strong>
-                        {{ optional($competition->organizer)->venue ?? 'Not specified' }}
+                        <strong>{{ __('competitions.venue') }}:</strong>
+                        {{ optional($competition->organizer)->venue ?: __('common.not_specified') }}
                     </p>
 
                     <div class="competition-preview-actions">
                         <a href="{{ route('competition.show', $competition->id) }}" class="btn btn-primary btn-sm">
-                            Open
+                            {{ __('common.view_details') }}
                         </a>
 
                         @auth
-                            <a href="{{ route('competition.edit', $competition->id) }}" class="btn btn-outline-primary btn-sm">
-                                Edit
+                            <a href="{{ route('competition.edit', $competition->id) }}"
+                               class="btn btn-outline-primary btn-sm">
+                                {{ __('common.edit') }}
                             </a>
                         @endauth
                     </div>
                 </div>
 
                 <div class="competition-image-placeholder">
-                    Competition image
+                    {{ __('competitions.competition_image') }}
                 </div>
             </article>
         @empty
             <div class="empty-state">
-                <h2>No competitions found</h2>
-                <p>There are no competitions added yet.</p>
+                <h2>{{ __('competitions.no_competitions') }}</h2>
+                <p>{{ __('competitions.no_competitions_description') }}</p>
             </div>
         @endforelse
     </section>
@@ -84,18 +91,22 @@
         const competitionSearch = document.getElementById('competitionSearch');
         const competitionCards = document.querySelectorAll('.competition-card-js');
 
-        competitionSearch.addEventListener('input', function () {
-            const searchText = this.value.toLowerCase();
+        function filterCompetitions() {
+            const searchText = competitionSearch.value.toLowerCase();
 
             competitionCards.forEach(function (card) {
                 const cardText = card.dataset.search.toLowerCase();
 
-                if (cardText.includes(searchText)) {
+                if (searchText === '' || cardText.includes(searchText)) {
                     card.style.display = 'flex';
                 } else {
                     card.style.display = 'none';
                 }
             });
-        });
+        }
+
+        competitionSearch.addEventListener('input', filterCompetitions);
+
+        filterCompetitions();
     </script>
 </x-layout>

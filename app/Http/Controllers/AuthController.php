@@ -48,7 +48,7 @@ class AuthController extends Controller
         }
 
         throw ValidationException::withMessages([
-            'credentials' => 'The provided credentials are incorrect.'
+            'credentials' => __('auth.invalid_credentials')
         ]);
     }
 

@@ -45,7 +45,7 @@ class AdminController extends Controller
 
         $user->update($validated);
         return redirect()->route('admin.users.index')
-            ->with('success', 'User information updated');
+            ->with('success', __('controllers.user_info_update'));
     }
     /**
      * Show the form for creating a new resource.
@@ -61,7 +61,7 @@ class AdminController extends Controller
         $user->update(['role' => $validated['role']]);
 
         return redirect()->route('admin.users.index')
-            ->with('success', 'User role updated.');
+            ->with('success', __('controllers.user_role_update'));
     }
 
     /**
@@ -73,12 +73,12 @@ class AdminController extends Controller
 
         if ($user->id === auth()->id()) {
             return redirect()->route('admin.users.index')
-                ->withErrors(['user' => 'You cannot block yourself.']);
+                ->withErrors(['user' => __('controllers.user_admin')]);
         }
 
         $user->update(['is_blocked' => !$user->is_blocked]);
 
         return redirect()->route('admin.users.index')
-            ->with('success', 'User block status was changed successfully.');
+            ->with('success', __('controllers.user_block'));
     }
 }

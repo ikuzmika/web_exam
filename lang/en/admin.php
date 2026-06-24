@@ -19,6 +19,7 @@ return [
 
     'participant' => 'Participant',
     'organizer' => 'Organizer',
+    'secretary' => 'Secretary',
     'admin' => 'Admin',
 
     'block' => 'Block',

@@ -42,7 +42,7 @@ class ProfileController extends Controller
 
         if ($request->filled('password')) {
             if (Hash::check($request->current_password, $user->password)) {
-                return back()->withErrors(['current_password' => 'Current password is incorrect.'])
+                return back()->withErrors(['current_password' => __('controllers.change_password_error')])
                     ->withInput();
             }
 
@@ -53,6 +53,6 @@ class ProfileController extends Controller
 
         return redirect()
             ->route('profile.edit')
-            ->with('success', 'Profile information updated.');
+            ->with('success', __('controllers.updated_profile'));
     }
 }

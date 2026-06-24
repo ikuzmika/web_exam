@@ -1,21 +1,20 @@
 <x-layout>
     <x-slot name="title">
-        Pending photos
+        {{ __('photos.pending_photos') }}
     </x-slot>
-
     <section class="page-header">
         <div>
-            <h1>Pending photos</h1>
-            <p>Photos waiting for admin approval.</p>
+            <h1>{{ __('photos.pending_photos') }}</h1>
+            <p>{{ __('photos.pending_description') }}</p>
         </div>
 
         <div class="d-flex gap-2">
             <a href="{{ route('photo.index') }}" class="btn btn-outline-primary">
-                Back to gallery
+                {{ __('photos.back_to_gallery') }}
             </a>
 
             <a href="{{ route('photo.trashed') }}" class="btn btn-outline-danger">
-                Deleted photos
+                {{ __('photos.deleted_photos') }}
             </a>
         </div>
     </section>
@@ -27,57 +26,62 @@
 
                     <div class="photo-show-image-wrapper">
                         <img src="{{ asset('storage/' . $photo->file_path) }}"
-                             alt="{{ $photo->title ?? 'Photo' }}"
+                             alt="{{ translate_db($photo->title) ?: __('photos.photo') }}"
                              class="photo-show-image">
                     </div>
 
                     <h2 class="mt-3">
-                        {{ $photo->title ?? 'Untitled photo' }}
+                        {{ translate_db($photo->title) ?: __('photos.untitled_photo') }}
                     </h2>
 
                     <p>
-                        <strong>Status:</strong>
+                        <strong>{{ __('photos.status') }}:</strong>
                         <span class="badge bg-warning text-dark">
-                            Waiting for approval
-                        </span>
+                        {{ __('photos.waiting_for_approval') }}
+                    </span>
                     </p>
 
                     <p>
-                        <strong>Uploaded by:</strong>
-                        {{ $photo->uploadedBy?->name ?? 'Unknown user' }}
+                        <strong>{{ __('photos.uploaded_by') }}:</strong>
+                        {{ $photo->uploadedBy?->name ?? __('photos.unknown_user') }}
                     </p>
 
                     <p>
-                        <strong>Uploaded at:</strong>
+                        <strong>{{ __('photos.uploaded_at') }}:</strong>
                         {{ $photo->created_at?->format('d.m.Y H:i') }}
                     </p>
 
                     @if ($photo->competition)
                         <p>
-                            <strong>Competition:</strong>
-                            {{ $photo->competition->title }}
+                            <strong>{{ __('photos.competition') }}:</strong>
+                            {{ translate_db($photo->competition->title) }}
                         </p>
                     @endif
 
                     @if ($photo->track)
                         <p>
-                            <strong>Type:</strong>
-                            Track scheme
+                            <strong>{{ __('photos.type') }}:</strong>
+                            {{ __('photos.track_scheme') }}
                         </p>
 
                         <p>
-                            <strong>Track:</strong>
-                            {{ $photo->track->competition?->title ?? 'No competition' }}
+                            <strong>{{ __('photos.track') }}:</strong>
+                            {{ translate_db($photo->track->competition?->title) ?: __('competitions.no_competition') }}
                             —
-                            {{ $photo->track->difficultyLevel?->name ?? 'No level' }}
+                            {{ translate_db($photo->track->difficultyLevel?->name) ?: __('tracks.no_level') }}
                             —
-                            Track #{{ $photo->track->id }}
+                            {{ __('tracks.track_number', ['id' => $photo->track->id]) }}
+                        </p>
+                    @else
+                        <p>
+                            <strong>{{ __('photos.type') }}:</strong>
+                            {{ __('photos.gallery_photo') }}
                         </p>
                     @endif
 
                     @if ($photo->pair)
                         <p>
-                            <strong>Pair:</strong>
+                            <strong>{{ __('photos.pair') }}:</strong>
 
                             {{ $photo->pair->dog?->handler?->name }}
                             {{ $photo->pair->dog?->handler?->surname }}
@@ -92,7 +96,7 @@
 
                     <div class="d-flex gap-2 mt-3">
                         <a href="{{ route('photo.show', $photo) }}" class="btn btn-outline-primary">
-                            View details
+                            {{ __('common.view_details') }}
                         </a>
 
                         <form method="POST" action="{{ route('photo.approve', $photo) }}">
@@ -100,7 +104,7 @@
                             @method('PATCH')
 
                             <button type="submit" class="btn btn-success">
-                                Approve
+                                {{ __('photos.approve') }}
                             </button>
                         </form>
 
@@ -110,8 +114,8 @@
 
                             <button type="submit"
                                     class="btn btn-danger"
-                                    onclick="return confirm('Reject this photo and move it to deleted photos?')">
-                                Reject
+                                    onclick="return confirm('{{ __('photos.confirm_reject_photo') }}')">
+                                {{ __('photos.reject') }}
                             </button>
                         </form>
                     </div>
@@ -120,8 +124,8 @@
             </article>
         @empty
             <div class="empty-state">
-                <h2>No pending photos</h2>
-                <p>There are no photos waiting for approval.</p>
+                <h2>{{ __('photos.no_pending_photos') }}</h2>
+                <p>{{ __('photos.no_pending_photos_description') }}</p>
             </div>
         @endforelse
     </section>

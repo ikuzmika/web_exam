@@ -69,7 +69,7 @@ class SponsorController extends Controller
         $sponsor->organizers()->sync($this->prepareOrganizerSyncData($request));
 
         return redirect()->route('sponsor.show', $sponsor->id)
-            ->with('success', 'Sponsor created.');
+            ->with('success', __('controllers.new_sponsor'));
     }
 
     /**
@@ -129,7 +129,7 @@ class SponsorController extends Controller
         $sponsor->organizers()->sync($this->prepareOrganizerSyncData($request));
 
         return redirect()->route('sponsor.show', $sponsor->id)
-            ->with('success', 'Sponsor updated.');
+            ->with('success', __('controllers.updated_sponsor'));
 
     }
 
@@ -144,7 +144,7 @@ class SponsorController extends Controller
 
         $sponsor->delete();
         return redirect()->route('sponsor.index')
-            ->with('success', 'Sponsor deleted.');
+            ->with('success', __('controllers.deleted_sponsor'));
     }
 
     public function trashed(Request $request)
@@ -169,7 +169,7 @@ class SponsorController extends Controller
 
         $sponsor->restore();
         return redirect()->route('sponsor.trashed')
-            ->with('success', 'Sponsor restored.');
+            ->with('success', __('controllers.restored_sponsor'));
     }
 
     public function forceDelete(Request $request, string $id)
@@ -182,7 +182,7 @@ class SponsorController extends Controller
 
         $sponsor->forceDelete();
         return redirect()->route('sponsor.trashed')
-            ->with('success', 'Sponsor permanently deleted.');
+            ->with('success', __('controllers.force_deleted_sponsor'));
     }
 
     private function prepareOrganizerSyncData(Request $request): array

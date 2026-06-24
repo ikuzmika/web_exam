@@ -6,7 +6,6 @@ return [
     'show_title' => 'Pair details',
     'create_title' => 'Create pair',
     'edit_title' => 'Edit pair',
-
     'pair' => 'Pair',
     'handler' => 'Handler',
     'dog' => 'Dog',
@@ -17,12 +16,21 @@ return [
     'status' => 'Status',
     'active' => 'Active',
     'inactive' => 'Inactive',
-
     'results' => 'Results',
     'photos' => 'Photos',
     'no_pairs' => 'No pairs found.',
     'back_to_pairs' => 'Back to pairs',
-
     'create_button' => 'Create pair',
     'update_button' => 'Update pair',
+    'agility_pairs' => 'Agility pairs',
+    'index_description' => 'View agility pairs, handlers, dogs and size categories.',
+    'add_pair' => 'Add pair',
+    'search_pair' => 'Search pair',
+    'search_placeholder' => 'Enter handler or dog name',
+    'dog_size' => 'Dog size',
+    'active_from' => 'Active from',
+    'active_until' => 'Active until',
+    'unknown_dog' => 'Unknown dog',
+    'no_pairs_description' => 'There are no pairs added yet.',
+    'choose_pair' => 'Choose pair',
 ];
