@@ -4,7 +4,7 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\Http;
 
-class DeeplTranslationService
+class DeepLTranslationService
 {
     public function translate(string $text, string $targetLocale): string
     {
