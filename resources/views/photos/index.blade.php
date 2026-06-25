@@ -111,7 +111,38 @@
         @endforelse
     </section>
 
-    <div class="mt-3">
-        {{ $photos->links('pagination::bootstrap-5') }}
-    </div>
+    @if($photos->hasPages())
+        <div class="mt-4 d-flex justify-content-between align-items-center">
+            <div>
+                @if($photos->onFirstPage())
+                    <span class="btn btn-outline-primary disabled">
+                    {{ __('pagination.previous') }}
+                </span>
+                @else
+                    <a href="{{ $photos->previousPageUrl() }}" class="btn btn-outline-primary">
+                        {{ __('pagination.previous') }}
+                    </a>
+                @endif
+            </div>
+
+            <div class="text-muted">
+                {{ __('pagination.page_info', [
+                    'current' => $photos->currentPage(),
+                    'last' => $photos->lastPage(),
+                ]) }}
+            </div>
+
+            <div>
+                @if($photos->hasMorePages())
+                    <a href="{{ $photos->nextPageUrl() }}" class="btn btn-outline-primary">
+                        {{ __('pagination.next') }}
+                    </a>
+                @else
+                    <span class="btn btn-outline-primary disabled">
+                    {{ __('pagination.next') }}
+                </span>
+                @endif
+            </div>
+        </div>
+    @endif
 </x-layout>
