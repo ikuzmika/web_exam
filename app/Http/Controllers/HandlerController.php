@@ -104,7 +104,7 @@ class HandlerController extends Controller
         $validated['cerated_by_user_id'] = Auth::id();
 
         $handler->update($validated);
-        return redirect()->route('handler.show', $handler->id)
+        return redirect()->route('handler.index')
             ->with('success', __('controllers.updated_handler'));
     }
 

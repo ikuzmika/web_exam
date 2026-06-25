@@ -10,11 +10,19 @@
                 <p>{{ __('pairs.index_description') }}</p>
             </div>
 
-            @can('create', App\Models\Pair::class)
-                <a href="{{ route('pair.create') }}" class="btn btn-primary">
-                    {{ __('pairs.add_pair') }}
-                </a>
-            @endcan
+            <div class="d-flex gap-2">
+                @can('create', App\Models\Pair::class)
+                    <a href="{{ route('pair.create') }}" class="btn btn-primary">
+                        {{ __('pairs.add_pair') }}
+                    </a>
+                @endcan
+
+                @can('viewTrashed', App\Models\Pair::class)
+                    <a href="{{ route('pair.trashed') }}" class="btn btn-outline-danger">
+                        {{ __('pairs.deleted_pairs') }}
+                    </a>
+                @endcan
+            </div>
         </div>
 
         <div class="filter-bar competitions-search-card">
@@ -116,10 +124,19 @@
                                     {{ __('common.edit') }}
                                 </a>
                             @endcan
-                            
-                            <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">
-                                {{ __('common.close') }}
-                            </button>
+
+                            @can('delete', $pair)
+                                <form method="POST"
+                                      action="{{ route('pair.destroy', $pair->id) }}"
+                                      onsubmit="return confirm('{{ __('common.confirm_delete') }}')">
+                                    @csrf
+                                    @method('DELETE')
+
+                                    <button type="submit" class="btn btn-danger">
+                                        {{ __('common.delete') }}
+                                    </button>
+                                </form>
+                            @endcan
                         </div>
                     </div>
                 </div>

@@ -38,7 +38,7 @@ class Track extends Model
 
     public function schemePhotos()
     {
-        return $this->hasMany(Photo::class, 'track_id');
+        return $this->hasMany(Photo::class, 'track_id')->latest();
     }
 
 }

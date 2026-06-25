@@ -54,12 +54,32 @@ class ResultController extends Controller
             'pair_id' => 'required|integer|exists:pairs,id',
             'track_id' => 'required|integer|exists:tracks,id',
             'result_status_id' => 'required|integer|exists:result_statuses,id',
-            'points' => 'required|integer'
+            'points' => 'nullable|integer|min:0|max:100',
         ]);
 
-        $validated['recorded_by_user_id'] = Auth::id();
+        $status = ResultStatus::findOrFail($validated['result_status_id']);
 
-        Result::create($validated);
+        $points = $validated['points'] ?? null;
+
+        if ($status->name === 'NS') {
+            $points = 0;
+        }
+
+        if ($status->name !== 'NS' && $points === null) {
+            return back()
+                ->withErrors([
+                    'points' => __('results.points_required'),
+                ])
+                ->withInput();
+        }
+
+        Result::create([
+            'recorded_by_user_id' => Auth::id(),
+            'pair_id' => $validated['pair_id'],
+            'track_id' => $validated['track_id'],
+            'result_status_id' => $validated['result_status_id'],
+            'points' => $points,
+        ]);
 
         return redirect()->route('result.index')
             ->with('success', __('controllers.new_result'));
@@ -107,12 +127,34 @@ class ResultController extends Controller
             'pair_id' => 'required|integer|exists:pairs,id',
             'track_id' => 'required|integer|exists:tracks,id',
             'result_status_id' => 'required|integer|exists:result_statuses,id',
-            'points' => 'required|integer'
+            'points' => 'nullable|integer|min:0|max:100'
         ]);
 
-        $validated['recorded_by_user_id'] = Auth::id();
-        $result->update($validated);
-        return redirect()->route('result.show', $result->id)
+        $status = ResultStatus::findOrFail($validated['result_status_id']);
+
+        $points = $validated['points'] ?? null;
+
+        if ($status->name === 'NS') {
+            $points = 0;
+        }
+
+        if ($status->name !== 'NS' && $points === null) {
+            return back()
+                ->withErrors([
+                    'points' => __('results.points_required'),
+                ])
+                ->withInput();
+        }
+
+        $result->update([
+            'recorded_by_user_id' => Auth::id(),
+            'pair_id' => $validated['pair_id'],
+            'track_id' => $validated['track_id'],
+            'result_status_id' => $validated['result_status_id'],
+            'points' => $points,
+        ]);
+
+        return redirect()->route('result.index')
             ->with('success', __('controllers.updated_result'));
     }
 

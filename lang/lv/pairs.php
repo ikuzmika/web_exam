@@ -33,4 +33,9 @@ return [
     'unknown_dog' => 'Nezināms suns',
     'no_pairs_description' => 'Vēl nav pievienotu pāru.',
     'choose_pair' => 'Izvēlies pāri',
+    'trashed_title' => 'Dzēstie pāri',
+    'trashed_description' => 'Atjauno pārus vai dzēs tos neatgriezeniski.',
+    'no_deleted_pairs' => 'Dzēstu pāru nav',
+    'no_deleted_pairs_description' => 'Nav neviena dzēsta pāra.',
+    'deleted_pairs' => 'Dzēstie pāri'
 ];

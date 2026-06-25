@@ -13,11 +13,19 @@
                 </p>
             </div>
 
-            @can('create', App\Models\Dog::class)
-                <a href="{{ route('dog.create') }}" class="btn btn-primary">
-                    {{ __('dogs.add_dog') }}
-                </a>
-            @endcan
+            <div class="d-flex gap-2">
+                @can('create', App\Models\Dog::class)
+                    <a href="{{ route('dog.create') }}" class="btn btn-primary">
+                        {{ __('dogs.add_dog') }}
+                    </a>
+                @endcan
+
+                @can('viewTrashed', App\Models\Dog::class)
+                    <a href="{{ route('dog.trashed') }}" class="btn btn-outline-danger">
+                        {{ __('dogs.deleted_dogs') }}
+                    </a>
+                @endcan
+            </div>
         </div>
 
         <div class="filter-bar competitions-search-card">
@@ -104,7 +112,20 @@
                                 </a>
                             @endcan
 
-                            <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">
+                            @can('delete', $dog)
+                                <form method="POST"
+                                      action="{{ route('dog.destroy', $dog->id) }}"
+                                      onsubmit="return confirm('{{ __('common.confirm_delete') }}')">
+                                    @csrf
+                                    @method('DELETE')
+
+                                    <button type="submit" class="btn btn-outline-primary">
+                                        {{ __('common.delete') }}
+                                    </button>
+                                </form>
+                            @endcan
+
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                                 {{ __('common.close') }}
                             </button>
                         </div>

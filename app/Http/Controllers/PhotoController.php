@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Competition;
 use App\Models\Pair;
 use App\Models\Photo;
-use App\Models\Track;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -47,10 +46,8 @@ class PhotoController extends Controller
 
         $competitions = Competition::orderByDesc('date')->get();
         $pairs = Pair::with(['dog.handler'])->orderBy('id')->get();
-        $tracks = Track::with(['competition', 'difficultyLevel'])
-            ->orderBy('competition_id')->orderBy('id')->get();
 
-        return view('photos.create', compact('competitions', 'pairs', 'tracks'));
+        return view('photos.create', compact('competitions', 'pairs'));
     }
 
     /**
@@ -65,7 +62,6 @@ class PhotoController extends Controller
         $validated = $request->validate([
             'competition_id' => 'nullable|integer|exists:competitions,id',
             'pair_id' => 'nullable|integer|exists:pairs,id',
-            'track_id' => 'nullable|integer|exists:tracks,id',
             'title' => 'nullable|string|max:200',
             'photo' => 'required|file|mimes:jpg,jpeg,png,webp|max:4096',
         ]);
@@ -76,7 +72,7 @@ class PhotoController extends Controller
             'uploaded_by_user_id' => Auth::id(),
             'competition_id' => $validated['competition_id'] ?? null,
             'pair_id' => $validated['pair_id'] ?? null,
-            'track_id' => $validated['track_id'] ?? null,
+            'track_id' => null,
             'title' => $validated['title'] ?? null,
             'file_path' => $filePath,
             'is_approved' => $request->user()->isAdmin()
@@ -91,10 +87,6 @@ class PhotoController extends Controller
      */
     public function show(Photo $photo)
     {
-        if ($photo->track_id) {
-            return redirect()->route('track.show', $photo->track_id);
-        }
-
         $photo->load([
             'uploadedBy',
             'competition',
@@ -116,9 +108,8 @@ class PhotoController extends Controller
         $competitions = Competition::orderByDesc('date')->get();
         $pairs = Pair::with('dog.handler')
             ->orderBy('id')->get();
-        $tracks = Track::with(['competition', 'difficultyLevel'])
-            ->orderBy('competition_id')->orderBy('id')->get();
-        return view('photos.edit', compact('competitions', 'pairs', 'photo', 'tracks'));
+
+        return view('photos.edit', compact('competitions', 'pairs', 'photo'));
     }
 
     /**
@@ -133,7 +124,6 @@ class PhotoController extends Controller
         $validated = $request->validate([
             'competition_id' => 'nullable|integer|exists:competitions,id',
             'pair_id' => 'nullable|integer|exists:pairs,id',
-            'track_id' => 'nullable|integer|exists:tracks,id',
             'title' => 'nullable|string|max:200',
             'photo' => 'file|mimes:jpg,jpeg,png,webp|max:4096',
         ]);
@@ -151,7 +141,7 @@ class PhotoController extends Controller
         $photo->update([
             'competition_id' => $validated['competition_id'] ?? null,
             'pair_id' => $validated['pair_id'] ?? null,
-            'track_id' => $validated['track_id'] ?? null,
+            'track_id' =>  null,
             'title' => $validated['title'] ?? null,
             'file_path' => $filePath,
             'is_approved' => $request->user()->isAdmin()

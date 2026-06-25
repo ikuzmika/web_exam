@@ -48,9 +48,9 @@ class DogPolicy
         return (($user->isSecretary()) && ($user->id === $dog->created_by_user_id));
     }
 
-    public function viewTrashed(User $user, Dog $dog): bool
+    public function viewTrashed(User $user): bool
     {
-        return (($user->isSecretary()) && ($user->id === $dog->created_by_user_id));
+        return $user->isSecretary();
     }
 
     /**

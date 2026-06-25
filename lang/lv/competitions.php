@@ -2,7 +2,7 @@
 
 return [
     'title' => 'Sacensības',
-    'page_description' => 'Apskati agility sacensības un to informāciju.',
+    'page_description' => 'Apskati adžiliti sacensības un to informāciju.',
     'create_title' => 'Izveidot sacensības',
     'edit_title' => 'Labot sacensības',
     'show_title' => 'Sacensību informācija',
@@ -37,4 +37,9 @@ return [
     'venue' => 'Norises vieta',
     'competition_image' => 'Sacensību attēls',
     'no_competitions_description' => 'Vēl nav pievienotu sacensību.',
+    'trashed_title' => 'Dzēstās sacensības',
+    'trashed_description' => 'Atjauno sacensības vai dzēs tās neatgriezeniski.',
+    'no_deleted_competitions' => 'Dzēstu sacensību nav',
+    'no_deleted_competitions_description' => 'Nav nevienu dzēstu sacensību.',
+    'deleted_competitions' => 'Dzēstās sacensības'
 ];

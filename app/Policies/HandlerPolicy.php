@@ -48,9 +48,9 @@ class HandlerPolicy
         return (($user->isSecretary()) && ($user->id === $handler->created_by_user_id));
     }
 
-    public function viewTrashed(User $user, Handler $handler): bool
+    public function viewTrashed(User $user): bool
     {
-        return (($user->isSecretary()) && ($user->id === $handler->created_by_user_id));
+        return $user->isSecretary();
     }
 
     /**

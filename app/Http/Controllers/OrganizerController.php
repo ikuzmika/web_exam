@@ -7,6 +7,7 @@ use App\Models\Sponsor;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class OrganizerController extends Controller
 {
@@ -15,9 +16,6 @@ class OrganizerController extends Controller
         $this->middleware('auth')->except(['index', 'show']);
     }
 
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $organizers = Organizer::with('sponsors')->get();
@@ -25,9 +23,6 @@ class OrganizerController extends Controller
         return view('organizers.index', compact('organizers'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create(Request $request)
     {
         if ($request->user()->cannot('create', Organizer::class)) {
@@ -39,9 +34,6 @@ class OrganizerController extends Controller
         return view('organizers.create', compact('sponsors'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         if ($request->user()->cannot('create', Organizer::class)) {
@@ -49,16 +41,21 @@ class OrganizerController extends Controller
         }
 
         $validated = $request->validate([
-            'name' => 'required|max:60',
-            'contact_person' => 'string|max:150',
-            'email' => 'unique:organizers|email|max:100',
-            'contact_number' => 'max:20',
-            'venue' => 'required|max:255',
+            'name' => 'required|string|max:60',
+            'contact_person' => 'nullable|string|max:150',
+            'email' => [
+                'nullable',
+                'email',
+                'max:100',
+                Rule::unique('organizers', 'email'),
+            ],
+            'contact_number' => 'nullable|string|max:20',
+            'venue' => 'required|string|max:255',
 
             'sponsors' => 'nullable|array',
             'sponsors.*.selected' => 'nullable|boolean',
-            'sponsors.*.contribution_type' => 'nullable|max:100',
-            'sponsors.*.amount' => 'nullable|numeric|min:0',
+            'sponsors.*.contribution_type' => 'nullable|string|max:100',
+            'sponsors.*.contribution_amount' => 'nullable|numeric|min:0',
         ]);
 
         $organizer = Organizer::create([
@@ -72,13 +69,11 @@ class OrganizerController extends Controller
 
         $organizer->sponsors()->sync($this->prepareSponsorSyncData($request));
 
-        return redirect()->route('organizer.index')
+        return redirect()
+            ->route('organizer.index')
             ->with('success', __('controllers.new_organizer'));
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         $organizer = Organizer::with('sponsors')->findOrFail($id);
@@ -86,9 +81,6 @@ class OrganizerController extends Controller
         return view('organizers.show', compact('organizer'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Request $request, string $id)
     {
         $organizer = Organizer::with('sponsors')->findOrFail($id);
@@ -102,32 +94,33 @@ class OrganizerController extends Controller
         return view('organizers.edit', compact('organizer', 'sponsors'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
-        $organizer = Organizer::findOrFail($id);
+        $organizer = Organizer::with('sponsors')->findOrFail($id);
 
         if ($request->user()->cannot('update', $organizer)) {
             abort(403, 'Unauthorized action.');
         }
 
         $validated = $request->validate([
-            'name' => 'required|max:60',
-            'contact_person' => 'max:150',
-            'email' => 'unique:organizers|email|max:100' . $organizer->id,
-            'contact_number' => 'max:20',
-            'venue' => 'required|max:255',
+            'name' => 'required|string|max:60',
+            'contact_person' => 'nullable|string|max:150',
+            'email' => [
+                'nullable',
+                'email',
+                'max:100',
+                Rule::unique('organizers', 'email')->ignore($organizer->id),
+            ],
+            'contact_number' => 'nullable|string|max:20',
+            'venue' => 'required|string|max:255',
 
             'sponsors' => 'nullable|array',
             'sponsors.*.selected' => 'nullable|boolean',
-            'sponsors.*.contribution_type' => 'nullable|max:100',
+            'sponsors.*.contribution_type' => 'nullable|string|max:100',
             'sponsors.*.contribution_amount' => 'nullable|numeric|min:0',
         ]);
 
         $organizer->update([
-            'created_by_user_id' => Auth::id(),
             'name' => $validated['name'],
             'contact_person' => $validated['contact_person'] ?? null,
             'email' => $validated['email'] ?? null,
@@ -136,13 +129,12 @@ class OrganizerController extends Controller
         ]);
 
         $organizer->sponsors()->sync($this->prepareSponsorSyncData($request));
-        return redirect()->route('organizer.show', $organizer->id)
+
+        return redirect()
+            ->route('organizer.index')
             ->with('success', __('controllers.updated_organizer'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Request $request, Organizer $organizer)
     {
         if ($request->user()->cannot('delete', $organizer)) {
@@ -150,7 +142,9 @@ class OrganizerController extends Controller
         }
 
         $organizer->delete();
-        return redirect()->route('organizer.index')
+
+        return redirect()
+            ->route('organizer.index')
             ->with('success', __('controllers.deleted_organizer'));
     }
 
@@ -161,7 +155,8 @@ class OrganizerController extends Controller
         }
 
         $organizers = Organizer::onlyTrashed()
-            ->with('sponsors')->get();
+            ->with('sponsors')
+            ->get();
 
         return view('organizers.trashed', compact('organizers'));
     }
@@ -175,7 +170,9 @@ class OrganizerController extends Controller
         }
 
         $organizer->restore();
-        return redirect()->route('organizer.trashed')
+
+        return redirect()
+            ->route('organizer.trashed')
             ->with('success', __('controllers.restored_organizer'));
     }
 
@@ -187,9 +184,12 @@ class OrganizerController extends Controller
             abort(403, 'Unauthorized action.');
         }
 
+        $organizer->sponsors()->detach();
         $organizer->forceDelete();
-        return redirect()->route('organizer.trashed')
-            ->with('success', __('controllers.force_deleted_handler'));
+
+        return redirect()
+            ->route('organizer.trashed')
+            ->with('success', __('controllers.force_deleted_organizer'));
     }
 
     private function prepareSponsorSyncData(Request $request): array

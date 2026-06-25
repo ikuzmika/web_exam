@@ -50,7 +50,7 @@ class SponsorPolicy
 
     public function viewTrashed(User $user, Sponsor $sponsor): bool
     {
-        return (($user->isOrganizer()) && ($user->id === $sponsor->created_by_user_id));
+        return $user->isOrganizer();
     }
 
     /**

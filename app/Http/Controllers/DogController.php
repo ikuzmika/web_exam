@@ -109,7 +109,7 @@ class DogController extends Controller
         $validated['created_by_user_id'] = Auth::id();
 
         $dog->update($validated);
-        return redirect()->route('dog.show', $dog->id)
+        return redirect()->route('dog.index')
             ->with('success', __('controllers.updated_dog'));
     }
 

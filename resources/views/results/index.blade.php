@@ -1,36 +1,44 @@
 <x-layout>
     <x-slot name="title">
-        Results
+        {{ __('results.title') }}
     </x-slot>
 
     <section class="competitions-top">
         <div class="page-header competitions-title-card">
             <div>
-                <h1>Results</h1>
+                <h1>{{ __('results.title') }}</h1>
 
                 <p>
-                    View agility competition results for participating pairs.
+                    {{ __('results.index_description') }}
                 </p>
             </div>
 
-            @can('create', App\Models\Result::class)
-                <a href="{{ route('result.create') }}" class="btn btn-primary">
-                    Add result
-                </a>
-            @endcan
+            <div class="d-flex gap-2">
+                @can('create', App\Models\Result::class)
+                    <a href="{{ route('result.create') }}" class="btn btn-primary">
+                        {{ __('results.add_result') }}
+                    </a>
+                @endcan
+
+                @can('viewTrashed', App\Models\Result::class)
+                    <a href="{{ route('result.trashed') }}" class="btn btn-outline-danger">
+                        {{ __('results.deleted_results') }}
+                    </a>
+                @endcan
+            </div>
         </div>
 
         <div class="filter-bar competitions-search-card">
             <div class="filter-field">
                 <label for="resultSearch" class="form-label">
-                    Search result
+                    {{ __('results.search_result') }}
                 </label>
 
                 <input
                     type="text"
                     id="resultSearch"
                     class="form-control"
-                    placeholder="Enter pair, dog, competition or status"
+                    placeholder="{{ __('results.search_placeholder') }}"
                 >
             </div>
         </div>
@@ -40,139 +48,150 @@
         <div class="table-responsive">
             <table class="table results-table">
                 <thead>
-                    <tr>
-                        <th>Pair</th>
-                        <th>Competition</th>
-                        <th>Track</th>
-                        <th>Status</th>
-                        <th>Points</th>
-                        <th></th>
-                    </tr>
+                <tr>
+                    <th>{{ __('results.pair') }}</th>
+                    <th>{{ __('results.competition') }}</th>
+                    <th>{{ __('results.track') }}</th>
+                    <th>{{ __('results.status') }}</th>
+                    <th>{{ __('results.points') }}</th>
+                    <th></th>
+                </tr>
                 </thead>
 
                 <tbody>
-                    @forelse($results as $result)
-                        <tr
-                            class="result-row-js"
-                            data-search="
+                @forelse($results as $result)
+                    <tr
+                        class="result-row-js"
+                        data-search="
                                 {{ optional(optional(optional($result->pair)->dog)->handler)->name }}
                                 {{ optional(optional(optional($result->pair)->dog)->handler)->surname }}
                                 {{ optional(optional($result->pair)->dog)->name }}
                                 {{ optional(optional($result->track)->competition)->title }}
+                                {{ translate_db(optional(optional($result->track)->competition)->title) }}
                                 {{ optional($result->track)->name }}
                                 {{ optional(optional($result->track)->difficultyLevel)->name }}
+                                {{ translate_db(optional(optional($result->track)->difficultyLevel)->name) }}
                                 {{ optional($result->resultStatus)->name }}
                                 {{ $result->points }}
                             "
-                        >
-                            <td>
-                                {{ optional(optional(optional($result->pair)->dog)->handler)->name ?? 'Unknown' }}
-                                {{ optional(optional(optional($result->pair)->dog)->handler)->surname ?? '' }}
-                                &
-                                {{ optional(optional($result->pair)->dog)->name ?? 'Unknown dog' }}
-                            </td>
+                    >
+                        <td>
+                            {{ optional(optional(optional($result->pair)->dog)->handler)->name ?? __('common.unknown') }}
+                            {{ optional(optional(optional($result->pair)->dog)->handler)->surname ?? '' }}
+                            &
+                            {{ optional(optional($result->pair)->dog)->name ?? __('results.unknown_dog') }}
+                        </td>
 
-                            <td>
-                                {{ optional(optional($result->track)->competition)->title ?? 'Not specified' }}
-                            </td>
+                        <td>
+                            {{ translate_db(optional(optional($result->track)->competition)->title) ?: __('common.not_specified') }}
+                        </td>
 
-                            <td>
-                                Track {{ optional($result->track)->name ?? 'Not specified' }}
-                            </td>
+                        <td>
+                            {{ __('results.track_name', ['name' => optional($result->track)->name ?? __('common.not_specified')]) }}
+                        </td>
 
-                            <td>
-                                {{ optional($result->resultStatus)->name ?? 'Not specified' }}
-                            </td>
+                        <td>
+                            {{ optional($result->resultStatus)->name ?? __('common.not_specified') }}
+                        </td>
 
-                            <td>
-                                {{ $result->points ?? 0 }}
-                            </td>
+                        <td>
+                            {{ $result->points ?? 0 }}
+                        </td>
 
-                            <td class="text-end">
-                                <button
-                                    type="button"
-                                    class="btn btn-outline-primary btn-sm"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#resultModal{{ $result->id }}"
-                                >
-                                    Details
-                                </button>
-                            </td>
-                        </tr>
+                        <td class="text-end">
+                            <button
+                                type="button"
+                                class="btn btn-outline-primary btn-sm"
+                                data-bs-toggle="modal"
+                                data-bs-target="#resultModal{{ $result->id }}"
+                            >
+                                {{ __('common.view_details') }}
+                            </button>
+                        </td>
+                    </tr>
 
-                        <div class="modal fade" id="resultModal{{ $result->id }}" tabindex="-1" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content result-modal">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">
-                                            Result details
-                                        </h5>
+                    <div class="modal fade" id="resultModal{{ $result->id }}" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content result-modal">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">
+                                        {{ __('results.result_details') }}
+                                    </h5>
 
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                    </div>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
 
-                                    <div class="modal-body">
-                                        <p>
-                                            <strong>Handler:</strong>
-                                            {{ optional(optional(optional($result->pair)->dog)->handler)->name ?? 'Not specified' }}
-                                            {{ optional(optional(optional($result->pair)->dog)->handler)->surname ?? '' }}
-                                        </p>
+                                <div class="modal-body">
+                                    <p>
+                                        <strong>{{ __('results.handler') }}:</strong>
+                                        {{ optional(optional(optional($result->pair)->dog)->handler)->name ?? __('common.not_specified') }}
+                                        {{ optional(optional(optional($result->pair)->dog)->handler)->surname ?? '' }}
+                                    </p>
 
-                                        <p>
-                                            <strong>Dog:</strong>
-                                            {{ optional(optional($result->pair)->dog)->name ?? 'Not specified' }}
-                                        </p>
+                                    <p>
+                                        <strong>{{ __('results.dog') }}:</strong>
+                                        {{ optional(optional($result->pair)->dog)->name ?? __('common.not_specified') }}
+                                    </p>
 
-                                        <p>
-                                            <strong>Competition:</strong>
-                                            {{ optional(optional($result->track)->competition)->title ?? 'Not specified' }}
-                                        </p>
+                                    <p>
+                                        <strong>{{ __('results.competition') }}:</strong>
+                                        {{ translate_db(optional(optional($result->track)->competition)->title) ?: __('common.not_specified') }}
+                                    </p>
 
-                                        <p>
-                                            <strong>Track:</strong>
-                                            Track {{ optional($result->track)->name ?? 'Not specified' }}
-                                        </p>
+                                    <p>
+                                        <strong>{{ __('results.track') }}:</strong>
+                                        {{ __('results.track_name', ['name' => optional($result->track)->name ?? __('common.not_specified')]) }}
+                                    </p>
 
-                                        <p>
-                                            <strong>Difficulty level:</strong>
-                                            {{ optional(optional($result->track)->difficultyLevel)->name ?? 'Not specified' }}
-                                        </p>
+                                    <p>
+                                        <strong>{{ __('results.difficulty_level') }}:</strong>
+                                        {{ translate_db(optional(optional($result->track)->difficultyLevel)->name) ?: __('common.not_specified') }}
+                                    </p>
 
-                                        <p>
-                                            <strong>Status:</strong>
-                                            {{ optional($result->resultStatus)->name ?? 'Not specified' }}
-                                        </p>
+                                    <p>
+                                        <strong>{{ __('results.status') }}:</strong>
+                                        {{ optional($result->resultStatus)->name ?? __('common.not_specified') }}
+                                    </p>
 
-                                        <p>
-                                            <strong>Points:</strong>
-                                            {{ $result->points ?? 0 }}
-                                        </p>
-                                    </div>
+                                    <p>
+                                        <strong>{{ __('results.points') }}:</strong>
+                                        {{ $result->points ?? 0 }}
+                                    </p>
+                                </div>
 
-                                    <div class="modal-footer">
-                                        @can('update', $result)
-                                            <a href="{{ route('result.edit', $result->id) }}" class="btn btn-outline-primary">
-                                                Edit
-                                            </a>
-                                        @endcan
+                                <div class="modal-footer">
+                                    @can('update', $result)
+                                        <a href="{{ route('result.edit', $result->id) }}" class="btn btn-outline-primary">
+                                            {{ __('common.edit') }}
+                                        </a>
+                                    @endcan
 
-                                        <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">
-                                            Close
-                                        </button>
-                                    </div>
+                                    @can('delete', $result)
+                                        <form method="POST"
+                                              action="{{ route('result.destroy', $result->id) }}"
+                                              onsubmit="return confirm('{{ __('common.confirm_delete') }}')">
+                                            @csrf
+                                            @method('DELETE')
+
+                                            <button type="submit" class="btn btn-danger">
+                                                {{ __('common.delete') }}
+                                            </button>
+                                        </form>
+                                    @endcan
                                 </div>
                             </div>
                         </div>
-                    @empty
-                        <tr>
-                            <td colspan="6">
-                                <div class="empty-state">
-                                    <h2>No results found</h2>
-                                    <p>There are no results added yet.</p>
-                                </div>
-                            </td>
-                        </tr>
-                    @endforelse
+                    </div>
+                @empty
+                    <tr>
+                        <td colspan="6">
+                            <div class="empty-state">
+                                <h2>{{ __('results.no_results') }}</h2>
+                                <p>{{ __('results.no_results_description') }}</p>
+                            </div>
+                        </td>
+                    </tr>
+                @endforelse
                 </tbody>
             </table>
         </div>

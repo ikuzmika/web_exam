@@ -16,78 +16,78 @@ class OrganizerSponsorSeeder extends Seeder
         OrganizerSponsor::create([
             'organizer_id' => 1,
             'sponsor_id' => 1,
-            'contribution_type' => 'Awards'
+            'contribution_type' => 'Apbalvojumi'
         ]);
 
         OrganizerSponsor::create([
             'organizer_id' => 1,
             'sponsor_id' => 4,
-            'contribution_type' => 'Financial support',
+            'contribution_type' => 'Finansiālais atbalsts',
             'contribution_amount' => 1000
         ]);
 
         OrganizerSponsor::create([
             'organizer_id' => 1,
             'sponsor_id' => 6,
-            'contribution_type' => 'Awards'
+            'contribution_type' => 'Apbalvojumi'
         ]);
 
         OrganizerSponsor::create([
             'organizer_id' => 1,
             'sponsor_id' => 10,
-            'contribution_type' => 'Financial support',
+            'contribution_type' => 'Finansiālais atbalsts',
             'contribution_amount' => 500
         ]);
 
         OrganizerSponsor::create([
             'organizer_id' => 1,
             'sponsor_id' => 19,
-            'contribution_type' => 'Awards'
+            'contribution_type' => 'Apbalvojumi'
         ]);
 
         OrganizerSponsor::create([
             'organizer_id' => 1,
             'sponsor_id' => 5,
-            'contribution_type' => 'Awards'
+            'contribution_type' => 'Apbalvojumi'
         ]);
 
         OrganizerSponsor::create([
             'organizer_id' => 1,
             'sponsor_id' => 17,
-            'contribution_type' => 'Awards'
+            'contribution_type' => 'Apbalvojumi'
         ]);
 
         OrganizerSponsor::create([
             'organizer_id' => 1,
             'sponsor_id' => 14,
-            'contribution_type' => 'Financial support',
+            'contribution_type' => 'Finansiālais atbalsts',
             'contribution_amount' => 1000
         ]);
 
         OrganizerSponsor::create([
             'organizer_id' => 1,
             'sponsor_id' => 8,
-            'contribution_type' => 'Financial support',
+            'contribution_type' => 'Finansiālais atbalsts',
             'contribution_amount' => 2000
         ]);
 
         OrganizerSponsor::create([
             'organizer_id' => 1,
             'sponsor_id' => 13,
-            'contribution_type' => 'Awards'
+            'contribution_type' => 'Apbalvojumi'
         ]);
 
         OrganizerSponsor::create([
             'organizer_id' => 2,
             'sponsor_id' => 1,
-            'contribution_type' => 'Financial support',
+            'contribution_type' => 'Finansiālais atbalsts',
             'contribution_amount' => 600
         ]);
 
         OrganizerSponsor::create([
             'organizer_id' => 2,
             'sponsor_id' => 2,
-            'contribution_type' => 'Financial support',
+            'contribution_type' => 'Finansiālais atbalsts',
             'contribution_amount' => 5000
         ]);
 
@@ -104,26 +104,26 @@ class OrganizerSponsorSeeder extends Seeder
         OrganizerSponsor::create([
             'organizer_id' => 2,
             'sponsor_id' => 16,
-            'contribution_type' => 'Awards'
+            'contribution_type' => 'Apbalvojumi'
         ]);
 
         OrganizerSponsor::create([
             'organizer_id' => 2,
             'sponsor_id' => 18,
-            'contribution_type' => 'Awards'
+            'contribution_type' => 'Apbalvojumi'
         ]);
 
         OrganizerSponsor::create([
             'organizer_id' => 2,
             'sponsor_id' => 19,
-            'contribution_type' => 'Financial support',
+            'contribution_type' => 'Finansiālais atbalsts',
             'contribution_amount' => 2000
         ]);
 
         OrganizerSponsor::create([
             'organizer_id' => 2,
             'sponsor_id' => 12,
-            'contribution_type' => 'Awards'
+            'contribution_type' => 'Apbalvojumi'
         ]);
 
         OrganizerSponsor::create([
@@ -134,20 +134,20 @@ class OrganizerSponsorSeeder extends Seeder
         OrganizerSponsor::create([
             'organizer_id' => 3,
             'sponsor_id' => 3,
-            'contribution_type' => 'Awards'
+            'contribution_type' => 'Apbalvojumi'
         ]);
 
         OrganizerSponsor::create([
             'organizer_id' => 3,
             'sponsor_id' => 7,
-            'contribution_type' => 'Financial support',
+            'contribution_type' => 'Finansiālais atbalsts',
             'contribution_amount' => 1500
         ]);
 
         OrganizerSponsor::create([
             'organizer_id' => 3,
             'sponsor_id' => 9,
-            'contribution_type' => 'Financial support',
+            'contribution_type' => 'Finansiālais atbalsts',
             'contribution_amount' => 1000
         ]);
 
@@ -159,13 +159,13 @@ class OrganizerSponsorSeeder extends Seeder
         OrganizerSponsor::create([
             'organizer_id' => 3,
             'sponsor_id' => 11,
-            'contribution_type' => 'Awards'
+            'contribution_type' => 'Apbalvojumi'
         ]);
 
         OrganizerSponsor::create([
             'organizer_id' => 3,
             'sponsor_id' => 2,
-            'contribution_type' => 'Awards'
+            'contribution_type' => 'Apbalvojumi'
         ]);
 
         OrganizerSponsor::create([
@@ -176,13 +176,13 @@ class OrganizerSponsorSeeder extends Seeder
         OrganizerSponsor::create([
             'organizer_id' => 4,
             'sponsor_id' => 6,
-            'contribution_type' => 'Awards'
+            'contribution_type' => 'Apbalvojumi'
         ]);
 
         OrganizerSponsor::create([
             'organizer_id' => 4,
             'sponsor_id' => 7,
-            'contribution_type' => 'Financial support',
+            'contribution_type' => 'Finansiālais atbalsts',
             'contribution_amount' => 2000
         ]);
 
@@ -199,7 +199,7 @@ class OrganizerSponsorSeeder extends Seeder
         OrganizerSponsor::create([
             'organizer_id' => 4,
             'sponsor_id' => 10,
-            'contribution_type' => 'Financial support',
+            'contribution_type' => 'Finansiālais atbalsts',
             'contribution_amount' => 500
         ]);
 
@@ -211,13 +211,13 @@ class OrganizerSponsorSeeder extends Seeder
         OrganizerSponsor::create([
             'organizer_id' => 4,
             'sponsor_id' => 3,
-            'contribution_type' => 'Awards'
+            'contribution_type' => 'Apbalvojumi'
         ]);
 
         OrganizerSponsor::create([
             'organizer_id' => 4,
             'sponsor_id' => 1,
-            'contribution_type' => 'Awards'
+            'contribution_type' => 'Apbalvojumi'
         ]);
     }
 }

@@ -16,7 +16,7 @@ class Sponsor extends Model
         'email'
     ];
 
-    public function organizer()
+    public function organizers()
     {
         return $this->belongsToMany(Organizer::class, 'organizer_sponsor')
             ->withPivot('contribution_type', 'contribution_amount')

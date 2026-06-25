@@ -50,7 +50,7 @@ class TrackPolicy
 
     public function viewTrashed(User $user, Track $track): bool
     {
-        return (($user->isOrganizer()) && ($user->id === $track->created_by_user_id));
+        return $user->isOrganizer();
     }
 
     /**

@@ -48,9 +48,9 @@ class PhotoPolicy
         return (($user->isRegularUser() || $user->isOrganizer()) && ($user->id === $photo->uploaded_by_user_id));
     }
 
-    public function viewTrashed(User $user, Photo $photo): bool
+    public function viewTrashed(User $user): bool
     {
-        return (($user->isRegularUser() || $user->isOrganizer()) && ($user->id === $photo->uploaded_by_user_id));
+        return $user->isAdmin();
     }
 
     /**

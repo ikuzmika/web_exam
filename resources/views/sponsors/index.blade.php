@@ -1,21 +1,26 @@
 <x-layout>
     <x-slot name="title">
-        Sponsors
+        {{ __('sponsors.title') }}
     </x-slot>
 
     <section class="competitions-top">
         <div class="page-header competitions-title-card">
             <div>
-                <h1>Sponsors</h1>
+                <h1>{{ __('sponsors.title') }}</h1>
 
                 <p>
-                    View sponsors that support agility competitions and organizers.
+                    {{ __('sponsors.index_description') }}
                 </p>
             </div>
 
             @can('create', App\Models\Sponsor::class)
                 <a href="{{ route('sponsor.create') }}" class="btn btn-primary">
-                    Add sponsor
+                    {{ __('sponsors.add_sponsor') }}
+                </a>
+            @endcan
+            @can('viewTrashed', App\Models\Sponsor::class)
+                <a href="{{ route('sponsor.trashed') }}" class="btn btn-outline-danger">
+                    {{ __('sponsors.deleted_sponsors') }}
                 </a>
             @endcan
         </div>
@@ -23,14 +28,14 @@
         <div class="filter-bar competitions-search-card">
             <div class="filter-field">
                 <label for="sponsorSearch" class="form-label">
-                    Search sponsor
+                    {{ __('sponsors.search_sponsor') }}
                 </label>
 
                 <input
                     type="text"
                     id="sponsorSearch"
                     class="form-control"
-                    placeholder="Enter sponsor, email or organizer"
+                    placeholder="{{ __('sponsors.search_placeholder') }}"
                 >
             </div>
         </div>
@@ -44,7 +49,7 @@
                     {{ $sponsor->name }}
                     {{ $sponsor->email }}
                     {{ $sponsor->description }}
-                    @foreach($sponsor->organizer as $organizer)
+                    @foreach($sponsor->organizers as $organizer)
                         {{ $organizer->name }}
                     @endforeach
                 "
@@ -54,7 +59,7 @@
                 </h2>
 
                 <p class="sponsor-card-text">
-                    {{ $sponsor->email ?? 'Email not specified' }}
+                    {{ $sponsor->email ?? __('sponsors.email_not_specified') }}
                 </p>
 
                 <button
@@ -63,7 +68,7 @@
                     data-bs-toggle="modal"
                     data-bs-target="#sponsorModal{{ $sponsor->id }}"
                 >
-                    Details
+                    {{ __('common.view_details') }}
                 </button>
             </article>
 
@@ -80,48 +85,78 @@
 
                         <div class="modal-body">
                             <p>
-                                <strong>Sponsor:</strong>
+                                <strong>{{ __('sponsors.sponsor') }}:</strong>
                                 {{ $sponsor->name }}
                             </p>
 
                             <p>
-                                <strong>Email:</strong>
-                                {{ $sponsor->email ?? 'Not specified' }}
+                                <strong>{{ __('sponsors.email') }}:</strong>
+                                {{ $sponsor->email ?? __('common.not_specified') }}
                             </p>
 
                             <p>
-                                <strong>Description:</strong>
-                                {{ $sponsor->description ?? 'Not specified' }}
+                                <strong>{{ __('sponsors.description') }}:</strong>
+                                {{ translate_db($sponsor->description) ?: __('common.not_specified') }}
                             </p>
 
-                            <p>
-                                <strong>Organizers:</strong>
-                                @forelse($sponsor->organizer as $organizer)
-                                    {{ $organizer->name }}@if(!$loop->last), @endif
+                            <div>
+                                <strong>{{ __('sponsors.organizers') }}:</strong>
+
+                                @forelse($sponsor->organizers as $organizer)
+                                    <div class="mt-2">
+                                        <div>
+                                            {{ $organizer->name }}
+                                        </div>
+
+                                        <div class="text-muted">
+                                            {{ __('sponsors.contribution_type') }}:
+                                            {{ translate_db($organizer->pivot?->contribution_type) ?: __('common.not_specified') }}
+                                        </div>
+
+                                        <div class="text-muted">
+                                            {{ __('sponsors.contribution_amount') }}:
+                                            @if($organizer->pivot?->contribution_amount !== null)
+                                                {{ number_format($organizer->pivot->contribution_amount, 2) }}
+                                            @else
+                                                {{ __('common.not_specified') }}
+                                            @endif
+                                        </div>
+                                    </div>
                                 @empty
-                                    Not specified
+                                    <div class="text-muted">
+                                        {{ __('common.not_specified') }}
+                                    </div>
                                 @endforelse
-                            </p>
+                            </div>
                         </div>
 
                         <div class="modal-footer">
                             @can('update', $sponsor)
                                 <a href="{{ route('sponsor.edit', $sponsor->id) }}" class="btn btn-outline-primary">
-                                    Edit
+                                    {{ __('common.edit') }}
                                 </a>
                             @endcan
 
-                            <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">
-                                Close
-                            </button>
+                            @can('delete', $sponsor)
+                                <form method="POST"
+                                      action="{{ route('sponsor.destroy', $sponsor->id) }}"
+                                      onsubmit="return confirm('{{ __('common.confirm_delete') }}')">
+                                    @csrf
+                                    @method('DELETE')
+
+                                    <button type="submit" class="btn btn-danger">
+                                        {{ __('common.delete') }}
+                                    </button>
+                                </form>
+                            @endcan
                         </div>
                     </div>
                 </div>
             </div>
         @empty
             <div class="empty-state">
-                <h2>No sponsors found</h2>
-                <p>There are no sponsors added yet.</p>
+                <h2>{{ __('sponsors.no_sponsors') }}</h2>
+                <p>{{ __('sponsors.no_sponsors_description') }}</p>
             </div>
         @endforelse
     </section>

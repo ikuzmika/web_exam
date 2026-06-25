@@ -1092,3 +1092,31 @@ body {
         grid-template-columns: 1fr;
     }
 }
+
+.checkbox-list {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: #ffffff;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.checkbox-list-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: var(--text-main);
+}
+
+.checkbox-list-item:hover {
+    background: var(--accent-light);
+}
+
+.checkbox-list-item input {
+    accent-color: var(--accent);
+}

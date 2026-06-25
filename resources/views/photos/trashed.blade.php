@@ -78,36 +78,34 @@
                         {{ $photo->uploadedBy?->name ?? __('photos.unknown_user') }}
                     </p>
 
-                    <div class="d-flex gap-2 mt-3">
+                    @can('force-delete', \App\Models\Photo::class)
+                        <div class="d-flex gap-2 mt-3">
+                            <form method="POST" action="{{ route('photo.restore', $photo->id) }}">
+                                @csrf
+                                @method('PATCH')
 
-                        <form method="POST" action="{{ route('photo.restore', $photo->id) }}">
-                            @csrf
-                            @method('PATCH')
+                                <button type="submit" class="btn btn-success">
+                                    {{ __('common.restore') }}
+                                </button>
+                            </form>
 
-                            <button type="submit" class="btn btn-success">
-                                {{ __('common.restore') }}
-                            </button>
-                        </form>
+                            <form method="POST" action="{{ route('photo.forceDelete', $photo->id) }}">
+                                @csrf
+                                @method('DELETE')
 
-                        <form method="POST" action="{{ route('photo.forceDelete', $photo->id) }}">
-                            @csrf
-                            @method('DELETE')
-
-                            <button type="submit"
-                                    class="btn btn-danger"
-                                    onclick="return confirm(@js(__('photos.confirm_permanent_delete_photo')))">
-                                {{ __('photos.delete_permanently') }}
-                            </button>
-                        </form>
-
-                    </div>
-
+                                <button type="submit"
+                                        class="btn btn-danger"
+                                        onclick="return confirm(@js(__('photos.confirm_permanent_delete_photo')))">
+                                    {{ __('photos.delete_permanently') }}
+                                </button>
+                            </form>
+                        </div>
+                    @endcan
                 </div>
             </article>
         @empty
             <div class="empty-state">
                 <h2>{{ __('photos.no_deleted_photos') }}</h2>
-                <p>{{ __('photos.no_deleted_photos_description') }}</p>
             </div>
         @endforelse
     </section>

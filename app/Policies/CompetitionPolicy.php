@@ -48,9 +48,9 @@ class CompetitionPolicy
         return (($user->isOrganizer()) && ($user->id === $competition->created_by_user_id));
     }
 
-    public function viewTrashed(User $user, Competition $competition): bool
+    public function viewTrashed(User $user): bool
     {
-        return (($user->isOrganizer()) && ($user->id === $competition->created_by_user_id));
+        return $user->isOrganizer();
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Competition;
 use App\Models\DifficultyLevel;
+use App\Models\Photo;
 use App\Models\Track;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -21,7 +22,10 @@ class TrackController extends Controller
      */
     public function index()
     {
-        $tracks = Track::with(['competition', 'difficultyLevel'])->get();
+        $tracks = Track::with([
+            'competition',
+            'difficultyLevel',
+            'schemePhotos'])->get();
         return view('track.index', compact('tracks'));
     }
 
@@ -30,7 +34,7 @@ class TrackController extends Controller
      */
     public function create(Request $request)
     {
-        if ($request->user()->cannnot('create', Track::class)) {
+        if ($request->user()->cannot('create', Track::class)) {
             abort(403, 'Unauthorized action.');
         }
 
@@ -44,7 +48,7 @@ class TrackController extends Controller
      */
     public function store(Request $request, Track $track)
     {
-        if ($request->user()->cannnot('create', $track)) {
+        if ($request->user()->cannot('create', $track)) {
             abort(403, 'Unauthorized action.');
         }
 
@@ -54,9 +58,17 @@ class TrackController extends Controller
             'name' => 'required|max:20',
         ]);
 
-        $validated['created_by_user_id'] = Auth::id();
+        $track = Track::create([
+            'created_by_user_id' => Auth::id(),
+            'name' => $validated['name'],
+            'competition_id' => $validated['competition_id'],
+            'difficulty_level_id' => $validated['difficulty_level_id'],
+        ]);
 
-        Track::create($validated);
+        if ($request->hasFile('scheme_photo')) {
+            $this->storeTrackPhoto($request, $track);
+        }
+
         return redirect()->route('track.index')
             ->with('success', __('controllers.new_track'));
     }
@@ -85,7 +97,7 @@ class TrackController extends Controller
     {
         $track = Track::findOrFail($id);
 
-        if ($request->user()->cannnot('update', $track)) {
+        if ($request->user()->cannot('update', $track)) {
             abort(403, 'Unauthorized action.');
         }
 
@@ -101,7 +113,7 @@ class TrackController extends Controller
     {
         $track = Track::findOrFail($id);
 
-        if ($request->user()->cannnot('update', $track)) {
+        if ($request->user()->cannot('update', $track)) {
             abort(403, 'Unauthorized action.');
         }
 
@@ -114,7 +126,17 @@ class TrackController extends Controller
         $validated['created_by_user_id'] = Auth::id();
 
         $track->update($validated);
-        return redirect()->route('track.show', $track->id)
+
+        if ($request->has('delete_scheme_photo')) {
+            $this->deleteTrackPhotos($track);
+        }
+
+        if ($request->hasFile('scheme_photo')) {
+            $this->deleteTrackPhotos($track);
+            $this->storeTrackPhoto($request, $track);
+        }
+
+        return redirect()->route('track.index')
             ->with('success', __('controllers.updated_track'));
     }
 
@@ -123,7 +145,7 @@ class TrackController extends Controller
      */
     public function destroy(Request $request, Track $track)
     {
-        if ($request->user()->cannnot('delete', $track)) {
+        if ($request->user()->cannot('delete', $track)) {
             abort(403, 'Unauthorized action.');
         }
 
@@ -134,7 +156,7 @@ class TrackController extends Controller
 
     public function trashed(Request $request)
     {
-        if ($request->user()->cannnot('viewTrashed', Track::class)) {
+        if ($request->user()->cannot('viewTrashed', Track::class)) {
             abort(403, 'Unauthorized action.');
         }
         $tracks = Track::onlyTrashed()->get();
@@ -145,7 +167,7 @@ class TrackController extends Controller
     {
         $track = Track::onlyTrashed()->findOrFail($id);
 
-        if ($request->user()->cannnot('restore', Track::class)) {
+        if ($request->user()->cannot('restore', Track::class)) {
             abort(403, 'Unauthorized action.');
         }
         $track->restore();
@@ -157,12 +179,37 @@ class TrackController extends Controller
     {
         $track = Track::onlyTrashed()->findOrFail($id);
 
-        if ($request->user()->cannnot('forceDelete', Track::class)) {
+        if ($request->user()->cannot('forceDelete', Track::class)) {
             abort(403, 'Unauthorized action.');
         }
 
         $track->forceDelete();
         return redirect()->route('track.trashed')
             ->with('success', __('controllers.force_deleted_track'));
+    }
+
+    private function storeTrackPhoto(Request $request, Track $track): void
+    {
+        $filePath = $request->file('scheme_photo')->store('gallery', 'public');
+
+        Photo::create([
+            'uploaded_by_user_id' => $request->user()->id,
+            'competition_id' => $track->competition_id,
+            'track_id' => $track->id,
+            'pair_id' => null,
+            'title' => 'Track ' . $track->name,
+            'file_path' => $filePath,
+            'is_approved' => true,
+        ]);
+    }
+
+    private function deleteTrackPhotos(Track $track): void
+    {
+        Photo::where('track_id', $track->id)
+            ->whereNull('deleted_at')
+            ->get()
+            ->each(function (Photo $photo) {
+                $photo->delete();
+            });
     }
 }

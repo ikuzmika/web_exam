@@ -69,29 +69,6 @@
             </div>
 
             <div class="mb-3">
-                <label for="track_id" class="form-label">
-                    {{ __('photos.track') }}
-                </label>
-
-                <select name="track_id" id="track_id" class="form-control">
-                    <option value="">
-                        {{ __('tracks.choose_track') }}
-                    </option>
-
-                    @foreach ($tracks as $track)
-                        <option value="{{ $track->id }}"
-                            @selected(old('track_id', $photo->track_id) == $track->id)>
-                            {{ translate_db($track->competition?->title) ?: __('competitions.no_competition') }}
-                            —
-                            {{ translate_db($track->difficultyLevel?->name) ?: __('tracks.no_level') }}
-                            —
-                            {{ __('tracks.track_number', ['id' => $track->id]) }}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
-
-            <div class="mb-3">
                 <label for="pair_id" class="form-label">
                     {{ __('photos.pair') }}
                 </label>

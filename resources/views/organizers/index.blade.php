@@ -1,36 +1,45 @@
 <x-layout>
     <x-slot name="title">
-        Organizers
+        {{ __('organizers.title') }}
     </x-slot>
 
     <section class="competitions-top">
         <div class="page-header competitions-title-card">
             <div>
-                <h1>Organizers</h1>
+                <h1>{{ __('organizers.title') }}</h1>
 
                 <p>
-                    View organizers of agility competitions.
+                    {{ __('organizers.index_description') }}
                 </p>
             </div>
 
-            @can('create', App\Models\Organizer::class)
-                <a href="{{ route('organizer.create') }}" class="btn btn-primary">
-                    Add organizer
-                </a>
-            @endcan
+            <div class="d-flex gap-2">
+                @can('create', App\Models\Organizer::class)
+                    <a href="{{ route('organizer.create') }}" class="btn btn-primary">
+                        {{ __('organizers.add_organizer') }}
+                    </a>
+                @endcan
+
+                @can('viewTrashed', App\Models\Organizer::class)
+                    <a href="{{ route('organizer.trashed') }}" class="btn btn-outline-danger">
+                        {{ __('organizers.deleted_organizers') }}
+                    </a>
+                @endcan
+            </div>
+
         </div>
 
         <div class="filter-bar competitions-search-card">
             <div class="filter-field">
                 <label for="organizerSearch" class="form-label">
-                    Search organizer
+                    {{ __('organizers.search_organizer') }}
                 </label>
 
                 <input
                     type="text"
                     id="organizerSearch"
                     class="form-control"
-                    placeholder="Enter organizer, venue or sponsor"
+                    placeholder="{{ __('organizers.search_placeholder') }}"
                 >
             </div>
         </div>
@@ -56,7 +65,7 @@
                 </h2>
 
                 <p class="organizer-card-text">
-                    {{ $organizer->venue ?? 'Venue not specified' }}
+                    {{ $organizer->venue ?? __('organizers.venue_not_specified') }}
                 </p>
 
                 <button
@@ -65,7 +74,7 @@
                     data-bs-toggle="modal"
                     data-bs-target="#organizerModal{{ $organizer->id }}"
                 >
-                    Details
+                    {{ __('common.view_details') }}
                 </button>
             </article>
 
@@ -82,58 +91,77 @@
 
                         <div class="modal-body">
                             <p>
-                                <strong>Organizer:</strong>
+                                <strong>{{ __('organizers.organizer') }}:</strong>
                                 {{ $organizer->name }}
                             </p>
 
                             <p>
-                                <strong>Venue:</strong>
-                                {{ $organizer->venue ?? 'Not specified' }}
+                                <strong>{{ __('organizers.venue') }}:</strong>
+                                {{ $organizer->venue ?? __('common.not_specified') }}
                             </p>
 
                             <p>
-                                <strong>Contact person:</strong>
-                                {{ $organizer->contact_person ?? 'Not specified' }}
+                                <strong>{{ __('organizers.contact_person') }}:</strong>
+                                {{ $organizer->contact_person ?? __('common.not_specified') }}
                             </p>
 
                             <p>
-                                <strong>Email:</strong>
-                                {{ $organizer->email ?? 'Not specified' }}
+                                <strong>{{ __('organizers.email') }}:</strong>
+                                {{ $organizer->email ?? __('common.not_specified') }}
                             </p>
 
                             <p>
-                                <strong>Contact number:</strong>
-                                {{ $organizer->contact_number ?? 'Not specified' }}
+                                <strong>{{ __('organizers.contact_number') }}:</strong>
+                                {{ $organizer->contact_number ?? __('common.not_specified') }}
                             </p>
 
-                            <p>
-                                <strong>Sponsors:</strong>
-                                @forelse($organizer->sponsors as $sponsor)
-                                    {{ $sponsor->name }}@if(!$loop->last), @endif
+                            <div><strong>{{ __('organizers.sponsors') }}
+                                    :</strong> @forelse($organizer->sponsors as $sponsor)
+                                    <div class="mt-2">
+                                        <div> {{ $sponsor->name }} </div>
+                                        <div class="text-muted"> {{ __('organizers.contribution_type') }}
+                                            : {{ translate_db($sponsor->pivot?->contribution_type) ?: __('common.not_specified') }}
+                                        </div>
+                                        <div class="text-muted"> {{ __('organizers.contribution_amount') }}
+                                            : @if($sponsor->pivot?->contribution_amount !== null)
+                                                {{ number_format($sponsor->pivot->contribution_amount, 2) }}
+                                            @else
+                                                {{ __('common.not_specified') }}
+                                            @endif
+                                        </div>
+                                    </div>
                                 @empty
-                                    Not specified
-                                @endforelse
-                            </p>
+                                    <div class="text-muted"> {{ __('common.not_specified') }} </div>
+                                @endforelse </div>
                         </div>
 
                         <div class="modal-footer">
                             @can('update', $organizer)
                                 <a href="{{ route('organizer.edit', $organizer->id) }}" class="btn btn-outline-primary">
-                                    Edit
+                                    {{ __('common.edit') }}
                                 </a>
                             @endcan
 
-                            <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">
-                                Close
-                            </button>
+                            @can('delete', $organizer)
+                                <form method="POST"
+                                      action="{{ route('organizer.destroy', $organizer->id) }}"
+                                      onsubmit="return confirm('{{ __('common.confirm_delete') }}')">
+                                    @csrf
+                                    @method('DELETE')
+
+                                    <button type="submit" class="btn btn-danger">
+                                        {{ __('common.delete') }}
+                                    </button>
+                                </form>
+                            @endcan
                         </div>
                     </div>
                 </div>
             </div>
         @empty
             <div class="empty-state">
-                <h2>No organizers found</h2>
-                <p>There are no organizers added yet.</p>
+                <h2>{{ __('organizers.no_organizers') }}</h2>
+                <p>{{ __('organizers.no_organizers_description') }}</p>
             </div>
         @endforelse
     </section>

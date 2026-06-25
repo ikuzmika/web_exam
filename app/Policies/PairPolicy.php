@@ -48,9 +48,9 @@ class PairPolicy
         return (($user->isSecretary()) && ($user->id === $pair->created_by_user_id));
     }
 
-    public function viewTrashed(User $user, Pair $pair): bool
+    public function viewTrashed(User $user): bool
     {
-        return (($user->isSecretary()) && ($user->id === $pair->created_by_user_id));
+        return $user->isSecretary();
     }
 
     /**

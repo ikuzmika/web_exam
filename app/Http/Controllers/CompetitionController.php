@@ -112,7 +112,7 @@ class CompetitionController extends Controller
         $validated['created_by_user_id'] = Auth::id();
 
         $competition->update($validated);
-        return redirect()->route('competition.show', $competition->id)
+        return redirect()->route('competition.index')
             ->with('success', __('controllers.updated_competition.'));
 
     }

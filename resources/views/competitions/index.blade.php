@@ -13,11 +13,19 @@
                 </p>
             </div>
 
-            @can('create', App\Models\Competition::class)
-                <a href="{{ route('competition.create') }}" class="btn btn-primary">
-                    {{ __('competitions.add_competition') }}
-                </a>
-            @endcan
+            <div class="d-flex gap-2">
+                @can('create', App\Models\Competition::class)
+                    <a href="{{ route('competition.create') }}" class="btn btn-primary">
+                        {{ __('competitions.add_competition') }}
+                    </a>
+                @endcan
+
+                @can('viewTrashed', App\Models\Competition::class)
+                    <a href="{{ route('competition.trashed') }}" class="btn btn-outline-danger">
+                        {{ __('competitions.deleted_competitions') }}
+                    </a>
+                @endcan
+            </div>
         </div>
 
         <div class="filter-bar competitions-search-card">
@@ -71,6 +79,18 @@
                                class="btn btn-outline-primary btn-sm">
                                 {{ __('common.edit') }}
                             </a>
+                        @endcan
+                        @can('delete', $competition)
+                            <form method="POST"
+                                  action="{{ route('competition.destroy', $competition->id) }}"
+                                  onsubmit="return confirm('{{ __('common.confirm_delete') }}')">
+                                @csrf
+                                @method('DELETE')
+
+                                <button type="submit" class="btn btn-danger btn-sm">
+                                    {{ __('common.delete') }}
+                                </button>
+                            </form>
                         @endcan
                     </div>
                 </div>

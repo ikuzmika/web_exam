@@ -19,7 +19,7 @@ class SponsorController extends Controller
      */
     public function index()
     {
-        $sponsors = Sponsor::with('organizer')->get();
+        $sponsors = Sponsor::with('organizers')->get();
 
         return view('sponsors.index', compact('sponsors'));
     }
@@ -50,12 +50,12 @@ class SponsorController extends Controller
 
         $validated = $request->validate([
             'name' => 'required|max:150',
-            'description' => 'nullable',
-            'email' => 'email|max:150',
+            'description' => 'nullable|string|max:255',
+            'email' => 'nullable|email|max:150',
 
             'organizers' => 'nullable|array',
             'organizers.*.selected' => 'nullable|boolean',
-            'organizers.*.contribution_type' => 'nullable|max:100',
+            'organizers.*.contribution_type' => 'nullable|string|max:100',
             'organizers.*.contribution_amount' => 'nullable|numeric|min:0',
         ]);
 
@@ -68,7 +68,7 @@ class SponsorController extends Controller
 
         $sponsor->organizers()->sync($this->prepareOrganizerSyncData($request));
 
-        return redirect()->route('sponsor.show', $sponsor->id)
+        return redirect()->route('sponsor.index')
             ->with('success', __('controllers.new_sponsor'));
     }
 
@@ -77,7 +77,7 @@ class SponsorController extends Controller
      */
     public function show(string $id)
     {
-        $sponsor = Sponsor::with('organizer')->findOrFail($id);
+        $sponsor = Sponsor::with('organizers')->findOrFail($id);
 
         return view('sponsors.show', compact('sponsor'));
     }
@@ -91,10 +91,10 @@ class SponsorController extends Controller
             abort(403, 'Unauthorized action.');
         }
 
-        $sponsor->load('organizer');
+        $sponsor->load('organizers');
 
-        $organizer = Organizer::orderBY('name')->get();
-        return view('sponsors.edit', compact('sponsor', 'organizer'));
+        $organizers = Organizer::orderBY('name')->get();
+        return view('sponsors.edit', compact('sponsor', 'organizers'));
     }
 
     /**
@@ -110,12 +110,12 @@ class SponsorController extends Controller
 
         $validated = $request->validate([
             'name' => 'required|max:150',
-            'description' => 'nullable',
-            'email' => 'email|max:150',
+            'description' => 'nullable|string|max:255',
+            'email' => 'nullable|email|max:150',
 
             'organizers' => 'nullable|array',
             'organizers.*.selected' => 'nullable|boolean',
-            'organizers.*.contribution_type' => 'nullable|max:100',
+            'organizers.*.contribution_type' => 'nullable|string|max:100',
             'organizers.*.contribution_amount' => 'nullable|numeric|min:0',
         ]);
 
@@ -128,7 +128,7 @@ class SponsorController extends Controller
 
         $sponsor->organizers()->sync($this->prepareOrganizerSyncData($request));
 
-        return redirect()->route('sponsor.show', $sponsor->id)
+        return redirect()->route('sponsor.index')
             ->with('success', __('controllers.updated_sponsor'));
 
     }
@@ -154,7 +154,7 @@ class SponsorController extends Controller
         }
 
         $sponsors = Sponsor::onlyTrashed()
-            ->with('organizer')->get();
+            ->with('organizers')->get();
 
         return view('sponsors.trashed', compact('sponsors'));
     }

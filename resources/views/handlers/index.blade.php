@@ -13,11 +13,19 @@
                 </p>
             </div>
 
-            @can('create', App\Models\Handler::class)
-                <a href="{{ route('handler.create') }}" class="btn btn-primary">
-                    {{ __('handlers.add_handler') }}
-                </a>
-            @endcan
+            <div class="d-flex gap-2">
+                @can('create', App\Models\Handler::class)
+                    <a href="{{ route('handler.create') }}" class="btn btn-primary">
+                        {{ __('handlers.add_handler') }}
+                    </a>
+                @endcan
+
+                @can('viewTrashed', App\Models\Handler::class)
+                    <a href="{{ route('handler.trashed') }}" class="btn btn-outline-danger">
+                        {{ __('handlers.deleted_handlers') }}
+                    </a>
+                @endcan
+            </div>
         </div>
 
         <div class="filter-bar competitions-search-card">
@@ -102,9 +110,18 @@
                                 </a>
                             @endcan
 
-                            <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">
-                                {{ __('common.close') }}
-                            </button>
+                            @can('delete', $handler)
+                                <form method="POST"
+                                      action="{{ route('handler.destroy', $handler->id) }}"
+                                      onsubmit="return confirm('{{ __('common.confirm_delete') }}')">
+                                    @csrf
+                                    @method('DELETE')
+
+                                    <button type="submit" class="btn btn-danger">
+                                        {{ __('common.delete') }}
+                                    </button>
+                                </form>
+                            @endcan
                         </div>
                     </div>
                 </div>

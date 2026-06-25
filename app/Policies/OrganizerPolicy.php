@@ -48,9 +48,9 @@ class OrganizerPolicy
         return (($user->isOrganizer()) && ($user->id === $organizer->created_by_user_id));
     }
 
-    public function viewTrashed(User $user, Organizer $organizer): bool
+    public function viewTrashed(User $user): bool
     {
-        return (($user->isOrganizer()) && ($user->id === $organizer->created_by_user_id));
+        return $user->isOrganizer();
     }
 
     /**

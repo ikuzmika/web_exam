@@ -37,4 +37,9 @@ return [
     'venue' => 'Venue',
     'competition_image' => 'Competition image',
     'no_competitions_description' => 'There are no competitions added yet.',
+    'trashed_title' => 'Deleted competitions',
+    'trashed_description' => 'Restore competitions or permanently delete them.',
+    'no_deleted_competitions' => 'No deleted competitions',
+    'no_deleted_competitions_description' => 'There are no deleted competitions.',
+    'deleted_competitions' => 'Deleted competitions'
 ];

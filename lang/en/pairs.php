@@ -33,4 +33,9 @@ return [
     'unknown_dog' => 'Unknown dog',
     'no_pairs_description' => 'There are no pairs added yet.',
     'choose_pair' => 'Choose pair',
+    'trashed_title' => 'Deleted pairs',
+    'trashed_description' => 'Restore pairs or permanently delete them.',
+    'no_deleted_pairs' => 'No deleted pairs',
+    'no_deleted_pairs_description' => 'There are no deleted pairs.',
+    'deleted_pairs' => 'Deleted pairs'
 ];
