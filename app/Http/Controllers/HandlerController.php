@@ -38,20 +38,20 @@ class HandlerController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, Handler $handler)
+    public function store(Request $request)
     {
-        if ($request->user()->cannot('create', $handler)) {
+        if ($request->user()->cannot('create', Handler::class)) {
             abort(403, 'Unauthorized action.');
         }
 
         $validated = $request->validate([
-            'name' => 'required|max:60',
-            'surname' => 'required|max:60',
-            'email' => 'email|max:20|unique:handlers',
-            'contact_number' => 'integer|digits:20',
+            'name' => 'required|string|max:60',
+            'surname' => 'required|string|max:60',
+            'email' => 'nullable|email|max:20|unique:handlers,email',
+            'contact_number' => 'nullable|string|max:20',
         ]);
 
-        $validated['cerated_by_user_id'] = Auth::id();
+        $validated['created_by_user_id'] = Auth::id();
 
         Handler::create($validated);
 
@@ -95,13 +95,11 @@ class HandlerController extends Controller
         }
 
         $validated = $request->validate([
-            'name' => 'required|max:60',
-            'surname' => 'required|max:60',
-            'email' => 'email|max:20|unique:handlers',
-            'contact_number' => 'integer|digits:20',
+            'name' => 'required|string|max:60',
+            'surname' => 'required|string|max:60',
+            'email' => 'nullable|email|max:20|unique:handlers,email,' . $handler->id,
+            'contact_number' => 'nullable|string|max:20',
         ]);
-
-        $validated['cerated_by_user_id'] = Auth::id();
 
         $handler->update($validated);
         return redirect()->route('handler.index')
