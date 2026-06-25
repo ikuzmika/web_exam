@@ -35,4 +35,6 @@ return [
     'success' => 'Success',
     'error' => 'Error',
     'close' => 'Close',
+    'date' => 'Date',
+    'open' => 'Open',
 ];

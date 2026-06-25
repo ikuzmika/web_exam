@@ -48,4 +48,5 @@ return [
     'trashed_description' => 'Atjauno trases vai dzēs tās neatgriezeniski.',
     'no_deleted_tracks' => 'Dzēstu trašu nav',
     'no_deleted_tracks_description' => 'Nav nevienas dzēstas trases.',
+    'no_track_photo' => 'Trases shēma nav pievienota.'
 ];

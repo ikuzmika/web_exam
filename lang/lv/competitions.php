@@ -41,5 +41,6 @@ return [
     'trashed_description' => 'Atjauno sacensības vai dzēs tās neatgriezeniski.',
     'no_deleted_competitions' => 'Dzēstu sacensību nav',
     'no_deleted_competitions_description' => 'Nav nevienu dzēstu sacensību.',
-    'deleted_competitions' => 'Dzēstās sacensības'
+    'deleted_competitions' => 'Dzēstās sacensības',
+    'judge' => 'Tiesnesis',
 ];

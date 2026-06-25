@@ -54,7 +54,7 @@ class CompetitionController extends Controller
 
         $validated = $request->validate([
             'organizer_id' => 'required|integer|exists:organizers,id',
-            'judge_id' => 'required|integer|exists:judges,id',
+            'judge_id' => 'required|integer|exists:handlers,id',
             'title' => 'required|string|min:3|max:255',
             'date' => 'required|date',
             'competition_photo' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
@@ -96,6 +96,7 @@ class CompetitionController extends Controller
             'judge',
             'track.difficultyLevel',
             'photo',
+            'track.schemePhotos'
         ])->findOrFail($id);
 
         return view('competitions.show', compact('competition'));
@@ -130,7 +131,7 @@ class CompetitionController extends Controller
 
         $validated = $request->validate([
             'organizer_id' => 'required|integer|exists:organizers,id',
-            'judge_id' => 'required|integer|exists:judges,id',
+            'judge_id' => 'required|integer|exists:handlers,id',
             'title' => 'required|string|min:3|max:255',
             'date' => 'required|date',
             'competition_photo' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
@@ -166,7 +167,7 @@ class CompetitionController extends Controller
             ]);
         }
 
-        return redirect()->route('competition.index')
+        return redirect()->route('competition.show', $competition->id)
             ->with('success', __('controllers.updated_competition'));
 
     }
@@ -179,6 +180,13 @@ class CompetitionController extends Controller
         if ($request->user()->cannot('delete', $competition)) {
             abort(403, 'Unauthorized action.');
         }
+
+        Photo::where('competition_id', $competition->id)
+            ->whereNull('deleted_at')
+            ->get()
+            ->each(function (Photo $photo) {
+                $photo->delete();
+            });
 
         $competition->delete();
         return redirect()->route('competition.index')

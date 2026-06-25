@@ -35,4 +35,6 @@ return [
     'success' => 'Veiksmīgi',
     'error' => 'Kļūda',
     'close' => 'Aizvērt',
+    'date' => 'Datums',
+    'open' => 'Atvērt',
 ];

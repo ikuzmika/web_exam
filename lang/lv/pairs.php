@@ -37,5 +37,9 @@ return [
     'trashed_description' => 'Atjauno pārus vai dzēs tos neatgriezeniski.',
     'no_deleted_pairs' => 'Dzēstu pāru nav',
     'no_deleted_pairs_description' => 'Nav neviena dzēsta pāra.',
-    'deleted_pairs' => 'Dzēstie pāri'
+    'deleted_pairs' => 'Dzēstie pāri',
+    'create_description' => 'Izveido jaunu agility pāri, izvēloties suni un aktivitātes periodu.',
+    'edit_description' => 'Atjaunini pāra informāciju.',
+    'choose_dog' => 'Izvēlies suni',
+    'no_available_dogs' => 'Nav pieejamu suņu',
 ];

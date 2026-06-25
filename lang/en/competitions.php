@@ -41,5 +41,6 @@ return [
     'trashed_description' => 'Restore competitions or permanently delete them.',
     'no_deleted_competitions' => 'No deleted competitions',
     'no_deleted_competitions_description' => 'There are no deleted competitions.',
-    'deleted_competitions' => 'Deleted competitions'
+    'deleted_competitions' => 'Deleted competitions',
+    'judge' => 'Judge',
 ];

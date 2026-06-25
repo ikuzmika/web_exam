@@ -96,7 +96,7 @@
                                 <button type="submit"
                                         class="btn btn-danger"
                                         onclick="return confirm(@js(__('photos.confirm_permanent_delete_photo')))">
-                                    {{ __('photos.delete_permanently') }}
+                                    {{ __('common.delete') }}
                                 </button>
                             </form>
                         </div>

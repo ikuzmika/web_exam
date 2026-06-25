@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('dogs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('handler_id')->constrained('handlers')->onDelete('cascade');
+            $table->foreignId('handler_id')->nullable()->constrained('handlers')->onDelete('cascade');
             $table->foreignId('size_category_id')->constrained('size_categories')->onDelete('cascade');
             $table->foreignId('created_by_user_id')->constrained('users')->onDelete('cascade');
             $table->string('name',100);

@@ -37,5 +37,9 @@ return [
     'trashed_description' => 'Restore pairs or permanently delete them.',
     'no_deleted_pairs' => 'No deleted pairs',
     'no_deleted_pairs_description' => 'There are no deleted pairs.',
-    'deleted_pairs' => 'Deleted pairs'
+    'deleted_pairs' => 'Deleted pairs',
+    'create_description' => 'Create a new agility pair by selecting a dog and activity period.',
+    'edit_description' => 'Update pair information.',
+    'choose_dog' => 'Choose dog',
+    'no_available_dogs' => 'There are no dogs available'
 ];

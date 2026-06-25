@@ -7,6 +7,7 @@ use App\Models\Pair;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class PairController extends Controller
 {
@@ -36,8 +37,12 @@ class PairController extends Controller
             abort(403, 'Unauthorized action.');
         }
 
-        $dog = Dog::all();
-        return view('pairs.create', compact('dog'));
+        $dogs = Dog::with(['handler', 'sizeCategory'])
+            ->whereDoesntHave('pair')
+            ->orderBy('name')
+            ->get();
+
+        return view('pairs.create', compact('dogs'));
     }
 
     /**
@@ -50,9 +55,9 @@ class PairController extends Controller
         }
 
         $validated = $request->validate([
-            'dog_id' => 'required|integer|exists:dogs,id',
+            'dog_id' => 'required|integer|exists:dogs,id|unique:pairs,dog_id',
             'active_from' => 'required|date',
-            'active_until' => 'date',
+            'active_until' => 'nullable|date|after:active_from',
         ]);
 
         $validated['created_by_user_id'] = Auth::id();
@@ -82,8 +87,15 @@ class PairController extends Controller
             abort(403, 'Unauthorized action.');
         }
 
-        $dog = Dog::all();
-        return view('pairs.edit', compact('pair', 'dog'));
+        $dogs = Dog::with(['handler', 'sizeCategory'])
+            ->where(function ($query) use ($pair) {
+                $query->whereDoesntHave('pair')
+                    ->orWhere('id', $pair->dog_id);
+            })
+            ->orderBy('name')
+            ->get();
+
+        return view('pairs.edit', compact('pair', 'dogs'));
     }
 
     /**
@@ -98,9 +110,13 @@ class PairController extends Controller
         }
 
         $validated = $request->validate([
-            'dog_id' => 'required|integer|exists:dogs,id',
+            'dog_id' => [
+                'required',
+                'exists:dogs,id',
+                Rule::unique('pairs', 'dog_id')->ignore($pair->id),
+            ],
             'active_from' => 'required|date',
-            'active_until' => 'date',
+            'active_until' => 'nullable|date|after_or_equal:active_from',
         ]);
 
         $validated['created_by_user_id'] = Auth::id();

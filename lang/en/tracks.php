@@ -48,4 +48,5 @@ return [
     'trashed_description' => 'Restore tracks or permanently delete them.',
     'no_deleted_tracks' => 'No deleted tracks',
     'no_deleted_tracks_description' => 'There are no deleted tracks.',
+    'no_track_photo' => 'No track scheme has been added.',
 ];

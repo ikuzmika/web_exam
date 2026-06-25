@@ -48,7 +48,7 @@ class DogController extends Controller
         }
 
         $validated = $request->validate([
-            'handler_id' => 'required|integer|exists:handlers,id',
+            'handler_id' => 'nullable|integer|exists:handlers,id',
             'size_category_id' => 'required|integer|exists:size_categories,id',
             'name' => 'required|string|max:100',
             'description' => 'string|max:255',
@@ -100,7 +100,7 @@ class DogController extends Controller
         }
 
         $validated = $request->validate([
-            'handler_id' => 'required|integer|exists:handlers,id',
+            'handler_id' => 'nullable|integer|exists:handlers,id',
             'size_category_id' => 'required|integer|exists:size_categories,id',
             'name' => 'required|string|max:100',
             'description' => 'string|max:255',

@@ -62,7 +62,7 @@
         </p>
 
         <p>
-            <strong>Judge:</strong>
+            <strong>{{__('competitions.judge')}}:</strong>
             {{ optional($competition->judge)->name ?? __('common.not_specified') }}
             {{ optional($competition->judge)->surname ?? '' }}
         </p>
@@ -77,7 +77,7 @@
             <div class="list-card competition-track-card mb-2">
                 <div class="list-card-content">
                     <h2>
-                        Track {{ $track->name }}
+                        {{ __('tracks.track_name', ['name' => $track->name]) }}
                     </h2>
 
                     <p>
@@ -87,9 +87,96 @@
                 </div>
 
                 <div class="list-card-actions">
-                    <a href="{{ route('track.show', $track->id) }}" class="btn btn-outline-primary btn-sm">
+                    <button
+                        type="button"
+                        class="btn btn-outline-primary btn-sm"
+                        data-bs-toggle="modal"
+                        data-bs-target="#trackModal{{ $track->id }}"
+                    >
                         {{ __('common.view_details') }}
-                    </a>
+                    </button>
+                </div>
+            </div>
+
+            <div
+                class="modal fade"
+                id="trackModal{{ $track->id }}"
+                tabindex="-1"
+                aria-labelledby="trackModalLabel{{ $track->id }}"
+                aria-hidden="true"
+            >
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-content track-modal">
+                        <div class="modal-header">
+                            <h2 class="modal-title fs-5" id="trackModalLabel{{ $track->id }}">
+                                {{ __('tracks.track_name', ['name' => $track->name]) }}
+                            </h2>
+
+                            <button
+                                type="button"
+                                class="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="{{ __('common.close') }}"
+                            ></button>
+                        </div>
+
+                        <div class="modal-body">
+                            <p>
+                                <strong>{{ __('tracks.competition') }}:</strong>
+                                {{ translate_db($competition->title) }}
+                            </p>
+
+                            <p>
+                                <strong>{{ __('tracks.difficulty_level') }}:</strong>
+                                {{ translate_db(optional($track->difficultyLevel)->name) ?: __('common.not_specified') }}
+                            </p>
+
+                            @php
+                                $trackPhoto = $track->schemePhotos->first();
+                            @endphp
+
+                            @if($trackPhoto)
+                                <div class="mt-3">
+                                    <strong>{{ __('tracks.track_photo') }}:</strong>
+
+                                    <div class="photo-show-image-wrapper mt-2">
+                                        <img
+                                            src="{{ asset('storage/' . $trackPhoto->file_path) }}"
+                                            alt="{{ $trackPhoto->title ?? __('tracks.track_photo') }}"
+                                            class="photo-show-image"
+                                        >
+                                    </div>
+                                </div>
+                            @else
+                                <p class="text-muted mt-3">
+                                    {{ __('tracks.no_track_photo') }}
+                                </p>
+                            @endif
+                        </div>
+
+                        <div class="modal-footer">
+                            @can('update', $track)
+                                <a href="{{ route('track.edit', $track->id) }}" class="btn btn-outline-primary">
+                                    {{ __('common.edit') }}
+                                </a>
+                            @endcan
+
+                            @can('delete', $track)
+                                <form
+                                    method="POST"
+                                    action="{{ route('track.destroy', $track->id) }}"
+                                    onsubmit="return confirm('{{ __('common.confirm_delete') }}')"
+                                >
+                                    @csrf
+                                    @method('DELETE')
+
+                                    <button type="submit" class="btn btn-danger">
+                                        {{ __('common.delete') }}
+                                    </button>
+                                </form>
+                            @endcan
+                        </div>
+                    </div>
                 </div>
             </div>
         @empty
