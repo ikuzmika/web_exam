@@ -15,6 +15,28 @@
                 @csrf
 
                 <div class="mb-3">
+                    <label for="handler_id" class="form-label">
+                        {{ __('pairs.handler') }}
+                    </label>
+
+                    <select name="handler_id" id="handler_id" class="form-control" required>
+                        <option value="">
+                            {{ __('pairs.choose_handler') }}
+                        </option>
+
+                        @foreach($handlers as $handler)
+                            <option value="{{ $handler->id }}" @selected(old('handler_id') == $handler->id)>
+                                {{ $handler->name }} {{ $handler->surname }}
+                            </option>
+                        @endforeach
+                    </select>
+
+                    @error('handler_id')
+                    <div class="form-error">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
                     <label for="dog_id" class="form-label">
                         {{ __('pairs.dog') }}
                     </label>
@@ -27,9 +49,6 @@
                         @forelse($dogs as $dog)
                             <option value="{{ $dog->id }}" @selected(old('dog_id') == $dog->id)>
                                 {{ $dog->name }}
-                                —
-                                {{ optional($dog->handler)->name ?? __('common.unknown') }}
-                                {{ optional($dog->handler)->surname ?? '' }}
                                 —
                                 {{ optional($dog->sizeCategory)->name ?? __('common.not_specified') }}
                             </option>

@@ -42,4 +42,5 @@ return [
     'edit_description' => 'Atjaunini pāra informāciju.',
     'choose_dog' => 'Izvēlies suni',
     'no_available_dogs' => 'Nav pieejamu suņu',
+    'choose_handler' => 'Izvēlies hendleri',
 ];

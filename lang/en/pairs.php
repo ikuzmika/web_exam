@@ -41,5 +41,6 @@ return [
     'create_description' => 'Create a new agility pair by selecting a dog and activity period.',
     'edit_description' => 'Update pair information.',
     'choose_dog' => 'Choose dog',
-    'no_available_dogs' => 'There are no dogs available'
+    'no_available_dogs' => 'There are no dogs available',
+    'choose_handler' => 'Choose handler'
 ];

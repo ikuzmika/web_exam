@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dog;
+use App\Models\Handler;
 use App\Models\Pair;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -37,12 +38,16 @@ class PairController extends Controller
             abort(403, 'Unauthorized action.');
         }
 
+        $handlers = Handler::orderBy('surname')
+            ->orderBy('name')
+            ->get();
+
         $dogs = Dog::with(['handler', 'sizeCategory'])
             ->whereDoesntHave('pair')
             ->orderBy('name')
             ->get();
 
-        return view('pairs.create', compact('dogs'));
+        return view('pairs.create', compact('dogs', 'handlers'));
     }
 
     /**
@@ -55,14 +60,25 @@ class PairController extends Controller
         }
 
         $validated = $request->validate([
-            'dog_id' => 'required|integer|exists:dogs,id|unique:pairs,dog_id',
+            'handler_id' => 'required|exists:handlers,id',
+            'dog_id' => 'required|exists:dogs,id|unique:pairs,dog_id',
             'active_from' => 'required|date',
-            'active_until' => 'nullable|date|after:active_from',
+            'active_until' => 'nullable|date|after_or_equal:active_from',
         ]);
 
-        $validated['created_by_user_id'] = Auth::id();
+        $dog = Dog::findOrFail($validated['dog_id']);
 
-        Pair::create($validated);
+        $dog->update([
+            'handler_id' => $validated['handler_id'],
+        ]);
+
+        Pair::create([
+            'created_by_user_id' => Auth::id(),
+            'dog_id' => $validated['dog_id'],
+            'active_from' => $validated['active_from'],
+            'active_until' => $validated['active_until'] ?? null,
+        ]);
+
         return redirect()->route('pair.index')
             ->with('success', __('controllers.new_pair'));
     }
@@ -79,13 +95,17 @@ class PairController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Request $request , string $id)
+    public function edit(Request $request , Pair $pair)
     {
-        $pair = Pair::findOrFail($id);
-
         if ($request->user()->cannot('update', $pair)) {
             abort(403, 'Unauthorized action.');
         }
+
+        $pair->load('dog.handler', 'dog.sizeCategory');
+
+        $handlers = Handler::orderBy('surname')
+            ->orderBy('name')
+            ->get();
 
         $dogs = Dog::with(['handler', 'sizeCategory'])
             ->where(function ($query) use ($pair) {
@@ -95,7 +115,7 @@ class PairController extends Controller
             ->orderBy('name')
             ->get();
 
-        return view('pairs.edit', compact('pair', 'dogs'));
+        return view('pairs.edit', compact('pair', 'dogs', 'handlers'));
     }
 
     /**
@@ -110,18 +130,30 @@ class PairController extends Controller
         }
 
         $validated = $request->validate([
+            'handler_id' => 'required|exists:handlers,id',
+
             'dog_id' => [
                 'required',
                 'exists:dogs,id',
                 Rule::unique('pairs', 'dog_id')->ignore($pair->id),
             ],
+
             'active_from' => 'required|date',
             'active_until' => 'nullable|date|after_or_equal:active_from',
         ]);
 
-        $validated['created_by_user_id'] = Auth::id();
+        $dog = Dog::findOrFail($validated['dog_id']);
 
-        $pair->update($validated);
+        $dog->update([
+            'handler_id' => $validated['handler_id'],
+        ]);
+
+        $pair->update([
+            'created_by_user_id' => Auth::id(),
+            'dog_id' => $validated['dog_id'],
+            'active_from' => $validated['active_from'],
+            'active_until' => $validated['active_until'] ?? null,
+        ]);
         return redirect()->route('pair.index')
             ->with('success', __('controllers.updated_pair'));
     }
