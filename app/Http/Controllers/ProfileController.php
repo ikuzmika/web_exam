@@ -41,12 +41,15 @@ class ProfileController extends Controller
         ];
 
         if ($request->filled('password')) {
-            if (Hash::check($request->current_password, $user->password)) {
-                return back()->withErrors(['current_password' => __('controllers.change_password_error')])
+            if (!Hash::check($request->current_password, $user->password)) {
+                return back()
+                    ->withErrors([
+                        'current_password' => __('controllers.change_password_error'),
+                    ])
                     ->withInput();
             }
 
-            $userData['password'] = Hash::make($validated['password']);
+            $userData['password'] = $validated['password'];
         }
 
         $user->update($userData);
