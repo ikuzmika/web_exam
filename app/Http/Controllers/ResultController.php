@@ -22,7 +22,14 @@ class ResultController extends Controller
      */
     public function index()
     {
-        $results = Result::all();
+        $results = Result::with([
+            'pair.dog.handler',
+            'track.competition',
+            'track.difficultyLevel',
+            'resultStatus',
+        ])
+            ->orderBy('id')
+            ->paginate(30);
         return view('results.index', compact('results'));
     }
 

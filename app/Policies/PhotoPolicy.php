@@ -56,7 +56,7 @@ class PhotoPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Photo $photo): bool
+    public function restore(User $user): bool
     {
         return $user->isAdmin();
     }
@@ -64,7 +64,7 @@ class PhotoPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Photo $photo): bool
+    public function forceDelete(User $user): bool
     {
         return $user->isAdmin();
     }

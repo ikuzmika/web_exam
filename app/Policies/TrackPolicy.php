@@ -48,7 +48,7 @@ class TrackPolicy
         return (($user->isOrganizer()) && ($user->id === $track->created_by_user_id));
     }
 
-    public function viewTrashed(User $user, Track $track): bool
+    public function viewTrashed(User $user): bool
     {
         return $user->isOrganizer();
     }
@@ -56,7 +56,7 @@ class TrackPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Track $track): bool
+    public function restore(User $user): bool
     {
         return $user->isAdmin();
     }
@@ -64,7 +64,7 @@ class TrackPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Track $track): bool
+    public function forceDelete(User $user): bool
     {
         return $user->isAdmin();
     }
