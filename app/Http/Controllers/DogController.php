@@ -20,7 +20,7 @@ class DogController extends Controller
      */
     public function index()
     {
-        $dogs = Dog::all();
+        $dogs = Dog::with(['handler', 'sizeCategory'])->get();
         return view('dogs.index', compact('dogs'));
     }
 
@@ -41,9 +41,9 @@ class DogController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, Dog $dog)
+    public function store(Request $request)
     {
-        if ($request->user()->cannot('create', $dog)) {
+        if ($request->user()->cannot('create', Dog::class)) {
             abort(403, 'Unauthorized action.');
         }
 
@@ -51,7 +51,7 @@ class DogController extends Controller
             'handler_id' => 'required|integer|exists:handlers,id',
             'size_category_id' => 'required|integer|exists:size_categories,id',
             'name' => 'required|string|max:100',
-            'description' => 'string|max:255',
+            'description' => 'nullable|string|max:255',
         ]);
 
         $validated['created_by_user_id'] = Auth::id();
@@ -103,10 +103,8 @@ class DogController extends Controller
             'handler_id' => 'required|integer|exists:handlers,id',
             'size_category_id' => 'required|integer|exists:size_categories,id',
             'name' => 'required|string|max:100',
-            'description' => 'string|max:255',
+            'description' => 'nullable|string|max:255',
         ]);
-
-        $validated['created_by_user_id'] = Auth::id();
 
         $dog->update($validated);
         return redirect()->route('dog.index')
