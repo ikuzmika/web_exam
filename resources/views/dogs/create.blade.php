@@ -35,7 +35,7 @@
                         {{ __('dogs.handler') }}
                     </label>
 
-                    <select name="handler_id" id="handler_id" class="form-control" required>
+                    <select name="handler_id" id="handler_id" class="form-control">
                         <option value="">
                             {{ __('common.not_specified') }}
                         </option>
