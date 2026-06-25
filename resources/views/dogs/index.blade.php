@@ -113,21 +113,15 @@
                             @endcan
 
                             @can('delete', $dog)
-                                <form method="POST"
-                                      action="{{ route('dog.destroy', $dog->id) }}"
-                                      onsubmit="return confirm('{{ __('common.confirm_delete') }}')">
+                                <form method="POST" action="{{ route('dog.destroy', $dog->id) }}">
                                     @csrf
                                     @method('DELETE')
 
-                                    <button type="submit" class="btn btn-outline-primary">
+                                    <button type="submit" class="btn btn-danger">
                                         {{ __('common.delete') }}
                                     </button>
                                 </form>
                             @endcan
-
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                                {{ __('common.close') }}
-                            </button>
                         </div>
                     </div>
                 </div>
