@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Psy\Command\CopyCommand;
+use App\Models\Photo;
+use Illuminate\Support\Facades\Storage;
 
 class CompetitionController extends Controller
 {
@@ -21,7 +23,7 @@ class CompetitionController extends Controller
      */
     public function index()
     {
-        $competitions = Competition::with('organizer')
+        $competitions = Competition::with(['organizer', 'photo'])
             ->orderByDesc('date')
             ->get();
         return view('competitions.index', compact('competitions'));
@@ -55,14 +57,33 @@ class CompetitionController extends Controller
             'judge_id' => 'required|integer|exists:judges,id',
             'title' => 'required|string|min:3|max:255',
             'date' => 'required|date',
+            'competition_photo' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
         ]);
 
-        $validated['created_by_user_id'] = Auth::id();
+        $competition = Competition::create([
+            'organizer_id' => $validated['organizer_id'],
+            'judge_id' => $validated['judge_id'],
+            'title' => $validated['title'],
+            'date' => $validated['date'],
+            'created_by_user_id' => Auth::id(),
+        ]);
 
-        Competition::create($validated);
+        if ($request->hasFile('competition_photo')) {
+            $filePath = $request->file('competition_photo')->store('competition_images', 'public');
+
+            Photo::create([
+                'uploaded_by_user_id' => Auth::id(),
+                'competition_id' => $competition->id,
+                'pair_id' => null,
+                'track_id' => null,
+                'title' => 'Competition card photo',
+                'file_path' => $filePath,
+                'is_approved' => true,
+            ]);
+        }
 
         return redirect()->route('competition.index')
-            ->with('success', __('controllers.new_competition.'));
+            ->with('success', __('controllers.new_competition'));
     }
 
     /**
@@ -70,7 +91,12 @@ class CompetitionController extends Controller
      */
     public function show(string $id)
     {
-        $competition = Competition::with(['organizer', 'judge'])->findOrFail($id);
+        $competition = Competition::with([
+            'organizer',
+            'judge',
+            'track.difficultyLevel',
+            'photo',
+        ])->findOrFail($id);
 
         return view('competitions.show', compact('competition'));
     }
@@ -80,7 +106,7 @@ class CompetitionController extends Controller
      */
     public function edit(Request $request, string $id)
     {
-        $competition = Competition::findOrFail($id);
+        $competition = Competition::with('photo')->findOrFail($id);
 
         if ($request->user()->cannot('update', $competition)) {
             abort(403, 'Unauthorized action.');
@@ -96,7 +122,7 @@ class CompetitionController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $competition = Competition::findOrFail($id);
+        $competition = Competition::with('photo')->findOrFail($id);
 
         if ($request->user()->cannot('update', $competition)) {
             abort(403, 'Unauthorized action.');
@@ -107,13 +133,41 @@ class CompetitionController extends Controller
             'judge_id' => 'required|integer|exists:judges,id',
             'title' => 'required|string|min:3|max:255',
             'date' => 'required|date',
+            'competition_photo' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
         ]);
 
-        $validated['created_by_user_id'] = Auth::id();
+        $competition->update([
+            'organizer_id' => $validated['organizer_id'],
+            'judge_id' => $validated['judge_id'],
+            'title' => $validated['title'],
+            'date' => $validated['date'],
+        ]);
 
-        $competition->update($validated);
+        if ($request->hasFile('competition_photo')) {
+            $oldPhoto = $competition->photo
+                ->where('title', 'Competition card photo')
+                ->first();
+
+            if ($oldPhoto) {
+                Storage::disk('public')->delete($oldPhoto->file_path);
+                $oldPhoto->delete();
+            }
+
+            $filePath = $request->file('competition_photo')->store('competition_images', 'public');
+
+            Photo::create([
+                'uploaded_by_user_id' => Auth::id(),
+                'competition_id' => $competition->id,
+                'pair_id' => null,
+                'track_id' => null,
+                'title' => 'Competition card photo',
+                'file_path' => $filePath,
+                'is_approved' => true,
+            ]);
+        }
+
         return redirect()->route('competition.index')
-            ->with('success', __('controllers.updated_competition.'));
+            ->with('success', __('controllers.updated_competition'));
 
     }
 
@@ -128,7 +182,7 @@ class CompetitionController extends Controller
 
         $competition->delete();
         return redirect()->route('competition.index')
-            ->with('success', __('controllers.deleted_competition.'));
+            ->with('success', __('controllers.deleted_competition'));
     }
 
     public function trashed(Request $request)
@@ -151,7 +205,7 @@ class CompetitionController extends Controller
 
         $competition->restore();
         return redirect()->route('competition.trashed')
-            ->with('success', __('controllers.restored_competition.'));
+            ->with('success', __('controllers.restored_competition'));
     }
 
     public function forceDelete(Request $request, string $id)
@@ -164,6 +218,6 @@ class CompetitionController extends Controller
 
         $competition->forceDelete();
         return redirect()->route('competition.trashed')
-            ->with('success', __('controllers.force_deleted_competition.'));
+            ->with('success', __('controllers.force_deleted_competition'));
     }
 }

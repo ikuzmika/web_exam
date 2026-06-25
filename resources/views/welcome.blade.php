@@ -94,9 +94,29 @@
                                 </a>
                             </div>
 
-                            <div class="competition-image-placeholder">
-                                {{ __('competitions.competition_image') }}
-                            </div>
+                            @php
+                                $competitionPhoto = $competition->photo
+                                    ->where('title', 'Competition card photo')
+                                    ->first();
+
+                                if (!$competitionPhoto) {
+                                    $competitionPhoto = $competition->photo->first();
+                                }
+                            @endphp
+
+                            @if($competitionPhoto)
+                                <div class="competition-image-placeholder has-image">
+                                    <img
+                                        src="{{ asset('storage/' . $competitionPhoto->file_path) }}"
+                                        alt="{{ __('competitions.competition_image') }}"
+                                        class="competition-card-image"
+                                    >
+                                </div>
+                            @else
+                                <div class="competition-image-placeholder">
+                                    {{ __('competitions.competition_image') }}
+                                </div>
+                            @endif
                         </div>
                     @empty
                         <div class="empty-state">

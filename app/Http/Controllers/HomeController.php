@@ -8,7 +8,8 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $upcomingCompetitions = Competition::where('date', '>=', now()->toDateString())
+        $upcomingCompetitions = Competition::with(['organizer', 'photo'])
+            ->where('date', '>=', now()->toDateString())
             ->orderBy('date')
             ->take(3)
             ->get();
